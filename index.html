@@ -1,0 +1,1805 @@
+<html lang="es"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>CineStack · Galería + Constructor TMDB · Sistema de Créditos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #0a0c12 0%, #0f111a 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            color: #f0f3fa;
+            padding: 2rem 1.5rem 3rem;
+            min-height: 100vh;
+        }
+
+        .hero {
+            max-width: 1400px;
+            margin: 0 auto 2rem auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1.2rem;
+            position: relative;
+        }
+
+        h1 {
+            font-weight: 800;
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #FFFFFF, #b2b9ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+
+        .top-buttons {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 12px;
+        }
+
+        .ctrl-panel-btn, .credits-btn {
+            background: #2a2f47;
+            border: 1px solid #4c5380;
+            padding: 0.7rem 1.6rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .credits-btn {
+            background: #2a5f4a;
+            border-color: #3e8e6e;
+            position: relative;
+        }
+        
+        /* Indicador de créditos en el botón */
+        .credits-badge {
+            background: #ffd966;
+            color: #1e2a2a;
+            border-radius: 40px;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-left: 6px;
+            transition: all 0.2s ease;
+        }
+        
+        /* Animación para el badge cuando se añaden créditos */
+        .credits-badge.pulse {
+            animation: badgePulse 0.5s ease-in-out 2;
+        }
+        
+        @keyframes badgePulse {
+            0% { transform: scale(1); background: #ffd966; }
+            50% { transform: scale(1.3); background: #ffaa33; }
+            100% { transform: scale(1); background: #ffd966; }
+        }
+
+        .credits-btn:hover {
+            background: #3e7a60;
+            transform: scale(0.98) translateY(-50%);
+        }
+
+        .ctrl-panel-btn:hover {
+            background: #3e4570;
+            border-color: #7c85c2;
+            transform: scale(0.98) translateY(-50%);
+        }
+
+        /* Modal de créditos */
+        .credits-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(12px);
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+        }
+
+        .credits-card {
+            background: #151c2c;
+            border-radius: 2rem;
+            padding: 2rem;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid #4d5b8c;
+            animation: fadeUp 0.2s ease;
+        }
+
+        .credits-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #e2e8ff;
+        }
+
+        .credits-balance {
+            background: #0e1220;
+            border-radius: 2rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ffd966;
+        }
+
+        .credits-balance span {
+            font-size: 1rem;
+            color: #9aa4cf;
+        }
+
+        .code-input-group {
+            display: flex;
+            gap: 8px;
+            margin: 1rem 0;
+        }
+
+        .code-input {
+            flex: 1;
+            background: #0e1220;
+            border: 1px solid #4d5b8c;
+            border-radius: 2rem;
+            padding: 0.8rem 1rem;
+            color: white;
+            font-size: 1rem;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .code-input:focus {
+            outline: none;
+            border-color: #6f7ed6;
+        }
+
+        .code-message {
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            min-height: 50px;
+            padding: 8px;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.3);
+        }
+        
+        .code-message.success {
+            color: #a0ffa0;
+            background: rgba(64, 224, 208, 0.1);
+            border-left: 3px solid #4caf50;
+        }
+        
+        .code-message.error {
+            color: #ffa0a0;
+            background: rgba(255, 68, 68, 0.1);
+            border-left: 3px solid #ff4444;
+        }
+
+        /* NOTIFICACIÓN TOAST */
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1e2a2a;
+            border-left: 5px solid #ffd966;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            z-index: 1200;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(10px);
+            background: rgba(30, 42, 42, 0.95);
+            max-width: 350px;
+        }
+        
+        .toast-notification.show {
+            transform: translateX(0);
+        }
+        
+        .toast-icon {
+            font-size: 1.8rem;
+        }
+        
+        .toast-content {
+            flex: 1;
+        }
+        
+        .toast-title {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+        
+        .toast-message {
+            font-size: 0.8rem;
+            color: #bcc6f0;
+        }
+        
+        .toast-close {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #9aa4cf;
+            background: none;
+            border: none;
+            padding: 0 4px;
+        }
+        
+        .toast-close:hover {
+            color: white;
+        }
+
+        /* MODAL PRINCIPAL DEL PANEL DE CONTROL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(8, 10, 18, 0.95);
+            backdrop-filter: blur(12px);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-card {
+            background: #151c2c;
+            max-width: 900px;
+            width: 90%;
+            border-radius: 2rem;
+            border: 1px solid #2f3b5c;
+            box-shadow: 0 30px 40px rgba(0,0,0,0.5);
+            animation: fadeUp 0.25s ease;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            padding: 1.5rem 1.8rem 0.5rem 1.8rem;
+            border-bottom: 1px solid #2a3455;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #e2e8ff;
+        }
+
+        .modal-tabs {
+            display: flex;
+            padding: 0 1.5rem;
+            gap: 0.5rem;
+            border-bottom: 1px solid #2a3455;
+        }
+
+        .modal-tab {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #9aa4cf;
+            transition: 0.2s;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+        }
+
+        .modal-tab.active {
+            color: #b9c8ff;
+            border-bottom-color: #6f7ed6;
+        }
+
+        .modal-tab:hover {
+            color: #ffffff;
+        }
+
+        .modal-body {
+            padding: 1.5rem 1.8rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+            color: #bcc6f0;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            background: #0e1220;
+            border: 1px solid #2a3455;
+            border-radius: 1rem;
+            padding: 0.7rem 1rem;
+            color: white;
+            font-size: 0.85rem;
+            transition: 0.2s;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #6f7ed6;
+            box-shadow: 0 0 0 2px rgba(111, 126, 214, 0.3);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .poster-preview {
+            background: #0b0f16;
+            border-radius: 1rem;
+            padding: 0.8rem;
+            margin: 0.8rem 0;
+            border: 1px dashed #2f3b5a;
+            text-align: center;
+        }
+
+        .poster-preview img {
+            max-width: 100%;
+            max-height: 140px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .tmdb-status {
+            font-size: 0.7rem;
+            color: #7c8bc0;
+            margin-top: 6px;
+        }
+
+        .tmdb-btn {
+            background: #2a2f4e;
+            border: 1px solid #5f6dcf;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.7rem;
+            cursor: pointer;
+            margin-top: 6px;
+            transition: 0.2s;
+            color: white;
+        }
+
+        .tmdb-btn:hover {
+            background: #3e4570;
+        }
+
+        .loading-spinner-sm {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid #6f7ed6;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .items-list {
+            max-height: 480px;
+            overflow-y: auto;
+        }
+        
+        .admin-item {
+            background: #11161f;
+            border-radius: 1rem;
+            margin-bottom: 0.8rem;
+            padding: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid #222a3a;
+            transition: 0.2s;
+            cursor: grab;
+            user-select: none;
+        }
+        
+        .admin-item:active {
+            cursor: grabbing;
+        }
+        
+        .admin-item.dragging {
+            opacity: 0.4;
+            cursor: grabbing;
+        }
+        
+        .admin-item.drag-over {
+            border-top: 3px solid #6f7ed6;
+            margin-top: -1px;
+        }
+        
+        .drag-handle {
+            cursor: grab;
+            color: #6f7ed6;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 0 5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .admin-item:active .drag-handle {
+            cursor: grabbing;
+        }
+
+        .admin-item:hover {
+            border-color: #4d5b8c;
+            background: #151c2a;
+        }
+
+        .admin-item-poster {
+            width: 50px;
+            height: 75px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #070b12;
+        }
+
+        .admin-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .admin-item-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .admin-item-meta {
+            font-size: 0.7rem;
+            color: #9aa4cf;
+            margin-top: 4px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .admin-item-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .action-btn {
+            background: #1f253d;
+            border: none;
+            padding: 0.4rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .action-btn.edit {
+            background: #2f3b62;
+        }
+        .action-btn.edit:hover {
+            background: #5f6dcf;
+        }
+        .action-btn.delete {
+            background: #8b3c48;
+        }
+        .action-btn.delete:hover {
+            background: #c24c5c;
+        }
+
+        .empty-message-panel {
+            text-align: center;
+            padding: 2rem;
+            color: #6f7daa;
+            font-size: 0.85rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #2a3455;
+        }
+        
+        .sort-info {
+            background: #1e2438;
+            border-radius: 2rem;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.7rem;
+            text-align: center;
+            color: #b9c3f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 0.6rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .btn-primary {
+            background: #5f6dcf;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #4a58b5;
+        }
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .btn-secondary {
+            background: #2b314b;
+            color: #e2e8ff;
+        }
+        .btn-secondary:hover {
+            background: #3d4468;
+        }
+
+        .btn-export {
+            background: #2a5f4a;
+            color: white;
+        }
+        .btn-export:hover {
+            background: #3e7a60;
+        }
+
+        /* PIN Modal */
+        .pin-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+        }
+
+        .pin-card {
+            background: #151c2c;
+            border-radius: 2rem;
+            padding: 2rem;
+            max-width: 360px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid #4d5b8c;
+            animation: fadeUp 0.2s ease;
+        }
+
+        .pin-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #e2e8ff;
+        }
+
+        .pin-card p {
+            color: #9aa4cf;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pin-input {
+            background: #0e1220;
+            border: 1px solid #4d5b8c;
+            border-radius: 2rem;
+            padding: 0.8rem 1rem;
+            width: 100%;
+            text-align: center;
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .pin-input:focus {
+            outline: none;
+            border-color: #6f7ed6;
+        }
+
+        .pin-error {
+            color: #ff8a8a;
+            font-size: 0.75rem;
+            margin-top: -1rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        /* Grid de películas */
+        .grid {
+            max-width: 1400px;
+            margin: 2rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 2rem 1.5rem;
+        }
+
+        .movie-card {
+            background: #11161f;
+            border-radius: 1.6rem;
+            overflow: hidden;
+            transition: all 0.25s ease;
+            border: 1px solid #222a3a;
+            box-shadow: 0 12px 20px -8px rgba(0,0,0,0.4);
+        }
+
+        .movie-card:hover {
+            transform: translateY(-6px);
+            border-color: #4d5b8c;
+        }
+
+        .poster-img {
+            width: 100%;
+            aspect-ratio: 2 / 3;
+            object-fit: cover;
+            background: #070b12;
+            display: block;
+        }
+
+        .card-info {
+            padding: 1rem 0.9rem 1.1rem;
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-year-type {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 0.75rem;
+            color: #9aa4cf;
+            margin: 0.4rem 0 0.5rem;
+        }
+
+        .media-badge {
+            background: #20263e;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+        }
+
+        .download-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #1f253d;
+            margin-top: 0.7rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 60px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #b9c8ff;
+            text-decoration: none;
+            width: 100%;
+            justify-content: center;
+            border: 1px solid #2f3a5a;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .download-link:hover {
+            background: #2f3b62;
+            color: white;
+        }
+
+        .empty-message {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 3rem;
+            background: #0e121f;
+            border-radius: 2rem;
+            color: #7f8bb3;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.75rem;
+            color: #4f5a82;
+        }
+
+        @media (max-width: 640px) {
+            body { padding: 1rem; }
+            .hero { flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; }
+            .top-buttons { position: static; transform: none; margin-top: 0; justify-content: center; }
+            h1 { font-size: 2rem; }
+            .grid { gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+            .form-row { grid-template-columns: 1fr; }
+            .admin-item { flex-wrap: wrap; }
+            .admin-item-actions { width: 100%; justify-content: flex-end; }
+            .modal-card { width: 95%; }
+            .modal-body { padding: 1rem; }
+            .drag-handle { display: none; }
+            .toast-notification { bottom: 20px; right: 20px; left: 20px; max-width: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>🎬 ESTRENOS 2026</h1>
+    <div class="top-buttons">
+        <button class="credits-btn" id="creditsBtn">
+            💰 CRÉDITOS 
+            <span class="credits-badge" id="creditsBadge">0</span>
+        </button>
+        <button class="ctrl-panel-btn" id="openPanelBtn">⚙️ PANEL DE CONTROL</button>
+    </div>
+</div>
+
+<div class="grid" id="moviesGrid">
+                <div class="movie-card" data-id="1774417886082">
+                    <img class="poster-img" src="https://image.tmdb.org/t/p/w500/4Z0E1W7YvQ0aVtgj7KKtktb9ukd.jpg" alt="hoppers" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
+                    <div class="card-info">
+                        <div class="card-title" title="hoppers">hoppers 🎬</div>
+                        <div class="card-year-type">
+                            <span>📅 2026</span>
+                            <span class="media-badge">🎬 Película</span>
+                        </div>
+                        <button class="download-link" data-id="1774417886082">
+                            ⬇️ Descargar archivo (1 crédito)
+                        </button>
+                    </div>
+                </div>
+            
+                <div class="movie-card" data-id="1774469698569">
+                    <img class="poster-img" src="https://image.tmdb.org/t/p/w500/zX1KJPiGTrzpFcjfOWlmqdRgpQd.jpg" alt="Anaconda" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
+                    <div class="card-info">
+                        <div class="card-title" title="Anaconda">Anaconda 🎬</div>
+                        <div class="card-year-type">
+                            <span>📅 2025</span>
+                            <span class="media-badge">🎬 Película</span>
+                        </div>
+                        <button class="download-link" data-id="1774469698569">
+                            ⬇️ Descargar archivo (1 crédito)
+                        </button>
+                    </div>
+                </div>
+            
+                <div class="movie-card" data-id="1774469713436">
+                    <img class="poster-img" src="https://image.tmdb.org/t/p/w500/4n1U0Mwn7djux6VKNYDRWPgS2x6.jpg" alt="Avatar: Fuego y ceniza" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
+                    <div class="card-info">
+                        <div class="card-title" title="Avatar: Fuego y ceniza">Avatar: Fuego y ceniza 🎬</div>
+                        <div class="card-year-type">
+                            <span>📅 2025</span>
+                            <span class="media-badge">🎬 Película</span>
+                        </div>
+                        <button class="download-link" data-id="1774469713436">
+                            ⬇️ Descargar archivo (1 crédito)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+<footer>Carteles vía The Movie Database (TMDB) · Datos guardados localmente · Arrastra para reordenar · Cada descarga consume 1 crédito</footer>
+
+<!-- NOTIFICACIÓN TOAST -->
+<div id="toastNotification" class="toast-notification" style="display: none;">
+    <div class="toast-icon" id="toastIcon">💰</div>
+    <div class="toast-content">
+        <div class="toast-title" id="toastTitle">Créditos añadidos</div>
+        <div class="toast-message" id="toastMessage">Has recibido créditos</div>
+    </div>
+    <button class="toast-close" id="toastClose">✕</button>
+</div>
+
+<!-- MODAL CRÉDITOS -->
+<div id="creditsModal" class="credits-modal" style="display: none;">
+    <div class="credits-card">
+        <h3>💰 MIS CRÉDITOS</h3>
+        <div class="credits-balance">
+            <span>CRÉDITOS DISPONIBLES</span><br>
+            <span id="creditsBalance">0</span>
+        </div>
+        <div class="code-input-group">
+            <input type="text" id="codeInput" class="code-input" placeholder="Ingresa tu código" maxlength="20" autocomplete="off">
+            <button id="redeemCodeBtn" class="btn btn-primary" style="padding: 0.8rem 1.2rem;">CANJEAR</button>
+        </div>
+        <div id="codeMessage" class="code-message"></div>
+        <button class="btn btn-secondary" id="closeCreditsBtn" style="margin-top: 1rem; width: 100%;">CERRAR</button>
+    </div>
+</div>
+
+<!-- MODAL PIN -->
+<div id="pinModal" class="pin-modal" style="display: none;">
+    <div class="pin-card">
+        <h3>🔐 Acceso restringido</h3>
+        <p>Ingresa el PIN para acceder al panel de control</p>
+        <input type="password" id="pinInput" class="pin-input" placeholder="••••••" maxlength="6" autocomplete="off">
+        <div id="pinError" class="pin-error" style="display: none;">❌ PIN incorrecto. Intenta de nuevo.</div>
+        <button id="verifyPinBtn" class="btn btn-primary" style="width: 100%;">Verificar acceso</button>
+    </div>
+</div>
+
+<!-- MODAL PRINCIPAL DEL PANEL DE CONTROL -->
+<div id="controlPanelModal" class="modal">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h2>🎛️ PANEL DE CONTROL</h2>
+        </div>
+        
+        <div class="modal-tabs">
+            <div class="modal-tab" data-tab="add">➕ AGREGAR</div>
+            <div class="modal-tab active" data-tab="edit">✏️ EDITAR / ELIMINAR · 🎯 ARRASTRA PARA ORDENAR</div>
+        </div>
+        
+        <div class="modal-body">
+            <!-- Pestaña AGREGAR -->
+            <div id="tabAdd" class="tab-content" style="display: none;">
+                <form id="addForm">
+                    <input type="hidden" id="editId" value="">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>🎞️ Título *</label>
+                            <input type="text" id="titleInput" placeholder="Ej: Dune, The Last of Us" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>📅 Año *</label>
+                            <input type="number" id="yearInput" placeholder="2024" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>🔗 Enlace del archivo (URL) *</label>
+                        <textarea id="urlInput" placeholder="https://ejemplo.com/video.mp4" required=""></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>🎭 Tipo</label>
+                        <select id="mediaType">
+                            <option value="movie">🎬 Película</option>
+                            <option value="tv">📺 Serie</option>
+                        </select>
+                    </div>
+                    
+                    <div class="poster-preview">
+                        <div style="font-size:0.7rem; color:#9aa9da;">⭐ Poster desde TMDb</div>
+                        <img id="posterPreview" style="display: none; margin-top: 5px;" alt="preview" src="https://image.tmdb.org/t/p/w500/4n1U0Mwn7djux6VKNYDRWPgS2x6.jpg">
+                        <div class="tmdb-status" id="tmdbStatus">✨ Usa el botón para obtener poster automático</div>
+                        <button type="button" id="fetchTmdbBtn" class="tmdb-btn">🌐 Obtener datos de TMDb</button>
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" id="closeModalBtn">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">➕ AGREGAR</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Pestaña EDITAR / ELIMINAR -->
+            <div id="tabEdit" class="tab-content" style="display: block;">
+                <div class="sort-info">
+                    <span>🖱️ Arrastra los elementos (agarra el ícono ⋮⋮ o la tarjeta) para cambiar el orden de la galería</span>
+                </div>
+                <div class="items-list" id="itemsList">
+                <div class="admin-item" data-index="0" data-id="1774417886082" draggable="true">
+                    <div class="drag-handle">⋮⋮</div>
+                    <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/4Z0E1W7YvQ0aVtgj7KKtktb9ukd.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                    <div class="admin-item-info">
+                        <div class="admin-item-title">hoppers 🎬</div>
+                        <div class="admin-item-meta">
+                            <span>📅 2026</span>
+                            <span>Película</span>
+                            <span>🔗 http://mxcuentas.ddns.net:8096/Item…</span>
+                        </div>
+                    </div>
+                    <div class="admin-item-actions">
+                        <button class="action-btn edit" data-id="1774417886082">✏️ Editar</button>
+                        <button class="action-btn delete" data-id="1774417886082">🗑️ Eliminar</button>
+                    </div>
+                </div>
+            
+                <div class="admin-item" data-index="1" data-id="1774469698569" draggable="true">
+                    <div class="drag-handle">⋮⋮</div>
+                    <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/zX1KJPiGTrzpFcjfOWlmqdRgpQd.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                    <div class="admin-item-info">
+                        <div class="admin-item-title">Anaconda 🎬</div>
+                        <div class="admin-item-meta">
+                            <span>📅 2025</span>
+                            <span>Película</span>
+                            <span>🔗 http://mxcuentas.ddns.net:8096/Item…</span>
+                        </div>
+                    </div>
+                    <div class="admin-item-actions">
+                        <button class="action-btn edit" data-id="1774469698569">✏️ Editar</button>
+                        <button class="action-btn delete" data-id="1774469698569">🗑️ Eliminar</button>
+                    </div>
+                </div>
+            
+                <div class="admin-item" data-index="2" data-id="1774469713436" draggable="true">
+                    <div class="drag-handle">⋮⋮</div>
+                    <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/4n1U0Mwn7djux6VKNYDRWPgS2x6.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                    <div class="admin-item-info">
+                        <div class="admin-item-title">Avatar: Fuego y ceniza 🎬</div>
+                        <div class="admin-item-meta">
+                            <span>📅 2025</span>
+                            <span>Película</span>
+                            <span>🔗 http://mxcuentas.ddns.net:8096/Item…</span>
+                        </div>
+                    </div>
+                    <div class="admin-item-actions">
+                        <button class="action-btn edit" data-id="1774469713436">✏️ Editar</button>
+                        <button class="action-btn delete" data-id="1774469713436">🗑️ Eliminar</button>
+                    </div>
+                </div>
+            </div>
+                <div class="modal-actions" style="margin-top: 1rem;">
+                    <button type="button" class="btn btn-export" id="exportHtmlBtn">📤 Exportar HTML completo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const TMDB_API_KEY = '04c35731a5ee918f014970082a0088b1';
+    const ADMIN_PIN = '199494';
+    
+    // Catálogo inicial
+    let catalogItems = [{"id":1774417886082,"title":"hoppers","year":2026,"downloadUrl":"http://mxcuentas.ddns.net:8096/Items/1361427/Download?api_key=d4f8955e60014f1d910f302a822544ec","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/4Z0E1W7YvQ0aVtgj7KKtktb9ukd.jpg","createdAt":"2026-03-25T05:51:26.082Z","updatedAt":"2026-03-25T20:14:42.707Z"},{"id":1774469698569,"title":"Anaconda","year":2025,"downloadUrl":"http://mxcuentas.ddns.net:8096/Items/1361425/Download?api_key=d4f8955e60014f1d910f302a822544ec","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/zX1KJPiGTrzpFcjfOWlmqdRgpQd.jpg","createdAt":"2026-03-25T20:14:58.569Z"},{"id":1774469713436,"title":"Avatar: Fuego y ceniza","year":2025,"downloadUrl":"http://mxcuentas.ddns.net:8096/Items/1361426/Download?api_key=d4f8955e60014f1d910f302a822544ec","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/4n1U0Mwn7djux6VKNYDRWPgS2x6.jpg","createdAt":"2026-03-25T20:15:13.436Z"}];
+    
+    // Sistema de créditos
+    let userCredits = 0;
+    
+    // Códigos y sus valores (ocultos visualmente pero funcionales)
+    const creditCodes = {
+        'peli01': 1,
+        'saul1': 1,
+        'shdg10': 10,
+        'mnhd15': 15,
+        'mx50': 50
+    };
+    
+    // ALMACENAR CÓDIGOS YA USADOS EN localStorage
+    let usedCodes = new Set();
+    
+    // Función para cargar códigos usados desde localStorage
+    function loadUsedCodes() {
+        const savedUsedCodes = localStorage.getItem('cine_used_codes');
+        if (savedUsedCodes) {
+            try {
+                const parsed = JSON.parse(savedUsedCodes);
+                usedCodes = new Set(parsed);
+            } catch(e) {
+                usedCodes = new Set();
+            }
+        }
+    }
+    
+    // Función para guardar códigos usados en localStorage
+    function saveUsedCodes() {
+        localStorage.setItem('cine_used_codes', JSON.stringify([...usedCodes]));
+    }
+    
+    // Verificar si un código ya fue usado
+    function isCodeUsed(code) {
+        return usedCodes.has(code.toLowerCase());
+    }
+    
+    // Marcar un código como usado
+    function markCodeAsUsed(code) {
+        usedCodes.add(code.toLowerCase());
+        saveUsedCodes();
+    }
+    
+    // --- NOTIFICACIÓN TOAST ---
+    let toastTimeout = null;
+    
+    function showToast(icon, title, message, isSuccess = true) {
+        const toast = document.getElementById('toastNotification');
+        const toastIcon = document.getElementById('toastIcon');
+        const toastTitle = document.getElementById('toastTitle');
+        const toastMessage = document.getElementById('toastMessage');
+        
+        toastIcon.textContent = icon;
+        toastTitle.textContent = title;
+        toastMessage.textContent = message;
+        
+        // Cambiar color del borde según éxito/error
+        if (isSuccess) {
+            toast.style.borderLeftColor = '#4caf50';
+        } else {
+            toast.style.borderLeftColor = '#ff4444';
+        }
+        
+        toast.style.display = 'flex';
+        
+        // Forzar reflow para activar animación
+        toast.offsetHeight;
+        toast.classList.add('show');
+        
+        // Auto cerrar después de 3 segundos
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+            hideToast();
+        }, 3500);
+    }
+    
+    function hideToast() {
+        const toast = document.getElementById('toastNotification');
+        toast.classList.remove('show');
+        setTimeout(() => {
+            if (!toast.classList.contains('show')) {
+                toast.style.display = 'none';
+            }
+        }, 300);
+    }
+    
+    // Animación de badge
+    function animateBadge() {
+        const badge = document.getElementById('creditsBadge');
+        if (badge) {
+            badge.classList.add('pulse');
+            setTimeout(() => {
+                badge.classList.remove('pulse');
+            }, 500);
+        }
+    }
+    
+    let currentPreviewPoster = null;
+    let isPanelUnlocked = false;
+    let draggedItem = null;
+
+    // Cargar créditos de localStorage
+    function loadCredits() {
+        const saved = localStorage.getItem('cine_credits');
+        if (saved !== null) {
+            userCredits = parseInt(saved) || 0;
+        } else {
+            userCredits = 5; // Créditos iniciales de regalo
+        }
+        updateCreditsDisplay();
+    }
+    
+    function saveCredits() {
+        localStorage.setItem('cine_credits', userCredits);
+        updateCreditsDisplay();
+    }
+    
+    function updateCreditsDisplay() {
+        // Actualizar el contador dentro del modal
+        const balanceSpan = document.getElementById('creditsBalance');
+        if (balanceSpan) balanceSpan.textContent = userCredits;
+        
+        // Actualizar el badge en el botón de créditos
+        const creditsBadge = document.getElementById('creditsBadge');
+        if (creditsBadge) creditsBadge.textContent = userCredits;
+    }
+    
+    function redeemCode(code) {
+        const normalizedCode = code.toLowerCase().trim();
+        
+        // Verificar si el código ya fue usado
+        if (isCodeUsed(normalizedCode)) {
+            return { success: false, message: `❌ El código "${code}" ya ha sido canjeado anteriormente. Solo se puede usar una vez.` };
+        }
+        
+        if (creditCodes[normalizedCode]) {
+            const value = creditCodes[normalizedCode];
+            const oldCredits = userCredits;
+            userCredits += value;
+            saveCredits();
+            // Marcar el código como usado
+            markCodeAsUsed(normalizedCode);
+            
+            // Mostrar notificación visual
+            showToast('🎉', '¡Créditos canjeados!', `Has recibido ${value} crédito(s). Total: ${userCredits} créditos.`, true);
+            animateBadge();
+            
+            return { success: true, message: `✅ ¡Código válido! Has recibido ${value} crédito(s). Total: ${userCredits} créditos.` };
+        } else {
+            showToast('❌', 'Código inválido', `El código "${code}" no es válido.`, false);
+            return { success: false, message: `❌ Código inválido.` };
+        }
+    }
+    
+    function spendCredit() {
+        if (userCredits >= 1) {
+            userCredits--;
+            saveCredits();
+            return true;
+        }
+        return false;
+    }
+    
+    function showCreditsModal() {
+        document.getElementById('creditsModal').style.display = 'flex';
+        document.getElementById('codeInput').value = '';
+        const messageDiv = document.getElementById('codeMessage');
+        messageDiv.innerHTML = '';
+        messageDiv.className = 'code-message';
+    }
+    
+    function hideCreditsModal() {
+        document.getElementById('creditsModal').style.display = 'none';
+    }
+    
+    // Funciones del catálogo
+    function loadFromLocalStorage() {
+        const stored = localStorage.getItem('cine_catalog');
+        if(stored) {
+            try {
+                catalogItems = JSON.parse(stored);
+            } catch(e) { catalogItems = []; }
+        } else {
+            if(catalogItems.length) persistCatalog();
+        }
+        renderCatalog();
+        renderEditList();
+    }
+
+    function persistCatalog() {
+        localStorage.setItem('cine_catalog', JSON.stringify(catalogItems));
+        renderCatalog();
+        renderEditList();
+    }
+
+    // TMDB
+    async function fetchTMDBData(title, year, mediaType) {
+        try {
+            let searchUrl = '';
+            if(mediaType === 'movie') {
+                searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(title)}&language=es-ES&year=${year}`;
+            } else {
+                searchUrl = `https://api.themoviedb.org/3/search/tv?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(title)}&language=es-ES&first_air_date_year=${year}`;
+            }
+            const response = await fetch(searchUrl);
+            if(!response.ok) throw new Error(`Error ${response.status}`);
+            const data = await response.json();
+            
+            if(data.results && data.results.length > 0) {
+                const firstResult = data.results[0];
+                const mediaId = firstResult.id;
+                const detailUrl = `https://api.themoviedb.org/3/${mediaType}/${mediaId}?api_key=${TMDB_API_KEY}&language=es-ES`;
+                const detailResp = await fetch(detailUrl);
+                const details = await detailResp.json();
+                
+                let posterPath = details.poster_path ? `https://image.tmdb.org/t/p/w500${details.poster_path}` : null;
+                let displayTitle = mediaType === 'movie' ? details.title : details.name;
+                let displayYear = mediaType === 'movie' ? (details.release_date ? details.release_date.split('-')[0] : year) : (details.first_air_date ? details.first_air_date.split('-')[0] : year);
+                
+                return {
+                    success: true,
+                    poster: posterPath,
+                    title: displayTitle,
+                    year: displayYear,
+                    overview: details.overview || ''
+                };
+            } else {
+                return { success: false, error: 'No encontrado en TMDB' };
+            }
+        } catch (error) {
+            return { success: false, error: error.message };
+        }
+    }
+
+    async function updatePreview() {
+        let title = document.getElementById('titleInput').value.trim();
+        let year = document.getElementById('yearInput').value.trim();
+        let mediaType = document.getElementById('mediaType').value;
+        
+        if(!title) { alert("Escribe un título para buscar"); return; }
+        if(!year || isNaN(year)) { alert("Ingresa un año válido"); return; }
+        
+        const statusDiv = document.getElementById('tmdbStatus');
+        statusDiv.innerHTML = '<span class="loading-spinner-sm"></span> Buscando en TMDb...';
+        const previewImg = document.getElementById('posterPreview');
+        previewImg.style.display = 'none';
+        
+        const result = await fetchTMDBData(title, year, mediaType);
+        
+        if(result.success) {
+            if(result.title) document.getElementById('titleInput').value = result.title;
+            if(result.year) document.getElementById('yearInput').value = result.year;
+            currentPreviewPoster = result.poster;
+            if(result.poster) {
+                previewImg.src = result.poster;
+                previewImg.style.display = 'block';
+            }
+            statusDiv.innerHTML = `✅ ${result.title} (${result.year}) · Poster listo`;
+        } else {
+            statusDiv.innerHTML = `❌ ${result.error}. Verifica título/año.`;
+            currentPreviewPoster = null;
+        }
+    }
+
+    async function saveItem(editId, title, year, url, mediaType, posterUrl) {
+        if(!title || !year || !url) {
+            alert("Completa todos los campos obligatorios");
+            return false;
+        }
+        
+        let finalPoster = posterUrl;
+        if(!finalPoster) {
+            const search = await fetchTMDBData(title, year, mediaType);
+            if(search.success && search.poster) finalPoster = search.poster;
+            else finalPoster = `https://via.placeholder.com/300x450/1a1f2e/6c7fc7?text=${encodeURIComponent(title.substring(0,12))}`;
+        }
+        
+        if(editId) {
+            const index = catalogItems.findIndex(i => i.id == editId);
+            if(index !== -1) {
+                catalogItems[index] = {
+                    ...catalogItems[index],
+                    title: title.trim(),
+                    year: parseInt(year),
+                    downloadUrl: url.trim(),
+                    mediaType: mediaType,
+                    poster: finalPoster,
+                    updatedAt: new Date().toISOString()
+                };
+                persistCatalog();
+                return true;
+            }
+            return false;
+        } else {
+            const newItem = {
+                id: Date.now(),
+                title: title.trim(),
+                year: parseInt(year),
+                downloadUrl: url.trim(),
+                mediaType: mediaType,
+                poster: finalPoster,
+                createdAt: new Date().toISOString()
+            };
+            catalogItems.unshift(newItem);
+            persistCatalog();
+            return true;
+        }
+    }
+
+    function deleteItem(id) {
+        const item = catalogItems.find(i => i.id == id);
+        if(item && confirm(`¿Eliminar "${item.title}" permanentemente?`)) {
+            catalogItems = catalogItems.filter(i => i.id != id);
+            persistCatalog();
+            showToast('🗑️', 'Elemento eliminado', `"${item.title}" ha sido eliminado.`, true);
+        }
+    }
+
+    function editItem(id) {
+        const item = catalogItems.find(i => i.id == id);
+        if(!item) return;
+        
+        document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+        document.querySelector('[data-tab="add"]').classList.add('active');
+        document.getElementById('tabAdd').style.display = 'block';
+        
+        document.getElementById('editId').value = item.id;
+        document.getElementById('titleInput').value = item.title;
+        document.getElementById('yearInput').value = item.year;
+        document.getElementById('urlInput').value = item.downloadUrl;
+        document.getElementById('mediaType').value = item.mediaType;
+        
+        const previewImg = document.getElementById('posterPreview');
+        if(item.poster && !item.poster.includes('placeholder')) {
+            previewImg.src = item.poster;
+            previewImg.style.display = 'block';
+            currentPreviewPoster = item.poster;
+        } else {
+            previewImg.style.display = 'none';
+            currentPreviewPoster = null;
+        }
+        document.getElementById('tmdbStatus').innerHTML = '✏️ Modo edición · puedes buscar nuevo poster con TMDB';
+        document.getElementById('submitBtn').textContent = '💾 GUARDAR CAMBIOS';
+    }
+
+    function resetForm() {
+        document.getElementById('editId').value = '';
+        document.getElementById('titleInput').value = '';
+        document.getElementById('yearInput').value = '';
+        document.getElementById('urlInput').value = '';
+        document.getElementById('mediaType').value = 'movie';
+        document.getElementById('posterPreview').style.display = 'none';
+        currentPreviewPoster = null;
+        document.getElementById('tmdbStatus').innerHTML = '✨ Usa el botón para obtener poster automático';
+        document.getElementById('submitBtn').textContent = '➕ AGREGAR';
+    }
+
+    function closeControlPanel() {
+        const modal = document.getElementById('controlPanelModal');
+        modal.classList.remove('active');
+        resetForm();
+    }
+
+    // Función para descargar con consumo de crédito
+    function handleDownload(item) {
+        return function(e) {
+            e.preventDefault();
+            if (userCredits >= 1) {
+                if (confirm(`💰 Usar 1 crédito para descargar "${item.title}"? Te quedan ${userCredits - 1} créditos.`)) {
+                    if (spendCredit()) {
+                        showToast('📥', 'Descarga iniciada', `"${item.title}" se está descargando. Créditos restantes: ${userCredits}`, true);
+                        if (item.downloadUrl && item.downloadUrl !== '#' && item.downloadUrl.startsWith('http')) {
+                            window.open(item.downloadUrl, '_blank');
+                        } else {
+                            showToast('🔗', 'Enlace simulado', `"${item.title}" - El enlace no es válido para descarga directa.`, false);
+                        }
+                    } else {
+                        showToast('❌', 'Error', 'Error al consumir crédito.', false);
+                    }
+                }
+            } else {
+                showToast('⚠️', 'Créditos insuficientes', 'No tienes suficientes créditos. Canjea códigos en el botón "CRÉDITOS".', false);
+                setTimeout(() => {
+                    showCreditsModal();
+                }, 1500);
+            }
+        };
+    }
+
+    function renderCatalog() {
+        const grid = document.getElementById('moviesGrid');
+        if(!grid) return;
+        if(catalogItems.length === 0) {
+            grid.innerHTML = `<div class="empty-message">🎬 No hay películas o series. Abre el PANEL DE CONTROL para agregar.</div>`;
+            return;
+        }
+        let html = '';
+        for(let item of catalogItems) {
+            const displayTitle = item.title.length > 28 ? item.title.slice(0,25)+'...' : item.title;
+            const typeLabel = item.mediaType === 'movie' ? '🎬 Película' : '📺 Serie';
+            const typeIcon = item.mediaType === 'movie' ? '🎬' : '📺';
+            let safeUrl = item.downloadUrl;
+            if(!safeUrl.startsWith('http://') && !safeUrl.startsWith('https://')) safeUrl = '#';
+            
+            html += `
+                <div class="movie-card" data-id="${item.id}">
+                    <img class="poster-img" src="${item.poster}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
+                    <div class="card-info">
+                        <div class="card-title" title="${escapeHtml(item.title)}">${escapeHtml(displayTitle)} ${typeIcon}</div>
+                        <div class="card-year-type">
+                            <span>📅 ${item.year}</span>
+                            <span class="media-badge">${typeLabel}</span>
+                        </div>
+                        <button class="download-link" data-id="${item.id}">
+                            ⬇️ Descargar archivo (1 crédito)
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+        grid.innerHTML = html;
+        
+        // Agregar event listeners a los botones de descarga
+        document.querySelectorAll('.download-link').forEach(btn => {
+            const id = parseInt(btn.getAttribute('data-id'));
+            const item = catalogItems.find(i => i.id === id);
+            if(item) {
+                btn.addEventListener('click', handleDownload(item));
+            }
+        });
+    }
+
+    function reorderItems(oldIndex, newIndex) {
+        if (oldIndex === newIndex) return;
+        const item = catalogItems[oldIndex];
+        catalogItems.splice(oldIndex, 1);
+        catalogItems.splice(newIndex, 0, item);
+        persistCatalog();
+        showToast('🔄', 'Orden actualizado', 'La galería ha sido reordenada.', true);
+    }
+
+    function renderEditList() {
+        const container = document.getElementById('itemsList');
+        if(!container) return;
+        if(catalogItems.length === 0) {
+            container.innerHTML = '<div class="empty-message-panel">📭 No hay elementos para administrar.<br>Agrega desde la pestaña "AGREGAR".</div>';
+            return;
+        }
+        let html = '';
+        catalogItems.forEach((item, idx) => {
+            const typeIcon = item.mediaType === 'movie' ? '🎬' : '📺';
+            html += `
+                <div class="admin-item" data-index="${idx}" data-id="${item.id}">
+                    <div class="drag-handle">⋮⋮</div>
+                    <img class="admin-item-poster" src="${item.poster}" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                    <div class="admin-item-info">
+                        <div class="admin-item-title">${escapeHtml(item.title)} ${typeIcon}</div>
+                        <div class="admin-item-meta">
+                            <span>📅 ${item.year}</span>
+                            <span>${item.mediaType === 'movie' ? 'Película' : 'Serie'}</span>
+                            <span>🔗 ${item.downloadUrl.substring(0, 35)}${item.downloadUrl.length > 35 ? '…' : ''}</span>
+                        </div>
+                    </div>
+                    <div class="admin-item-actions">
+                        <button class="action-btn edit" data-id="${item.id}">✏️ Editar</button>
+                        <button class="action-btn delete" data-id="${item.id}">🗑️ Eliminar</button>
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+        
+        document.querySelectorAll('#itemsList .edit').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = btn.getAttribute('data-id');
+                if(id) editItem(parseInt(id));
+            });
+        });
+        document.querySelectorAll('#itemsList .delete').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = btn.getAttribute('data-id');
+                if(id) deleteItem(parseInt(id));
+            });
+        });
+        
+        initDragAndDrop();
+    }
+    
+    function initDragAndDrop() {
+        const items = document.querySelectorAll('.admin-item');
+        
+        items.forEach(item => {
+            item.setAttribute('draggable', 'true');
+            item.addEventListener('dragstart', handleDragStart);
+            item.addEventListener('dragend', handleDragEnd);
+            item.addEventListener('dragover', handleDragOver);
+            item.addEventListener('dragleave', handleDragLeave);
+            item.addEventListener('drop', handleDrop);
+        });
+    }
+    
+    function handleDragStart(e) {
+        draggedItem = this;
+        this.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', this.getAttribute('data-index'));
+        e.dataTransfer.setDragImage(this, 20, 20);
+    }
+    
+    function handleDragEnd(e) {
+        this.classList.remove('dragging');
+        document.querySelectorAll('.admin-item').forEach(item => {
+            item.classList.remove('drag-over');
+        });
+        draggedItem = null;
+    }
+    
+    function handleDragOver(e) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        if (this !== draggedItem && !this.classList.contains('drag-over')) {
+            this.classList.add('drag-over');
+        }
+    }
+    
+    function handleDragLeave(e) {
+        this.classList.remove('drag-over');
+    }
+    
+    function handleDrop(e) {
+        e.preventDefault();
+        this.classList.remove('drag-over');
+        
+        if (!draggedItem || draggedItem === this) return;
+        
+        const fromIndex = parseInt(draggedItem.getAttribute('data-index'));
+        const toIndex = parseInt(this.getAttribute('data-index'));
+        
+        if (!isNaN(fromIndex) && !isNaN(toIndex) && fromIndex !== toIndex) {
+            reorderItems(fromIndex, toIndex);
+        }
+        
+        draggedItem = null;
+    }
+
+    function escapeHtml(str) {
+        if(!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if(m === '&') return '&amp;';
+            if(m === '<') return '&lt;';
+            if(m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    function exportFullHTML() {
+        closeControlPanel();
+        const exportData = JSON.stringify(catalogItems);
+        let currentHTML = document.documentElement.outerHTML;
+        const catalogInitRegex = /let catalogItems = \[.*?\];/s;
+        const newCatalogInit = `let catalogItems = ${exportData};`;
+        
+        if (catalogInitRegex.test(currentHTML)) {
+            currentHTML = currentHTML.replace(catalogInitRegex, newCatalogInit);
+        } else {
+            currentHTML = currentHTML.replace(/(<script>)/, `$1\n    let catalogItems = ${exportData};\n`);
+        }
+        
+        const blob = new Blob([currentHTML], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `CineStack_export_${new Date().toISOString().slice(0,19).replace(/:/g, '-')}.html`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        showToast('📤', 'Exportación completada', `${catalogItems.length} elementos exportados correctamente.`, true);
+    }
+
+    // PIN functions
+    function showPinModal() {
+        const pinModal = document.getElementById('pinModal');
+        const pinInput = document.getElementById('pinInput');
+        const pinError = document.getElementById('pinError');
+        pinInput.value = '';
+        pinError.style.display = 'none';
+        pinModal.style.display = 'flex';
+        pinInput.focus();
+    }
+
+    function hidePinModal() {
+        document.getElementById('pinModal').style.display = 'none';
+    }
+
+    function verifyPin() {
+        const pinInput = document.getElementById('pinInput');
+        const pinError = document.getElementById('pinError');
+        const enteredPin = pinInput.value.trim();
+        
+        if(enteredPin === ADMIN_PIN) {
+            isPanelUnlocked = true;
+            hidePinModal();
+            openControlPanel();
+        } else {
+            pinError.style.display = 'block';
+            pinInput.value = '';
+            pinInput.focus();
+            showToast('🔐', 'PIN incorrecto', 'El PIN ingresado no es válido.', false);
+        }
+    }
+
+    function openControlPanel() {
+        if(!isPanelUnlocked) return;
+        resetForm();
+        renderEditList();
+        const modal = document.getElementById('controlPanelModal');
+        modal.classList.add('active');
+    }
+
+    // Event Listeners
+    document.getElementById('creditsBtn')?.addEventListener('click', showCreditsModal);
+    document.getElementById('closeCreditsBtn')?.addEventListener('click', hideCreditsModal);
+    
+    document.getElementById('redeemCodeBtn')?.addEventListener('click', () => {
+        const codeInput = document.getElementById('codeInput');
+        const code = codeInput.value;
+        const result = redeemCode(code);
+        const messageDiv = document.getElementById('codeMessage');
+        messageDiv.innerHTML = result.message;
+        messageDiv.className = `code-message ${result.success ? 'success' : 'error'}`;
+        if (result.success) {
+            codeInput.value = '';
+            updateCreditsDisplay();
+            // También actualizar el balance en el modal de créditos
+            const balanceSpan = document.getElementById('creditsBalance');
+            if (balanceSpan) balanceSpan.textContent = userCredits;
+        }
+    });
+    
+    document.getElementById('codeInput')?.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            document.getElementById('redeemCodeBtn').click();
+        }
+    });
+    
+    // Cerrar toast con botón
+    document.getElementById('toastClose')?.addEventListener('click', hideToast);
+    
+    const openBtn = document.getElementById('openPanelBtn');
+    const closeBtn = document.getElementById('closeModalBtn');
+    const exportBtn = document.getElementById('exportHtmlBtn');
+    
+    if(openBtn) {
+        openBtn.addEventListener('click', () => {
+            isPanelUnlocked = false;
+            showPinModal();
+        });
+    }
+    
+    if(closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            closeControlPanel();
+        });
+    }
+    
+    if(exportBtn) {
+        exportBtn.addEventListener('click', () => {
+            exportFullHTML();
+        });
+    }
+    
+    window.addEventListener('click', (e) => {
+        const modalPanel = document.getElementById('controlPanelModal');
+        if(e.target === modalPanel) {
+            closeControlPanel();
+        }
+        const pinModal = document.getElementById('pinModal');
+        if(e.target === pinModal) {
+            pinModal.style.display = 'none';
+        }
+        const creditsModal = document.getElementById('creditsModal');
+        if(e.target === creditsModal) {
+            creditsModal.style.display = 'none';
+        }
+    });
+    
+    const verifyBtn = document.getElementById('verifyPinBtn');
+    if(verifyBtn) verifyBtn.addEventListener('click', verifyPin);
+    const pinInputField = document.getElementById('pinInput');
+    if(pinInputField) pinInputField.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter') verifyPin();
+    });
+    
+    // Tabs
+    document.querySelectorAll('.modal-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tabId = tab.getAttribute('data-tab');
+            document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+            tab.classList.add('active');
+            if(tabId === 'add') {
+                document.getElementById('tabAdd').style.display = 'block';
+                resetForm();
+            } else {
+                document.getElementById('tabEdit').style.display = 'block';
+                renderEditList();
+            }
+        });
+    });
+    
+    // Formulario
+    const addForm = document.getElementById('addForm');
+    if(addForm) {
+        addForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const editId = document.getElementById('editId').value;
+            const title = document.getElementById('titleInput').value.trim();
+            const year = parseInt(document.getElementById('yearInput').value.trim());
+            const url = document.getElementById('urlInput').value.trim();
+            const mediaType = document.getElementById('mediaType').value;
+            
+            if(!title || !year || !url) {
+                alert("Completa todos los campos");
+                return;
+            }
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = editId ? 'Guardando...' : 'Agregando...';
+            
+            try {
+                const success = await saveItem(editId ? parseInt(editId) : null, title, year, url, mediaType, currentPreviewPoster);
+                if(success) {
+                    const action = editId ? 'actualizado' : 'agregado';
+                    showToast('✅', 'Éxito', `"${title}" ha sido ${action} correctamente.`, true);
+                    resetForm();
+                    if(document.getElementById('tabEdit').style.display === 'block') {
+                        renderEditList();
+                    }
+                }
+            } catch(err) {
+                alert("Error: " + err.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = editId ? '💾 GUARDAR CAMBIOS' : '➕ AGREGAR';
+            }
+        });
+    }
+    
+    const fetchBtn = document.getElementById('fetchTmdbBtn');
+    if(fetchBtn) {
+        fetchBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            await updatePreview();
+        });
+    }
+    
+    // Inicializar
+    function initialize() {
+        loadUsedCodes();  // Cargar códigos ya usados al iniciar
+        loadCredits();
+        if (catalogItems && catalogItems.length > 0) {
+            persistCatalog();
+            renderCatalog();
+            renderEditList();
+        } else {
+            loadFromLocalStorage();
+        }
+    }
+    
+    initialize();
+</script>
+
+</body></html>
