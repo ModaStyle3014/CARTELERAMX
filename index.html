@@ -350,7 +350,7 @@
 
         .modal-card {
             background: #151c2c;
-            max-width: 1100px;
+            max-width: 1000px;
             width: 90%;
             border-radius: 2rem;
             border: 1px solid #2f3b5c;
@@ -392,6 +392,7 @@
             padding: 0 1.5rem;
             gap: 0.5rem;
             border-bottom: 1px solid #2a3455;
+            flex-wrap: wrap;
         }
 
         .modal-tab {
@@ -514,50 +515,8 @@
         }
 
         .items-list {
-            max-height: 380px;
+            max-height: 480px;
             overflow-y: auto;
-        }
-        
-        .codes-list {
-            max-height: 300px;
-            overflow-y: auto;
-            margin-bottom: 1rem;
-        }
-        
-        .code-item {
-            background: #11161f;
-            border-radius: 1rem;
-            margin-bottom: 0.6rem;
-            padding: 0.7rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border: 1px solid #222a3a;
-        }
-        
-        .code-info {
-            display: flex;
-            gap: 1rem;
-            align-items: baseline;
-            flex-wrap: wrap;
-        }
-        
-        .code-value {
-            font-family: monospace;
-            font-size: 1rem;
-            font-weight: bold;
-            color: #ffd966;
-            background: #0e1220;
-            padding: 0.2rem 0.6rem;
-            border-radius: 8px;
-        }
-        
-        .code-amount {
-            background: #2a5f4a;
-            padding: 0.2rem 0.6rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: bold;
         }
         
         .admin-item {
@@ -670,16 +629,6 @@
         .action-btn.delete:hover {
             background: #c24c5c;
         }
-        
-        .action-btn.code-delete {
-            background: #8b3c48;
-            padding: 0.3rem 0.7rem;
-            font-size: 0.7rem;
-        }
-        
-        .action-btn.code-delete:hover {
-            background: #c24c5c;
-        }
 
         .empty-message-panel {
             text-align: center;
@@ -693,16 +642,6 @@
             justify-content: flex-end;
             gap: 12px;
             margin-top: 1.5rem;
-            padding-top: 1rem;
-            border-top: 1px solid #2a3455;
-        }
-        
-        .modal-actions-between {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            margin-top: 1rem;
             padding-top: 1rem;
             border-top: 1px solid #2a3455;
         }
@@ -758,35 +697,76 @@
             background: #3e7a60;
         }
         
-        .codes-section {
+        .btn-danger {
+            background: #8b3c48;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #c24c5c;
+        }
+        
+        .code-item {
+            background: #0e1220;
+            border-radius: 1rem;
+            padding: 0.8rem;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #2a3455;
+        }
+        
+        .code-item-info {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .code-value {
+            font-family: monospace;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #ffd966;
+            background: #1a1f2e;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+        }
+        
+        .code-amount {
+            color: #6f7ed6;
+            font-weight: bold;
+        }
+        
+        .add-code-section {
             background: #0e1220;
             border-radius: 1rem;
             padding: 1rem;
-            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #2a3455;
         }
         
-        .codes-section h4 {
-            margin-bottom: 1rem;
-            color: #ffd966;
-            font-size: 0.9rem;
+        .add-code-section h4 {
+            margin-bottom: 0.8rem;
+            color: #b9c8ff;
         }
         
-        .add-code-group {
-            display: flex;
+        .code-form-row {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
             gap: 10px;
-            margin-bottom: 1rem;
+            align-items: center;
         }
         
-        .add-code-group input {
-            flex: 2;
+        @media (max-width: 640px) {
+            .code-form-row {
+                grid-template-columns: 1fr;
+            }
         }
         
-        .add-code-group select {
-            flex: 1;
-        }
-        
-        .add-code-group button {
-            flex-shrink: 0;
+        .code-list {
+            max-height: 300px;
+            overflow-y: auto;
         }
 
         .pin-modal {
@@ -1025,7 +1005,6 @@
             .admin-item-poster { width: 40px; height: 60px; }
             .search-box { max-width: 100%; }
             .quality-badge { top: 5px; left: 5px; padding: 2px 6px; font-size: 0.6rem; }
-            .add-code-group { flex-direction: column; }
         }
     </style>
 </head>
@@ -1050,7 +1029,20 @@
     <div id="searchResultsInfo" class="search-results-info" style="display: none;"></div>
 </div>
 
-<div class="grid" id="moviesGrid"><div class="movie-card" data-id="1774483041039">
+<div class="grid" id="moviesGrid"><div class="movie-card" data-id="1774553418916">
+                        <div class="poster-container">
+                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/szcew6yyjcDvaL0isaPBk2e3nkF.jpg" alt="Dune" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
+                            
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title" title="Dune">Dune 🎬</div>
+                            <div class="card-year-type">
+                                <span>📅 2021</span>
+                                <span class="media-badge">🎬 Película</span>
+                            </div>
+                            <button class="download-link" data-id="1774553418916">⬇️ Descargar archivo (1 crédito)</button>
+                        </div>
+                    </div><div class="movie-card" data-id="1774483041039">
                         <div class="poster-container">
                             <img class="poster-img not-available" src="https://image.tmdb.org/t/p/w500/4Js0gYWxuvTN6b8iAaSF1cSQzBs.jpg" alt="Super Mario Galaxy la película" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
                             <div class="quality-badge cam">CAM</div>
@@ -1223,11 +1215,11 @@
 
 <footer></footer>
 
-<div id="toastNotification" class="toast-notification" style="display: flex; border-left-color: rgb(76, 175, 80);">
+<div id="toastNotification" class="toast-notification" style="display: none; border-left-color: rgb(76, 175, 80);">
     <div class="toast-icon" id="toastIcon">✅</div>
     <div class="toast-content">
         <div class="toast-title" id="toastTitle">Código agregado</div>
-        <div class="toast-message" id="toastMessage">"SAUL" por 50 crédito(s) ha sido agregado. Recuerda exportar para guardar permanentemente.</div>
+        <div class="toast-message" id="toastMessage">✅ Código "mumu" agregado con 7 créditos</div>
     </div>
     <button class="toast-close" id="toastClose">✕</button>
 </div>
@@ -1267,7 +1259,7 @@
         <div class="modal-tabs">
             <div class="modal-tab" data-tab="add">➕ AGREGAR</div>
             <div class="modal-tab active" data-tab="edit">✏️ EDITAR / ELIMINAR · 🎯 ARRASTRA PARA ORDENAR</div>
-            <div class="modal-tab" data-tab="codes">🎫 ADMINISTRAR CÓDIGOS</div>
+            <div class="modal-tab" data-tab="codes">🎫 CÓDIGOS DE CRÉDITO</div>
         </div>
         
         <div class="modal-body">
@@ -1315,7 +1307,7 @@
                     
                     <div class="poster-preview">
                         <div style="font-size:0.7rem; color:#9aa9da;">⭐ Poster desde TMDb</div>
-                        <img id="posterPreview" style="display: none; margin-top: 5px;" alt="preview">
+                        <img id="posterPreview" style="display: none; margin-top: 5px;" alt="preview" src="https://image.tmdb.org/t/p/w500/szcew6yyjcDvaL0isaPBk2e3nkF.jpg">
                         <div class="tmdb-status" id="tmdbStatus">✨ Usa el botón para obtener poster automático</div>
                         <button type="button" id="fetchTmdbBtn" class="tmdb-btn">🌐 Obtener datos de TMDb</button>
                     </div>
@@ -1331,7 +1323,24 @@
                 <div class="sort-info">
                     <span>🖱️ Arrastra los elementos (agarra el ícono ⋮⋮ o la tarjeta) para cambiar el orden de la galería</span>
                 </div>
-                <div class="items-list" id="itemsList"><div class="admin-item" data-index="0" data-id="1774483041039" draggable="true">
+                <div class="items-list" id="itemsList"><div class="admin-item" data-index="0" data-id="1774553418916" draggable="true">
+                        <div class="drag-handle">⋮⋮</div>
+                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/szcew6yyjcDvaL0isaPBk2e3nkF.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                        <div class="admin-item-info">
+                            <div class="admin-item-title">Dune 🎬</div>
+                            <div class="admin-item-meta">
+                                <span>📅 2021</span>
+                                <span>Película</span>
+                                <span>✅ Disponible</span>
+                                <span>🏷️ Sin etiqueta</span>
+                                <span>🔗 d</span>
+                            </div>
+                        </div>
+                        <div class="admin-item-actions">
+                            <button class="action-btn edit" data-id="1774553418916">✏️ Editar</button>
+                            <button class="action-btn delete" data-id="1774553418916">🗑️ Eliminar</button>
+                        </div>
+                    </div><div class="admin-item" data-index="1" data-id="1774483041039" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
                         <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/4Js0gYWxuvTN6b8iAaSF1cSQzBs.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
                         <div class="admin-item-info">
@@ -1348,7 +1357,7 @@
                             <button class="action-btn edit" data-id="1774483041039">✏️ Editar</button>
                             <button class="action-btn delete" data-id="1774483041039">🗑️ Eliminar</button>
                         </div>
-                    </div><div class="admin-item" data-index="1" data-id="1774482931390" draggable="true">
+                    </div><div class="admin-item" data-index="2" data-id="1774482931390" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
                         <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/4Z0E1W7YvQ0aVtgj7KKtktb9ukd.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
                         <div class="admin-item-info">
@@ -1365,7 +1374,7 @@
                             <button class="action-btn edit" data-id="1774482931390">✏️ Editar</button>
                             <button class="action-btn delete" data-id="1774482931390">🗑️ Eliminar</button>
                         </div>
-                    </div><div class="admin-item" data-index="2" data-id="1774482950825" draggable="true">
+                    </div><div class="admin-item" data-index="3" data-id="1774482950825" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
                         <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/2pULHV2e3W7KNTyyfZl6dX071Np.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
                         <div class="admin-item-info">
@@ -1382,7 +1391,7 @@
                             <button class="action-btn edit" data-id="1774482950825">✏️ Editar</button>
                             <button class="action-btn delete" data-id="1774482950825">🗑️ Eliminar</button>
                         </div>
-                    </div><div class="admin-item" data-index="3" data-id="1774482992698" draggable="true">
+                    </div><div class="admin-item" data-index="4" data-id="1774482992698" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
                         <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/7lwOTxajURKEWO6gI370NTrVdBO.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
                         <div class="admin-item-info">
@@ -1399,7 +1408,7 @@
                             <button class="action-btn edit" data-id="1774482992698">✏️ Editar</button>
                             <button class="action-btn delete" data-id="1774482992698">🗑️ Eliminar</button>
                         </div>
-                    </div><div class="admin-item" data-index="4" data-id="1774480733383" draggable="true">
+                    </div><div class="admin-item" data-index="5" data-id="1774480733383" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
                         <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/l9S8MLUyi2diTc2Gf3KDAOQTuVx.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
                         <div class="admin-item-info">
@@ -1416,7 +1425,7 @@
                             <button class="action-btn edit" data-id="1774480733383">✏️ Editar</button>
                             <button class="action-btn delete" data-id="1774480733383">🗑️ Eliminar</button>
                         </div>
-                    </div><div class="admin-item" data-index="5" data-id="1774482914074" draggable="true">
+                    </div><div class="admin-item" data-index="6" data-id="1774482914074" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
                         <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/d5YmQx9kPLQBHEboGwrAavypztB.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
                         <div class="admin-item-info">
@@ -1433,7 +1442,7 @@
                             <button class="action-btn edit" data-id="1774482914074">✏️ Editar</button>
                             <button class="action-btn delete" data-id="1774482914074">🗑️ Eliminar</button>
                         </div>
-                    </div><div class="admin-item" data-index="6" data-id="1774507784749" draggable="true">
+                    </div><div class="admin-item" data-index="7" data-id="1774507784749" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
                         <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/q7aijAKE98Fcp6dgR6oWiUkFO2g.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
                         <div class="admin-item-info">
@@ -1450,7 +1459,7 @@
                             <button class="action-btn edit" data-id="1774507784749">✏️ Editar</button>
                             <button class="action-btn delete" data-id="1774507784749">🗑️ Eliminar</button>
                         </div>
-                    </div><div class="admin-item" data-index="7" data-id="1774506932525" draggable="true">
+                    </div><div class="admin-item" data-index="8" data-id="1774506932525" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
                         <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/9zBNg8koM3fjUTPT7QeJHuGG2r9.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
                         <div class="admin-item-info">
@@ -1467,7 +1476,7 @@
                             <button class="action-btn edit" data-id="1774506932525">✏️ Editar</button>
                             <button class="action-btn delete" data-id="1774506932525">🗑️ Eliminar</button>
                         </div>
-                    </div><div class="admin-item" data-index="8" data-id="1774539010961" draggable="true">
+                    </div><div class="admin-item" data-index="9" data-id="1774539010961" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
                         <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/efSsZJaddeq0LOABZqpCXdMxv9P.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
                         <div class="admin-item-info">
@@ -1484,7 +1493,7 @@
                             <button class="action-btn edit" data-id="1774539010961">✏️ Editar</button>
                             <button class="action-btn delete" data-id="1774539010961">🗑️ Eliminar</button>
                         </div>
-                    </div><div class="admin-item" data-index="9" data-id="1774540028069" draggable="true">
+                    </div><div class="admin-item" data-index="10" data-id="1774540028069" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
                         <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/dTCQ9KPhMWUM6mHWZzR4Ws1gl74.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
                         <div class="admin-item-info">
@@ -1501,7 +1510,7 @@
                             <button class="action-btn edit" data-id="1774540028069">✏️ Editar</button>
                             <button class="action-btn delete" data-id="1774540028069">🗑️ Eliminar</button>
                         </div>
-                    </div><div class="admin-item" data-index="10" data-id="1774541244430" draggable="true">
+                    </div><div class="admin-item" data-index="11" data-id="1774541244430" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
                         <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/tISaeNWkqPYqSdANTTteewEMS5H.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
                         <div class="admin-item-info">
@@ -1518,7 +1527,7 @@
                             <button class="action-btn edit" data-id="1774541244430">✏️ Editar</button>
                             <button class="action-btn delete" data-id="1774541244430">🗑️ Eliminar</button>
                         </div>
-                    </div><div class="admin-item" data-index="11" data-id="1774542078902" draggable="true">
+                    </div><div class="admin-item" data-index="12" data-id="1774542078902" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
                         <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/5Y2TeCVEnwPbd4FDShGbkKYw6GE.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
                         <div class="admin-item-info">
@@ -1535,7 +1544,7 @@
                             <button class="action-btn edit" data-id="1774542078902">✏️ Editar</button>
                             <button class="action-btn delete" data-id="1774542078902">🗑️ Eliminar</button>
                         </div>
-                    </div><div class="admin-item" data-index="12" data-id="1774541188064" draggable="true">
+                    </div><div class="admin-item" data-index="13" data-id="1774541188064" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
                         <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/2DTPapravB7kVBWjm6RsqEWyNqn.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
                         <div class="admin-item-info">
@@ -1559,72 +1568,113 @@
             </div>
             
             <div id="tabCodes" class="tab-content" style="display: none;">
-                <div class="codes-section">
-                    <h4>📋 CÓDIGOS DE CRÉDITOS INCORPORADOS EN EL CÓDIGO</h4>
-                    <div class="codes-list" id="codesList"><div class="code-item">
-                        <div class="code-info">
-                            <span class="code-value">afg</span>
-                            <span class="code-amount">1 crédito</span>
+                <div class="add-code-section">
+                    <h4>➕ Agregar nuevo código de crédito (se incrustará permanentemente)</h4>
+                    <div class="code-form-row">
+                        <input type="text" id="newCodeInput" placeholder="Código (ej: NUEVO10)" maxlength="20">
+                        <input type="number" id="newCodeValue" placeholder="Valor en créditos" min="1" style="width: 120px;">
+                        <button id="addCodeBtn" class="btn btn-primary">AGREGAR CÓDIGO</button>
+                    </div>
+                </div>
+                <div class="code-list" id="codeList"><div class="code-item">
+                        <div class="code-item-info">
+                            <span class="code-value">gsf1</span>
+                            <span class="code-amount">💰 1 crédito</span>
                         </div>
-                        <button class="action-btn code-delete" data-code="afg">🗑️ Eliminar</button>
+                        <button class="action-btn delete" data-code="gsf1">🗑️ Eliminar</button>
                     </div><div class="code-item">
-                        <div class="code-info">
-                            <span class="code-value">sgd</span>
-                            <span class="code-amount">2 créditos</span>
+                        <div class="code-item-info">
+                            <span class="code-value">sgd1</span>
+                            <span class="code-amount">💰 1 crédito</span>
                         </div>
-                        <button class="action-btn code-delete" data-code="sgd">🗑️ Eliminar</button>
+                        <button class="action-btn delete" data-code="sgd1">🗑️ Eliminar</button>
                     </div><div class="code-item">
-                        <div class="code-info">
-                            <span class="code-value">hsf</span>
-                            <span class="code-amount">3 créditos</span>
+                        <div class="code-item-info">
+                            <span class="code-value">asd1</span>
+                            <span class="code-amount">💰 1 crédito</span>
                         </div>
-                        <button class="action-btn code-delete" data-code="hsf">🗑️ Eliminar</button>
+                        <button class="action-btn delete" data-code="asd1">🗑️ Eliminar</button>
                     </div><div class="code-item">
-                        <div class="code-info">
-                            <span class="code-value">shsf</span>
-                            <span class="code-amount">5 créditos</span>
+                        <div class="code-item-info">
+                            <span class="code-value">vdf2</span>
+                            <span class="code-amount">💰 2 créditos</span>
                         </div>
-                        <button class="action-btn code-delete" data-code="shsf">🗑️ Eliminar</button>
+                        <button class="action-btn delete" data-code="vdf2">🗑️ Eliminar</button>
                     </div><div class="code-item">
-                        <div class="code-info">
-                            <span class="code-value">shdfgd</span>
-                            <span class="code-amount">10 créditos</span>
+                        <div class="code-item-info">
+                            <span class="code-value">fsd2</span>
+                            <span class="code-amount">💰 2 créditos</span>
                         </div>
-                        <button class="action-btn code-delete" data-code="shdfgd">🗑️ Eliminar</button>
+                        <button class="action-btn delete" data-code="fsd2">🗑️ Eliminar</button>
                     </div><div class="code-item">
-                        <div class="code-info">
-                            <span class="code-value">sdff</span>
-                            <span class="code-amount">20 créditos</span>
+                        <div class="code-item-info">
+                            <span class="code-value">sgd2</span>
+                            <span class="code-amount">💰 2 créditos</span>
                         </div>
-                        <button class="action-btn code-delete" data-code="sdff">🗑️ Eliminar</button>
+                        <button class="action-btn delete" data-code="sgd2">🗑️ Eliminar</button>
                     </div><div class="code-item">
-                        <div class="code-info">
-                            <span class="code-value">saul</span>
-                            <span class="code-amount">50 créditos</span>
+                        <div class="code-item-info">
+                            <span class="code-value">sfd3</span>
+                            <span class="code-amount">💰 3 créditos</span>
                         </div>
-                        <button class="action-btn code-delete" data-code="saul">🗑️ Eliminar</button>
+                        <button class="action-btn delete" data-code="sfd3">🗑️ Eliminar</button>
+                    </div><div class="code-item">
+                        <div class="code-item-info">
+                            <span class="code-value">ssd3</span>
+                            <span class="code-amount">💰 3 créditos</span>
+                        </div>
+                        <button class="action-btn delete" data-code="ssd3">🗑️ Eliminar</button>
+                    </div><div class="code-item">
+                        <div class="code-item-info">
+                            <span class="code-value">fsdsy5</span>
+                            <span class="code-amount">💰 5 créditos</span>
+                        </div>
+                        <button class="action-btn delete" data-code="fsdsy5">🗑️ Eliminar</button>
+                    </div><div class="code-item">
+                        <div class="code-item-info">
+                            <span class="code-value">sfdbd5</span>
+                            <span class="code-amount">💰 5 créditos</span>
+                        </div>
+                        <button class="action-btn delete" data-code="sfdbd5">🗑️ Eliminar</button>
+                    </div><div class="code-item">
+                        <div class="code-item-info">
+                            <span class="code-value">gsfdy5</span>
+                            <span class="code-amount">💰 5 créditos</span>
+                        </div>
+                        <button class="action-btn delete" data-code="gsfdy5">🗑️ Eliminar</button>
+                    </div><div class="code-item">
+                        <div class="code-item-info">
+                            <span class="code-value">sgdtd10</span>
+                            <span class="code-amount">💰 10 créditos</span>
+                        </div>
+                        <button class="action-btn delete" data-code="sgdtd10">🗑️ Eliminar</button>
+                    </div><div class="code-item">
+                        <div class="code-item-info">
+                            <span class="code-value">shdgd10</span>
+                            <span class="code-amount">💰 10 créditos</span>
+                        </div>
+                        <button class="action-btn delete" data-code="shdgd10">🗑️ Eliminar</button>
+                    </div><div class="code-item">
+                        <div class="code-item-info">
+                            <span class="code-value">mnhd20</span>
+                            <span class="code-amount">💰 20 créditos</span>
+                        </div>
+                        <button class="action-btn delete" data-code="mnhd20">🗑️ Eliminar</button>
+                    </div><div class="code-item">
+                        <div class="code-item-info">
+                            <span class="code-value">mx50</span>
+                            <span class="code-amount">💰 50 créditos</span>
+                        </div>
+                        <button class="action-btn delete" data-code="mx50">🗑️ Eliminar</button>
+                    </div><div class="code-item">
+                        <div class="code-item-info">
+                            <span class="code-value">mumu</span>
+                            <span class="code-amount">💰 7 créditos</span>
+                        </div>
+                        <button class="action-btn delete" data-code="mumu">🗑️ Eliminar</button>
                     </div></div>
-                    
-                    <div class="add-code-group">
-                        <input type="text" id="newCodeValue" placeholder="Código (ej: PROMO10)" maxlength="20">
-                        <select id="newCodeAmount">
-                            <option value="1">1 crédito</option>
-                            <option value="2">2 créditos</option>
-                            <option value="3">3 créditos</option>
-                            <option value="5">5 créditos</option>
-                            <option value="10">10 créditos</option>
-                            <option value="20">20 créditos</option>
-                            <option value="50">50 créditos</option>
-                        </select>
-                        <button id="addCodeBtn" class="btn btn-primary">➕ AGREGAR CÓDIGO</button>
-                    </div>
-                    
-                    <div class="modal-actions-between">
-                        <span class="sort-info" style="margin-bottom: 0; flex: 1;">
-                            ⚠️ Los cambios SOLO se guardan al EXPORTAR el HTML. Los códigos modificados quedarán incrustados en el nuevo archivo.
-                        </span>
-                        <button type="button" id="resetCodesBtn" class="btn btn-secondary">🔄 RESTABLECER CÓDIGOS ORIGINALES</button>
-                    </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="closeCodesModalBtn">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -1635,20 +1685,14 @@
     const TMDB_API_KEY = '04c35731a5ee918f014970082a0088b1';
     const ADMIN_PIN = '199494';
     
-    let catalogItems = [{"id":1774483041039,"title":"Super Mario Galaxy la película","year":2026,"downloadUrl":"a","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/4Js0gYWxuvTN6b8iAaSF1cSQzBs.jpg","createdAt":"2026-03-25T23:57:21.039Z","status":"coming","updatedAt":"2026-03-26T05:13:34.144Z","quality":"cam"},{"id":1774482931390,"title":"Hoppers","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/ujhru6ctbkwr0lfvkirgx/Hoppers-2026.mp4?rlkey=7473rtu7lprmcrxa3f7bn6uoq&st=670qgtji&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/4Z0E1W7YvQ0aVtgj7KKtktb9ukd.jpg","createdAt":"2026-03-25T23:55:31.390Z","status":"available","quality":"cam","updatedAt":"2026-03-26T15:26:54.479Z"},{"id":1774482950825,"title":"Scream 7","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/llit0eqyrdokntdnuns2u/Scream-7-2026.mp4?rlkey=j5lurnvntf5g09jk07vjlnxqd&st=5w4zly5n&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/2pULHV2e3W7KNTyyfZl6dX071Np.jpg","createdAt":"2026-03-25T23:55:50.825Z","updatedAt":"2026-03-26T16:34:18.441Z","status":"available","quality":"cam"},{"id":1774482992698,"title":"Proyecto Salvación","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/zkgzbq21lve64ib8k8k63/Proyecto-Fin-del-mundo-2026.mp4?rlkey=p54ldljpp5h93f8k1ppi18e0r&st=p3mjail9&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/7lwOTxajURKEWO6gI370NTrVdBO.jpg","createdAt":"2026-03-25T23:56:32.698Z","status":"available","quality":"cam","updatedAt":"2026-03-26T17:01:50.190Z"},{"id":1774480733383,"title":"Peaky Blinders: El hombre inmortal","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/yxz48i9tx29498cuwqqed/Peaky-Blinders-El-hombre-inmortal-2026.mp4?rlkey=szwhol7qfmxveabxnaq7vxw47&st=tq2r1qo5&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/l9S8MLUyi2diTc2Gf3KDAOQTuVx.jpg","createdAt":"2026-03-25T23:18:53.383Z","status":"available","updatedAt":"2026-03-26T04:45:33.431Z","quality":"1080p"},{"id":1774482914074,"title":"Máquina de guerra","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/h60e1r536hdgnwst2pyre/M-quina-de-guerra-2026.mp4?rlkey=rpzrg0khl2d7uimgg5dzme5mn&st=kbvwkio9&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/d5YmQx9kPLQBHEboGwrAavypztB.jpg","createdAt":"2026-03-25T23:55:14.074Z","status":"available","quality":"1080p","updatedAt":"2026-03-26T15:19:40.761Z"},{"id":1774507784749,"title":"Greenland 2","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/6vs5ov4eyiq17qx5or6e6/el-dia-del-fin-del-mundo-2026.mp4?rlkey=9vdzj9lbnkonyh7e1j8ujavum&st=4j6nyylo&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/q7aijAKE98Fcp6dgR6oWiUkFO2g.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T06:49:44.749Z","updatedAt":"2026-03-26T08:39:38.196Z"},{"id":1774506932525,"title":"Sin piedad","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/1t4jtav7phnskykdrq0ch/Sin-piedad-2026.mp4?rlkey=jwulph9esqlwz54ypxrwc05if&st=dshvs9d6&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/9zBNg8koM3fjUTPT7QeJHuGG2r9.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T06:35:32.525Z","updatedAt":"2026-03-26T08:25:20.960Z"},{"id":1774539010961,"title":"Solo Mio","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/7363ljgivbz6v8vglcszz/Solo-Mio-2026.mp4?rlkey=scwtcrbsyfgzih9zmjftkihqq&st=dz6pa28m&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/efSsZJaddeq0LOABZqpCXdMxv9P.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T15:30:10.961Z","updatedAt":"2026-03-26T16:31:50.121Z"},{"id":1774540028069,"title":"Suburbanos 3","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/4dhcwt8o0314a4nk18u3g/Flow-callejero-3-2026.mp4?rlkey=4qf1giftp8r59qh1d2ytq1cuh&st=lmf92bt2&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/dTCQ9KPhMWUM6mHWZzR4Ws1gl74.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T15:47:08.069Z","updatedAt":"2026-03-26T15:51:36.797Z"},{"id":1774541244430,"title":"Pose","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/byvfnlqm6osplpjhzl1gs/Sesi-n-fatal-2026.mp4?rlkey=w85o2sljo8zgl12q4icpyk8sy&st=yi0eht9j&dl=0","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/tISaeNWkqPYqSdANTTteewEMS5H.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T16:07:24.430Z"},{"id":1774542078902,"title":"Return to Silent Hill","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/g3s5b0yx2zrh9ss3jt3gz/Terror-en-Silent-Hill-Regreso-al-infierno-2026.mp4?rlkey=bn3sdqtp5uy2oafk9e6qxd2dy&st=zynuyaqq&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/5Y2TeCVEnwPbd4FDShGbkKYw6GE.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T16:21:18.902Z"},{"id":1774541188064,"title":"28 años después: El templo de los huesos","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/bxfidky2mctbddfekeom2/28-a-os-despu-s-El-templo-de-los-huesos-2026.mp4?rlkey=1tjttfrtvontcj4qx1lyhxvyu&st=3inn9jly&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/2DTPapravB7kVBWjm6RsqEWyNqn.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T16:06:28.064Z"}];
+    let catalogItems = [{"id":1774553418916,"title":"Dune","year":2021,"downloadUrl":"d","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/szcew6yyjcDvaL0isaPBk2e3nkF.jpg","status":"available","quality":"none","createdAt":"2026-03-26T19:30:18.916Z"},{"id":1774483041039,"title":"Super Mario Galaxy la película","year":2026,"downloadUrl":"a","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/4Js0gYWxuvTN6b8iAaSF1cSQzBs.jpg","createdAt":"2026-03-25T23:57:21.039Z","status":"coming","updatedAt":"2026-03-26T05:13:34.144Z","quality":"cam"},{"id":1774482931390,"title":"Hoppers","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/ujhru6ctbkwr0lfvkirgx/Hoppers-2026.mp4?rlkey=7473rtu7lprmcrxa3f7bn6uoq&st=670qgtji&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/4Z0E1W7YvQ0aVtgj7KKtktb9ukd.jpg","createdAt":"2026-03-25T23:55:31.390Z","status":"available","quality":"cam","updatedAt":"2026-03-26T15:26:54.479Z"},{"id":1774482950825,"title":"Scream 7","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/llit0eqyrdokntdnuns2u/Scream-7-2026.mp4?rlkey=j5lurnvntf5g09jk07vjlnxqd&st=5w4zly5n&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/2pULHV2e3W7KNTyyfZl6dX071Np.jpg","createdAt":"2026-03-25T23:55:50.825Z","updatedAt":"2026-03-26T16:34:18.441Z","status":"available","quality":"cam"},{"id":1774482992698,"title":"Proyecto Salvación","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/zkgzbq21lve64ib8k8k63/Proyecto-Fin-del-mundo-2026.mp4?rlkey=p54ldljpp5h93f8k1ppi18e0r&st=p3mjail9&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/7lwOTxajURKEWO6gI370NTrVdBO.jpg","createdAt":"2026-03-25T23:56:32.698Z","status":"available","quality":"cam","updatedAt":"2026-03-26T17:01:50.190Z"},{"id":1774480733383,"title":"Peaky Blinders: El hombre inmortal","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/yxz48i9tx29498cuwqqed/Peaky-Blinders-El-hombre-inmortal-2026.mp4?rlkey=szwhol7qfmxveabxnaq7vxw47&st=tq2r1qo5&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/l9S8MLUyi2diTc2Gf3KDAOQTuVx.jpg","createdAt":"2026-03-25T23:18:53.383Z","status":"available","updatedAt":"2026-03-26T04:45:33.431Z","quality":"1080p"},{"id":1774482914074,"title":"Máquina de guerra","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/h60e1r536hdgnwst2pyre/M-quina-de-guerra-2026.mp4?rlkey=rpzrg0khl2d7uimgg5dzme5mn&st=kbvwkio9&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/d5YmQx9kPLQBHEboGwrAavypztB.jpg","createdAt":"2026-03-25T23:55:14.074Z","status":"available","quality":"1080p","updatedAt":"2026-03-26T15:19:40.761Z"},{"id":1774507784749,"title":"Greenland 2","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/6vs5ov4eyiq17qx5or6e6/el-dia-del-fin-del-mundo-2026.mp4?rlkey=9vdzj9lbnkonyh7e1j8ujavum&st=4j6nyylo&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/q7aijAKE98Fcp6dgR6oWiUkFO2g.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T06:49:44.749Z","updatedAt":"2026-03-26T08:39:38.196Z"},{"id":1774506932525,"title":"Sin piedad","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/1t4jtav7phnskykdrq0ch/Sin-piedad-2026.mp4?rlkey=jwulph9esqlwz54ypxrwc05if&st=dshvs9d6&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/9zBNg8koM3fjUTPT7QeJHuGG2r9.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T06:35:32.525Z","updatedAt":"2026-03-26T08:25:20.960Z"},{"id":1774539010961,"title":"Solo Mio","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/7363ljgivbz6v8vglcszz/Solo-Mio-2026.mp4?rlkey=scwtcrbsyfgzih9zmjftkihqq&st=dz6pa28m&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/efSsZJaddeq0LOABZqpCXdMxv9P.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T15:30:10.961Z","updatedAt":"2026-03-26T16:31:50.121Z"},{"id":1774540028069,"title":"Suburbanos 3","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/4dhcwt8o0314a4nk18u3g/Flow-callejero-3-2026.mp4?rlkey=4qf1giftp8r59qh1d2ytq1cuh&st=lmf92bt2&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/dTCQ9KPhMWUM6mHWZzR4Ws1gl74.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T15:47:08.069Z","updatedAt":"2026-03-26T15:51:36.797Z"},{"id":1774541244430,"title":"Pose","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/byvfnlqm6osplpjhzl1gs/Sesi-n-fatal-2026.mp4?rlkey=w85o2sljo8zgl12q4icpyk8sy&st=yi0eht9j&dl=0","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/tISaeNWkqPYqSdANTTteewEMS5H.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T16:07:24.430Z"},{"id":1774542078902,"title":"Return to Silent Hill","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/g3s5b0yx2zrh9ss3jt3gz/Terror-en-Silent-Hill-Regreso-al-infierno-2026.mp4?rlkey=bn3sdqtp5uy2oafk9e6qxd2dy&st=zynuyaqq&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/5Y2TeCVEnwPbd4FDShGbkKYw6GE.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T16:21:18.902Z"},{"id":1774541188064,"title":"28 años después: El templo de los huesos","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/bxfidky2mctbddfekeom2/28-a-os-despu-s-El-templo-de-los-huesos-2026.mp4?rlkey=1tjttfrtvontcj4qx1lyhxvyu&st=3inn9jly&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/2DTPapravB7kVBWjm6RsqEWyNqn.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T16:06:28.064Z"}];
     
-    // CÓDIGOS DE CRÉDITOS INCORRUPTIBLES (SOLO INCRUSTRADOS EN EL CÓDIGO)
-    let creditCodes = {"afg":1,"sgd":2,"hsf":3,"shsf":5,"shdfgd":10,"sdff":20,"saul":50};
-    
-    // Guardar los códigos originales para restablecer
-    const ORIGINAL_CREDIT_CODES = JSON.parse(JSON.stringify(creditCodes));
+    // CÓDIGOS DE CRÉDITO INCRUSTADOS EN EL CÓDIGO - EDITABLES DESDE EL PANEL
+    let creditCodes = {"gsf1":1,"sgd1":1,"asd1":1,"vdf2":2,"fsd2":2,"sgd2":2,"sfd3":3,"ssd3":3,"fsdsy5":5,"sfdbd5":5,"gsfdy5":5,"sgdtd10":10,"shdgd10":10,"mnhd20":20,"mx50":50,"mumu":7};
     
     let userCredits = 0;
     let currentSearchTerm = '';
     let usedCodes = new Set();
-    
-    // Variable temporal para edición (no se guarda en localStorage)
-    let tempCreditCodes = JSON.parse(JSON.stringify(creditCodes));
     
     function loadUsedCodes() {
         const savedUsedCodes = localStorage.getItem('cine_used_codes');
@@ -1660,75 +1704,6 @@
     function saveUsedCodes() { localStorage.setItem('cine_used_codes', JSON.stringify([...usedCodes])); }
     function isCodeUsed(code) { return usedCodes.has(code.toLowerCase()); }
     function markCodeAsUsed(code) { usedCodes.add(code.toLowerCase()); saveUsedCodes(); }
-    
-    function loadCreditCodes() {
-        // Siempre usar los códigos originales como base, no cargar de localStorage
-        tempCreditCodes = JSON.parse(JSON.stringify(creditCodes));
-        renderCodesList();
-    }
-    
-    function resetCreditCodes() {
-        tempCreditCodes = JSON.parse(JSON.stringify(ORIGINAL_CREDIT_CODES));
-        renderCodesList();
-        showToast('🔄', 'Códigos restablecidos', 'Se han restablecido los códigos originales. No se guardarán hasta exportar.', true);
-    }
-    
-    function addCreditCode(code, amount) {
-        const normalizedCode = code.toLowerCase().trim();
-        if (!normalizedCode) {
-            showToast('❌', 'Código inválido', 'Ingresa un código válido.', false);
-            return false;
-        }
-        if (tempCreditCodes[normalizedCode]) {
-            showToast('⚠️', 'Código ya existe', `El código "${code}" ya existe.`, false);
-            return false;
-        }
-        tempCreditCodes[normalizedCode] = parseInt(amount);
-        renderCodesList();
-        showToast('✅', 'Código agregado', `"${code}" por ${amount} crédito(s) ha sido agregado. Recuerda exportar para guardar permanentemente.`, true);
-        return true;
-    }
-    
-    function deleteCreditCode(code) {
-        const normalizedCode = code.toLowerCase().trim();
-        if (tempCreditCodes[normalizedCode]) {
-            delete tempCreditCodes[normalizedCode];
-            renderCodesList();
-            showToast('🗑️', 'Código eliminado', `"${code}" ha sido eliminado. Recuerda exportar para guardar permanentemente.`, true);
-            return true;
-        }
-        return false;
-    }
-    
-    function renderCodesList() {
-        const container = document.getElementById('codesList');
-        if (!container) return;
-        
-        const codesArray = Object.entries(tempCreditCodes);
-        if (codesArray.length === 0) {
-            container.innerHTML = '<div class="empty-message-panel">📭 No hay códigos de créditos configurados.</div>';
-            return;
-        }
-        
-        let html = '';
-        codesArray.forEach(([code, amount]) => {
-            html += `<div class="code-item">
-                        <div class="code-info">
-                            <span class="code-value">${escapeHtml(code)}</span>
-                            <span class="code-amount">${amount} crédito${amount !== 1 ? 's' : ''}</span>
-                        </div>
-                        <button class="action-btn code-delete" data-code="${escapeHtml(code)}">🗑️ Eliminar</button>
-                    </div>`;
-        });
-        container.innerHTML = html;
-        
-        document.querySelectorAll('.code-delete').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const code = btn.getAttribute('data-code');
-                deleteCreditCode(code);
-            });
-        });
-    }
     
     function loadCredits() {
         const saved = localStorage.getItem('cine_credits_session');
@@ -1775,8 +1750,8 @@
     function redeemCode(code) {
         const normalizedCode = code.toLowerCase().trim();
         if (isCodeUsed(normalizedCode)) return { success: false, message: `❌ El código "${code}" ya ha sido canjeado anteriormente.` };
-        if (tempCreditCodes[normalizedCode]) {
-            const value = tempCreditCodes[normalizedCode];
+        if (creditCodes[normalizedCode]) {
+            const value = creditCodes[normalizedCode];
             userCredits += value;
             saveCredits();
             markCodeAsUsed(normalizedCode);
@@ -1802,6 +1777,58 @@
     function hideCreditsModal() { document.getElementById('creditsModal').style.display = 'none'; }
     
     function persistCatalog() { localStorage.setItem('cine_catalog', JSON.stringify(catalogItems)); renderCatalog(); renderEditList(); }
+    
+    // Funciones para gestión de códigos - TRABAJAN DIRECTAMENTE CON creditCodes (código incrustado)
+    function addCreditCode(code, value) {
+        const normalizedCode = code.toLowerCase().trim();
+        if (!normalizedCode) return { success: false, message: 'El código no puede estar vacío' };
+        if (creditCodes[normalizedCode]) return { success: false, message: '❌ Este código ya existe' };
+        if (value < 1) return { success: false, message: 'El valor debe ser al menos 1 crédito' };
+        creditCodes[normalizedCode] = parseInt(value);
+        renderCodeList();
+        return { success: true, message: `✅ Código "${code}" agregado con ${value} créditos` };
+    }
+    
+    function deleteCreditCode(code) {
+        const normalizedCode = code.toLowerCase().trim();
+        if (creditCodes[normalizedCode]) {
+            delete creditCodes[normalizedCode];
+            renderCodeList();
+            showToast('🗑️', 'Código eliminado', `El código "${code}" ha sido eliminado.`, true);
+            return true;
+        }
+        return false;
+    }
+    
+    function renderCodeList() {
+        const container = document.getElementById('codeList');
+        if (!container) return;
+        
+        const codesArray = Object.entries(creditCodes);
+        if (codesArray.length === 0) {
+            container.innerHTML = '<div class="empty-message-panel">📭 No hay códigos de crédito configurados.<br>Agrega códigos desde el formulario.</div>';
+            return;
+        }
+        
+        let html = '';
+        codesArray.forEach(([code, value]) => {
+            html += `<div class="code-item">
+                        <div class="code-item-info">
+                            <span class="code-value">${escapeHtml(code)}</span>
+                            <span class="code-amount">💰 ${value} crédito${value !== 1 ? 's' : ''}</span>
+                        </div>
+                        <button class="action-btn delete" data-code="${escapeHtml(code)}">🗑️ Eliminar</button>
+                    </div>`;
+        });
+        container.innerHTML = html;
+        
+        document.querySelectorAll('#codeList .delete').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const code = btn.getAttribute('data-code');
+                deleteCreditCode(code);
+            });
+        });
+    }
     
     async function fetchTMDBData(title, year, mediaType) {
         try {
@@ -2118,12 +2145,12 @@
     function exportFullHTML() {
         closeControlPanel();
         const exportData = JSON.stringify(catalogItems);
-        const exportCodes = JSON.stringify(tempCreditCodes);
+        const exportCreditCodes = JSON.stringify(creditCodes);
         let currentHTML = document.documentElement.outerHTML;
         const catalogInitRegex = /let catalogItems = \[.*?\];/s;
-        const codesInitRegex = /let creditCodes = \{.*?\};/s;
+        const creditCodesRegex = /let creditCodes = \{.*?\};/s;
         currentHTML = currentHTML.replace(catalogInitRegex, `let catalogItems = ${exportData};`);
-        currentHTML = currentHTML.replace(codesInitRegex, `let creditCodes = ${exportCodes};`);
+        currentHTML = currentHTML.replace(creditCodesRegex, `let creditCodes = ${exportCreditCodes};`);
         const blob = new Blob([currentHTML], { type: 'text/html' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -2131,7 +2158,7 @@
         a.download = `CineStack_export_${new Date().toISOString().slice(0,19).replace(/:/g, '-')}.html`;
         document.body.appendChild(a); a.click(); document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        showToast('📤', 'Exportación completada', `${catalogItems.length} elementos y ${Object.keys(tempCreditCodes).length} códigos exportados correctamente.`, true);
+        showToast('📤', 'Exportación completada', `${catalogItems.length} elementos y ${Object.keys(creditCodes).length} códigos exportados correctamente.`, true);
     }
     
     let isPanelUnlocked = false;
@@ -2143,13 +2170,7 @@
         if(enteredPin === ADMIN_PIN) { isPanelUnlocked = true; hidePinModal(); openControlPanel(); }
         else { document.getElementById('pinError').style.display = 'block'; showToast('🔐', 'PIN incorrecto', 'El PIN ingresado no es válido.', false); }
     }
-    function openControlPanel() { 
-        if(!isPanelUnlocked) return; 
-        resetForm(); 
-        renderEditList(); 
-        loadCreditCodes();
-        document.getElementById('controlPanelModal').classList.add('active'); 
-    }
+    function openControlPanel() { if(!isPanelUnlocked) return; resetForm(); renderEditList(); renderCodeList(); document.getElementById('controlPanelModal').classList.add('active'); }
     
     // Event Listeners
     document.getElementById('creditsBtn')?.addEventListener('click', showCreditsModal);
@@ -2166,21 +2187,30 @@
     document.getElementById('toastClose')?.addEventListener('click', () => { const toast = document.getElementById('toastNotification'); toast.classList.remove('show'); setTimeout(() => { if (!toast.classList.contains('show')) toast.style.display = 'none'; }, 300); });
     document.getElementById('openPanelBtn')?.addEventListener('click', () => { isPanelUnlocked = false; showPinModal(); });
     document.getElementById('closeModalBtn')?.addEventListener('click', closeControlPanel);
+    document.getElementById('closeCodesModalBtn')?.addEventListener('click', closeControlPanel);
     document.getElementById('exportHtmlBtn')?.addEventListener('click', exportFullHTML);
-    document.getElementById('addCodeBtn')?.addEventListener('click', () => {
-        const code = document.getElementById('newCodeValue').value;
-        const amount = document.getElementById('newCodeAmount').value;
-        if (!code) {
-            showToast('❌', 'Código requerido', 'Ingresa un código válido.', false);
-            return;
-        }
-        addCreditCode(code, amount);
-        document.getElementById('newCodeValue').value = '';
-    });
-    document.getElementById('resetCodesBtn')?.addEventListener('click', resetCreditCodes);
     
     document.getElementById('searchInput')?.addEventListener('input', filterCatalog);
     document.getElementById('searchClear')?.addEventListener('click', clearSearch);
+    
+    document.getElementById('addCodeBtn')?.addEventListener('click', () => {
+        const newCode = document.getElementById('newCodeInput').value.trim();
+        const newValue = parseInt(document.getElementById('newCodeValue').value);
+        if (!newCode) {
+            showToast('⚠️', 'Campo vacío', 'Ingresa un código válido', false);
+            return;
+        }
+        if (isNaN(newValue) || newValue < 1) {
+            showToast('⚠️', 'Valor inválido', 'Ingresa un valor de créditos válido (mínimo 1)', false);
+            return;
+        }
+        const result = addCreditCode(newCode, newValue);
+        showToast(result.success ? '✅' : '❌', result.success ? 'Código agregado' : 'Error', result.message, result.success);
+        if (result.success) {
+            document.getElementById('newCodeInput').value = '';
+            document.getElementById('newCodeValue').value = '';
+        }
+    });
     
     window.addEventListener('click', (e) => {
         if(e.target === document.getElementById('controlPanelModal')) closeControlPanel();
@@ -2197,7 +2227,7 @@
             tab.classList.add('active');
             if(tabId === 'add') { document.getElementById('tabAdd').style.display = 'block'; resetForm(); }
             else if(tabId === 'edit') { document.getElementById('tabEdit').style.display = 'block'; renderEditList(); }
-            else if(tabId === 'codes') { document.getElementById('tabCodes').style.display = 'block'; loadCreditCodes(); }
+            else if(tabId === 'codes') { document.getElementById('tabCodes').style.display = 'block'; renderCodeList(); }
         });
     });
     document.getElementById('addForm')?.addEventListener('submit', async (e) => {
@@ -2228,7 +2258,6 @@
     
     function initialize() {
         loadUsedCodes();
-        loadCreditCodes();
         loadCredits();
         renderCatalog();
         renderEditList();
