@@ -18,7 +18,7 @@
         }
 
         .hero {
-            max-width: 1400px;
+            max-width: 1800px;
             margin: 0 auto 2rem auto;
             display: flex;
             flex-wrap: wrap;
@@ -32,7 +32,7 @@
 
         h1 {
             font-weight: 800;
-            font-size: 2.8rem;
+            font-size: 1.8rem;
             background: linear-gradient(135deg, #FFFFFF, #b2b9ff);
             background-clip: text;
             -webkit-background-clip: text;
@@ -53,16 +53,16 @@
         .ctrl-panel-btn, .credits-btn {
             background: #2a2f47;
             border: 1px solid #4c5380;
-            padding: 0.7rem 1.6rem;
+            padding: 0.4rem 1rem;
             border-radius: 60px;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.75rem;
             color: white;
             cursor: pointer;
             transition: all 0.2s ease;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             backdrop-filter: blur(4px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.2);
         }
@@ -77,8 +77,8 @@
             background: #ffd966;
             color: #1e2a2a;
             border-radius: 40px;
-            padding: 0.2rem 0.6rem;
-            font-size: 0.75rem;
+            padding: 0.15rem 0.5rem;
+            font-size: 0.7rem;
             font-weight: bold;
             margin-left: 6px;
             transition: all 0.2s ease;
@@ -94,19 +94,8 @@
             100% { transform: scale(1); background: #ffd966; }
         }
 
-        .credits-btn:hover {
-            background: #3e7a60;
-            transform: scale(0.98) translateY(-50%);
-        }
-
-        .ctrl-panel-btn:hover {
-            background: #3e4570;
-            border-color: #7c85c2;
-            transform: scale(0.98) translateY(-50%);
-        }
-
         .search-container {
-            max-width: 1400px;
+            max-width: 1800px;
             margin: 0 auto 1.5rem auto;
             position: relative;
         }
@@ -123,7 +112,7 @@
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #9aa4cf;
             pointer-events: none;
         }
@@ -133,9 +122,9 @@
             background: #11161f;
             border: 1px solid #2a3455;
             border-radius: 60px;
-            padding: 0.9rem 3rem 0.9rem 3rem;
+            padding: 0.7rem 3rem 0.7rem 3rem;
             color: white;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             transition: all 0.2s ease;
             font-family: inherit;
         }
@@ -159,29 +148,244 @@
             background: none;
             border: none;
             color: #9aa4cf;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             cursor: pointer;
             padding: 0.25rem;
             display: none;
             border-radius: 50%;
-            transition: all 0.2s ease;
-        }
-
-        .search-clear:hover {
-            color: white;
-            background: #2a3455;
         }
 
         .search-results-info {
             text-align: center;
-            margin-top: 0.75rem;
-            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
             color: #9aa4cf;
         }
 
-        .search-results-info span {
-            color: #ffd966;
+        .grid {
+            max-width: 1800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 1rem;
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            }
+        }
+
+        @media (min-width: 1800px) {
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            body { 
+                padding: 1rem; 
+            }
+            .hero { 
+                flex-direction: column; 
+                align-items: center; 
+                justify-content: center; 
+                gap: 0.6rem;
+            }
+            .top-buttons { 
+                position: static; 
+                transform: none; 
+                margin-top: 0; 
+                justify-content: center; 
+            }
+            h1 { 
+                font-size: 1.5rem;
+            }
+            .ctrl-panel-btn, .credits-btn {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.7rem;
+            }
+            .grid { 
+                gap: 0.6rem; 
+            }
+            .movie-card .card-info {
+                padding: 0.4rem 0.3rem 0.5rem;
+            }
+            .card-title {
+                font-size: 0.65rem;
+            }
+            .card-year-type {
+                font-size: 0.55rem;
+                flex-wrap: wrap;
+                gap: 3px;
+                margin: 0.2rem 0 0.3rem;
+            }
+            .download-link {
+                font-size: 0.55rem;
+                padding: 0.25rem 0.3rem;
+                gap: 3px;
+            }
+            .quality-badge {
+                font-size: 0.5rem;
+                padding: 2px 4px;
+                top: 4px;
+                left: 4px;
+            }
+            .media-badge, .coming-soon-badge {
+                font-size: 0.55rem;
+                padding: 0.15rem 0.4rem;
+            }
+        }
+
+        .movie-card {
+            background: #11161f;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.25s ease;
+            border: 1px solid #222a3a;
+            box-shadow: 0 8px 16px -6px rgba(0,0,0,0.4);
+            position: relative;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-3px);
+            border-color: #4d5b8c;
+        }
+
+        .poster-container {
+            position: relative;
+        }
+
+        .poster-img {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+            background: #070b12;
+            display: block;
+            transition: filter 0.3s ease;
+        }
+        
+        .poster-img.not-available {
+            filter: grayscale(100%) brightness(0.7);
+        }
+
+        .quality-badge {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            padding: 3px 6px;
+            border-radius: 5px;
+            font-size: 0.6rem;
             font-weight: bold;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+        }
+
+        .quality-badge.hd-1080p {
+            background: linear-gradient(135deg, #b8860b, #daa520);
+            color: #fff4cc;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            border: 1px solid #ffd966;
+            font-size: 0.55rem;
+            padding: 2px 5px;
+        }
+
+        .quality-badge.cam {
+            background: rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 0.55rem;
+            padding: 2px 5px;
+        }
+
+        .card-info {
+            padding: 0.5rem 0.5rem 0.7rem;
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-year-type {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 0.6rem;
+            color: #9aa4cf;
+            margin: 0.2rem 0 0.4rem;
+        }
+
+        .media-badge {
+            background: #20263e;
+            padding: 0.15rem 0.4rem;
+            border-radius: 30px;
+            font-size: 0.6rem;
+        }
+        
+        .coming-soon-badge {
+            background: #5a4a2a;
+            padding: 0.15rem 0.4rem;
+            border-radius: 30px;
+            font-size: 0.6rem;
+            color: #ffd966;
+        }
+
+        .download-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #1f253d;
+            margin-top: 0.4rem;
+            padding: 0.3rem 0.5rem;
+            border-radius: 60px;
+            font-size: 0.6rem;
+            font-weight: 500;
+            color: #b9c8ff;
+            text-decoration: none;
+            width: 100%;
+            justify-content: center;
+            border: 1px solid #2f3a5a;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .download-link.disabled {
+            background: #2a2a2a;
+            color: #6f7daa;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        .download-link.disabled:hover {
+            background: #2a2a2a;
+            transform: none;
+        }
+
+        .download-link:hover {
+            background: #2f3b62;
+            color: white;
+        }
+
+        .empty-message {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 3rem;
+            background: #0e121f;
+            border-radius: 2rem;
+            color: #7f8bb3;
+            font-size: 0.85rem;
         }
 
         .credits-modal {
@@ -248,11 +452,6 @@
             letter-spacing: 1px;
         }
 
-        .code-input:focus {
-            outline: none;
-            border-color: #6f7ed6;
-        }
-
         .code-message {
             font-size: 0.85rem;
             margin-top: 0.5rem;
@@ -281,10 +480,10 @@
             background: #1e2a2a;
             border-left: 5px solid #ffd966;
             border-radius: 12px;
-            padding: 1rem 1.5rem;
+            padding: 0.8rem 1.2rem;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             z-index: 1200;
             transform: translateX(400px);
@@ -299,7 +498,7 @@
         }
         
         .toast-icon {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
         }
         
         .toast-content {
@@ -308,26 +507,22 @@
         
         .toast-title {
             font-weight: bold;
-            font-size: 0.9rem;
-            margin-bottom: 4px;
+            font-size: 0.85rem;
+            margin-bottom: 3px;
         }
         
         .toast-message {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #bcc6f0;
         }
         
         .toast-close {
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #9aa4cf;
             background: none;
             border: none;
             padding: 0 4px;
-        }
-        
-        .toast-close:hover {
-            color: white;
         }
 
         .modal {
@@ -374,31 +569,31 @@
         }
 
         .modal-header {
-            padding: 1.5rem 1.8rem 0.5rem 1.8rem;
+            padding: 1.2rem 1.5rem 0.5rem 1.5rem;
             border-bottom: 1px solid #2a3455;
         }
 
         .modal-header h2 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             color: #e2e8ff;
         }
 
         .modal-tabs {
             display: flex;
-            padding: 0 1.5rem;
-            gap: 0.5rem;
+            padding: 0 1.2rem;
+            gap: 0.3rem;
             border-bottom: 1px solid #2a3455;
             flex-wrap: wrap;
         }
 
         .modal-tab {
-            padding: 0.8rem 1.5rem;
+            padding: 0.6rem 1.2rem;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 500;
             color: #9aa4cf;
             transition: 0.2s;
@@ -411,25 +606,21 @@
             border-bottom-color: #6f7ed6;
         }
 
-        .modal-tab:hover {
-            color: #ffffff;
-        }
-
         .modal-body {
-            padding: 1.5rem 1.8rem;
+            padding: 1.2rem 1.5rem;
             overflow-y: auto;
             flex: 1;
         }
 
         .form-group {
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
         }
 
         label {
             display: block;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.3rem;
             color: #bcc6f0;
         }
 
@@ -437,23 +628,12 @@
             width: 100%;
             background: #0e1220;
             border: 1px solid #2a3455;
-            border-radius: 1rem;
-            padding: 0.7rem 1rem;
+            border-radius: 0.8rem;
+            padding: 0.6rem 0.9rem;
             color: white;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             transition: 0.2s;
             font-family: inherit;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #6f7ed6;
-            box-shadow: 0 0 0 2px rgba(111, 126, 214, 0.3);
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 60px;
         }
 
         .form-row {
@@ -465,53 +645,35 @@
         .poster-preview {
             background: #0b0f16;
             border-radius: 1rem;
-            padding: 0.8rem;
-            margin: 0.8rem 0;
+            padding: 0.6rem;
+            margin: 0.6rem 0;
             border: 1px dashed #2f3b5a;
             text-align: center;
         }
 
         .poster-preview img {
             max-width: 100%;
-            max-height: 140px;
-            border-radius: 10px;
+            max-height: 120px;
+            border-radius: 8px;
             object-fit: cover;
         }
 
         .tmdb-status {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #7c8bc0;
-            margin-top: 6px;
+            margin-top: 5px;
         }
 
         .tmdb-btn {
             background: #2a2f4e;
             border: 1px solid #5f6dcf;
-            padding: 0.4rem 1rem;
+            padding: 0.3rem 0.8rem;
             border-radius: 2rem;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             cursor: pointer;
-            margin-top: 6px;
+            margin-top: 5px;
             transition: 0.2s;
             color: white;
-        }
-
-        .tmdb-btn:hover {
-            background: #3e4570;
-        }
-
-        .loading-spinner-sm {
-            display: inline-block;
-            width: 14px;
-            height: 14px;
-            border: 2px solid #6f7ed6;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
 
         .items-list {
@@ -521,56 +683,23 @@
         
         .admin-item {
             background: #11161f;
-            border-radius: 1rem;
-            margin-bottom: 0.8rem;
-            padding: 0.8rem;
+            border-radius: 0.8rem;
+            margin-bottom: 0.6rem;
+            padding: 0.6rem;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.8rem;
             border: 1px solid #222a3a;
             transition: 0.2s;
             cursor: grab;
             user-select: none;
         }
         
-        .admin-item:active {
-            cursor: grabbing;
-        }
-        
-        .admin-item.dragging {
-            opacity: 0.4;
-            cursor: grabbing;
-        }
-        
-        .admin-item.drag-over {
-            border-top: 3px solid #6f7ed6;
-            margin-top: -1px;
-        }
-        
-        .drag-handle {
-            cursor: grab;
-            color: #6f7ed6;
-            font-size: 1.2rem;
-            font-weight: bold;
-            padding: 0 5px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .admin-item:active .drag-handle {
-            cursor: grabbing;
-        }
-
-        .admin-item:hover {
-            border-color: #4d5b8c;
-            background: #151c2a;
-        }
-
         .admin-item-poster {
-            width: 45px;
-            height: 67px;
+            width: 40px;
+            height: 60px;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 6px;
             background: #070b12;
         }
 
@@ -581,180 +710,109 @@
 
         .admin-item-title {
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .admin-item-meta {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #9aa4cf;
-            margin-top: 4px;
+            margin-top: 3px;
             display: flex;
-            gap: 12px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
         .admin-item-actions {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             flex-shrink: 0;
         }
 
         .action-btn {
             background: #1f253d;
             border: none;
-            padding: 0.4rem 0.9rem;
-            border-radius: 40px;
-            font-size: 0.7rem;
+            padding: 0.3rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.65rem;
             font-weight: 500;
             cursor: pointer;
             transition: 0.2s;
             color: white;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .action-btn.edit {
-            background: #2f3b62;
-        }
-        .action-btn.edit:hover {
-            background: #5f6dcf;
-        }
-        .action-btn.delete {
-            background: #8b3c48;
-        }
-        .action-btn.delete:hover {
-            background: #c24c5c;
-        }
-
-        .empty-message-panel {
-            text-align: center;
-            padding: 2rem;
-            color: #6f7daa;
-            font-size: 0.85rem;
-        }
-
-        .modal-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            margin-top: 1.5rem;
-            padding-top: 1rem;
-            border-top: 1px solid #2a3455;
-        }
-        
-        .sort-info {
-            background: #1e2438;
-            border-radius: 2rem;
-            padding: 0.5rem 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.7rem;
-            text-align: center;
-            color: #b9c3f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
         }
 
         .btn {
-            padding: 0.6rem 1.4rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 40px;
             font-weight: 600;
             border: none;
             cursor: pointer;
             transition: 0.2s;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
         .btn-primary {
             background: #5f6dcf;
             color: white;
         }
-        .btn-primary:hover {
-            background: #4a58b5;
-        }
-        .btn-primary:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
+        
         .btn-secondary {
             background: #2b314b;
             color: #e2e8ff;
         }
-        .btn-secondary:hover {
-            background: #3d4468;
-        }
-
+        
         .btn-export {
             background: #2a5f4a;
             color: white;
         }
-        .btn-export:hover {
-            background: #3e7a60;
-        }
-        
-        .btn-danger {
-            background: #8b3c48;
-            color: white;
-        }
-        .btn-danger:hover {
-            background: #c24c5c;
-        }
-        
+
         .code-item {
             background: #0e1220;
-            border-radius: 1rem;
-            padding: 0.8rem;
-            margin-bottom: 0.6rem;
+            border-radius: 0.8rem;
+            padding: 0.6rem;
+            margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             border: 1px solid #2a3455;
         }
         
-        .code-item-info {
-            display: flex;
-            align-items: baseline;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        
         .code-value {
             font-family: monospace;
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: bold;
             color: #ffd966;
             background: #1a1f2e;
-            padding: 0.2rem 0.8rem;
+            padding: 0.15rem 0.6rem;
             border-radius: 20px;
         }
         
         .code-amount {
             color: #6f7ed6;
             font-weight: bold;
+            font-size: 0.75rem;
         }
         
         .add-code-section {
             background: #0e1220;
-            border-radius: 1rem;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
+            border-radius: 0.8rem;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
             border: 1px solid #2a3455;
         }
         
         .add-code-section h4 {
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.6rem;
             color: #b9c8ff;
+            font-size: 0.85rem;
         }
         
         .code-form-row {
             display: grid;
             grid-template-columns: 1fr auto auto;
-            gap: 10px;
+            gap: 8px;
             align-items: center;
         }
         
@@ -764,11 +822,6 @@
             }
         }
         
-        .code-list {
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
         .pin-modal {
             position: fixed;
             top: 0;
@@ -795,216 +848,120 @@
         }
 
         .pin-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             margin-bottom: 0.5rem;
             color: #e2e8ff;
         }
 
         .pin-card p {
             color: #9aa4cf;
-            font-size: 0.85rem;
-            margin-bottom: 1.5rem;
+            font-size: 0.8rem;
+            margin-bottom: 1.2rem;
         }
 
         .pin-input {
             background: #0e1220;
             border: 1px solid #4d5b8c;
             border-radius: 2rem;
-            padding: 0.8rem 1rem;
+            padding: 0.7rem 1rem;
             width: 100%;
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             letter-spacing: 4px;
             color: white;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
-        .pin-input:focus {
-            outline: none;
-            border-color: #6f7ed6;
-        }
-
-        .pin-error {
-            color: #ff8a8a;
-            font-size: 0.75rem;
-            margin-top: -1rem;
-            margin-bottom: 1rem;
-            display: none;
-        }
-
-        .grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 1.5rem 1rem;
-        }
-
-        .movie-card {
-            background: #11161f;
-            border-radius: 1.2rem;
-            overflow: hidden;
-            transition: all 0.25s ease;
-            border: 1px solid #222a3a;
-            box-shadow: 0 8px 16px -6px rgba(0,0,0,0.4);
-            position: relative;
-        }
-
-        .movie-card:hover {
-            transform: translateY(-4px);
-            border-color: #4d5b8c;
-        }
-
-        .poster-container {
-            position: relative;
-        }
-
-        .poster-img {
-            width: 100%;
-            aspect-ratio: 3 / 4;
-            object-fit: cover;
-            background: #070b12;
-            display: block;
-            transition: filter 0.3s ease;
-        }
-        
-        .poster-img.not-available {
-            filter: grayscale(100%) brightness(0.7);
-        }
-
-        .quality-badge {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.7rem;
+        .drag-handle {
+            cursor: grab;
+            color: #6f7ed6;
+            font-size: 1rem;
             font-weight: bold;
-            z-index: 10;
-            backdrop-filter: blur(4px);
-        }
-
-        .quality-badge.hd-1080p {
-            background: linear-gradient(135deg, #b8860b, #daa520);
-            color: #fff4cc;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-            border: 1px solid #ffd966;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-        }
-
-        .quality-badge.cam {
-            background: rgba(255, 255, 255, 0.15);
-            color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            letter-spacing: 0.5px;
-        }
-
-        .card-info {
-            padding: 0.7rem 0.7rem 0.9rem;
-        }
-
-        .card-title {
-            font-weight: 700;
-            font-size: 0.85rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .card-year-type {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            font-size: 0.7rem;
-            color: #9aa4cf;
-            margin: 0.3rem 0 0.5rem;
-        }
-
-        .media-badge {
-            background: #20263e;
-            padding: 0.2rem 0.5rem;
-            border-radius: 30px;
-            font-size: 0.65rem;
+            padding: 0 4px;
         }
         
-        .coming-soon-badge {
-            background: #5a4a2a;
-            padding: 0.2rem 0.5rem;
-            border-radius: 30px;
-            font-size: 0.65rem;
-            color: #ffd966;
-        }
-
-        .download-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #1f253d;
-            margin-top: 0.5rem;
-            padding: 0.35rem 0.6rem;
-            border-radius: 60px;
-            font-size: 0.65rem;
-            font-weight: 500;
-            color: #b9c8ff;
-            text-decoration: none;
-            width: 100%;
-            justify-content: center;
-            border: 1px solid #2f3a5a;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .download-link.disabled {
-            background: #2a2a2a;
-            color: #6f7daa;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-        
-        .download-link.disabled:hover {
-            background: #2a2a2a;
-            transform: none;
-        }
-
-        .download-link:hover {
-            background: #2f3b62;
-            color: white;
-        }
-
-        .empty-message {
-            text-align: center;
-            grid-column: 1 / -1;
-            padding: 3rem;
-            background: #0e121f;
+        .sort-info {
+            background: #1e2438;
             border-radius: 2rem;
-            color: #7f8bb3;
+            padding: 0.4rem 0.8rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.65rem;
+            text-align: center;
+            color: #b9c3f0;
         }
-
+        
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 1rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid #2a3455;
+        }
+        
+        .empty-message-panel {
+            text-align: center;
+            padding: 1.5rem;
+            color: #6f7daa;
+            font-size: 0.8rem;
+        }
+        
         footer {
             text-align: center;
             margin-top: 2rem;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #4f5a82;
         }
-
-        @media (max-width: 640px) {
-            body { padding: 1rem; }
-            .hero { flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; }
-            .top-buttons { position: static; transform: none; margin-top: 0; justify-content: center; }
-            h1 { font-size: 2rem; }
-            .grid { gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-            .form-row { grid-template-columns: 1fr; }
-            .admin-item { flex-wrap: wrap; }
-            .admin-item-actions { width: 100%; justify-content: flex-end; }
-            .modal-card { width: 95%; }
-            .modal-body { padding: 1rem; }
-            .drag-handle { display: none; }
-            .toast-notification { bottom: 20px; right: 20px; left: 20px; max-width: none; }
-            .admin-item-poster { width: 40px; height: 60px; }
-            .search-box { max-width: 100%; }
-            .quality-badge { top: 5px; left: 5px; padding: 2px 6px; font-size: 0.6rem; }
+        
+        /* Estilos para la sección de importación/exportación */
+        .import-export-section {
+            background: #0e1220;
+            border-radius: 0.8rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #2a3455;
+        }
+        
+        .import-export-section h4 {
+            margin-bottom: 0.8rem;
+            color: #b9c8ff;
+            font-size: 0.85rem;
+        }
+        
+        .import-export-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-json-export {
+            background: #4a5f2a;
+            color: white;
+        }
+        
+        .btn-json-import {
+            background: #2a5f6e;
+            color: white;
+        }
+        
+        .file-input-label {
+            background: #2a5f6e;
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-block;
+        }
+        
+        .file-input-label:hover {
+            background: #1e4652;
+        }
+        
+        input[type="file"] {
+            display: none;
         }
     </style>
 </head>
@@ -1014,212 +971,239 @@
     <div class="top-buttons">
         <button class="credits-btn" id="creditsBtn">
             💰 CRÉDITOS 
-            <span class="credits-badge" id="creditsBadge">1</span>
+            <span class="credits-badge" id="creditsBadge">3</span>
         </button>
-        <button class="ctrl-panel-btn" id="openPanelBtn">⚙️ PANEL DE CONTROL</button>
+        <button class="ctrl-panel-btn" id="openPanelBtn">⚙️ PANEL</button>
     </div>
 </div>
 
 <div class="search-container">
     <div class="search-box">
         <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" class="search-input" placeholder="Buscar por título...">
+        <input type="text" id="searchInput" class="search-input" placeholder="Buscar...">
         <button id="searchClear" class="search-clear" style="display: none;">✕</button>
     </div>
     <div id="searchResultsInfo" class="search-results-info" style="display: none;"></div>
 </div>
 
-<div class="grid" id="moviesGrid"><div class="movie-card" data-id="1774483041039">
+<div class="grid" id="moviesGrid"><div class="movie-card">
                         <div class="poster-container">
-                            <img class="poster-img not-available" src="https://image.tmdb.org/t/p/w500/4Js0gYWxuvTN6b8iAaSF1cSQzBs.jpg" alt="Super Mario Galaxy la película" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
-                            <div class="quality-badge cam">CAM</div>
-                        </div>
-                        <div class="card-info">
-                            <div class="card-title" title="Super Mario Galaxy la película">Super Mario Galaxy la ... 🎬</div>
-                            <div class="card-year-type">
-                                <span>📅 2026</span>
-                                <span class="coming-soon-badge">⏳ Próximamente</span>
-                            </div>
-                            <button class="download-link disabled" data-id="1774483041039" disabled="">⏳ Próximamente</button>
-                        </div>
-                    </div><div class="movie-card" data-id="1774482931390">
-                        <div class="poster-container">
-                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/4Z0E1W7YvQ0aVtgj7KKtktb9ukd.jpg" alt="Hoppers" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
-                            <div class="quality-badge cam">CAM</div>
-                        </div>
-                        <div class="card-info">
-                            <div class="card-title" title="Hoppers">Hoppers 🎬</div>
-                            <div class="card-year-type">
-                                <span>📅 2026</span>
-                                <span class="media-badge">🎬 Película</span>
-                            </div>
-                            <button class="download-link" data-id="1774482931390">⬇️ Descargar archivo (1 crédito)</button>
-                        </div>
-                    </div><div class="movie-card" data-id="1774482950825">
-                        <div class="poster-container">
-                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/2pULHV2e3W7KNTyyfZl6dX071Np.jpg" alt="Scream 7" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
-                            <div class="quality-badge cam">CAM</div>
-                        </div>
-                        <div class="card-info">
-                            <div class="card-title" title="Scream 7">Scream 7 🎬</div>
-                            <div class="card-year-type">
-                                <span>📅 2026</span>
-                                <span class="media-badge">🎬 Película</span>
-                            </div>
-                            <button class="download-link" data-id="1774482950825">⬇️ Descargar archivo (1 crédito)</button>
-                        </div>
-                    </div><div class="movie-card" data-id="1774482992698">
-                        <div class="poster-container">
-                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/7lwOTxajURKEWO6gI370NTrVdBO.jpg" alt="Proyecto Salvación" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
-                            <div class="quality-badge cam">CAM</div>
-                        </div>
-                        <div class="card-info">
-                            <div class="card-title" title="Proyecto Salvación">Proyecto Salvación 🎬</div>
-                            <div class="card-year-type">
-                                <span>📅 2026</span>
-                                <span class="media-badge">🎬 Película</span>
-                            </div>
-                            <button class="download-link" data-id="1774482992698">⬇️ Descargar archivo (1 crédito)</button>
-                        </div>
-                    </div><div class="movie-card" data-id="1774480733383">
-                        <div class="poster-container">
-                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/l9S8MLUyi2diTc2Gf3KDAOQTuVx.jpg" alt="Peaky Blinders: El hombre inmortal" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
-                            <div class="quality-badge hd-1080p">1080p</div>
-                        </div>
-                        <div class="card-info">
-                            <div class="card-title" title="Peaky Blinders: El hombre inmortal">Peaky Blinders: El hom... 🎬</div>
-                            <div class="card-year-type">
-                                <span>📅 2026</span>
-                                <span class="media-badge">🎬 Película</span>
-                            </div>
-                            <button class="download-link" data-id="1774480733383">⬇️ Descargar archivo (1 crédito)</button>
-                        </div>
-                    </div><div class="movie-card" data-id="1774482914074">
-                        <div class="poster-container">
-                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/d5YmQx9kPLQBHEboGwrAavypztB.jpg" alt="Máquina de guerra" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
-                            <div class="quality-badge hd-1080p">1080p</div>
-                        </div>
-                        <div class="card-info">
-                            <div class="card-title" title="Máquina de guerra">Máquina de guerra 🎬</div>
-                            <div class="card-year-type">
-                                <span>📅 2026</span>
-                                <span class="media-badge">🎬 Película</span>
-                            </div>
-                            <button class="download-link" data-id="1774482914074">⬇️ Descargar archivo (1 crédito)</button>
-                        </div>
-                    </div><div class="movie-card" data-id="1774507784749">
-                        <div class="poster-container">
-                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/q7aijAKE98Fcp6dgR6oWiUkFO2g.jpg" alt="Greenland 2" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
-                            <div class="quality-badge hd-1080p">1080p</div>
-                        </div>
-                        <div class="card-info">
-                            <div class="card-title" title="Greenland 2">Greenland 2 🎬</div>
-                            <div class="card-year-type">
-                                <span>📅 2026</span>
-                                <span class="media-badge">🎬 Película</span>
-                            </div>
-                            <button class="download-link" data-id="1774507784749">⬇️ Descargar archivo (1 crédito)</button>
-                        </div>
-                    </div><div class="movie-card" data-id="1774506932525">
-                        <div class="poster-container">
-                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/9zBNg8koM3fjUTPT7QeJHuGG2r9.jpg" alt="Sin piedad" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
-                            <div class="quality-badge hd-1080p">1080p</div>
-                        </div>
-                        <div class="card-info">
-                            <div class="card-title" title="Sin piedad">Sin piedad 🎬</div>
-                            <div class="card-year-type">
-                                <span>📅 2026</span>
-                                <span class="media-badge">🎬 Película</span>
-                            </div>
-                            <button class="download-link" data-id="1774506932525">⬇️ Descargar archivo (1 crédito)</button>
-                        </div>
-                    </div><div class="movie-card" data-id="1774539010961">
-                        <div class="poster-container">
-                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/efSsZJaddeq0LOABZqpCXdMxv9P.jpg" alt="Solo Mio" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
-                            <div class="quality-badge hd-1080p">1080p</div>
-                        </div>
-                        <div class="card-info">
-                            <div class="card-title" title="Solo Mio">Solo Mio 🎬</div>
-                            <div class="card-year-type">
-                                <span>📅 2026</span>
-                                <span class="media-badge">🎬 Película</span>
-                            </div>
-                            <button class="download-link" data-id="1774539010961">⬇️ Descargar archivo (1 crédito)</button>
-                        </div>
-                    </div><div class="movie-card" data-id="1774540028069">
-                        <div class="poster-container">
-                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/dTCQ9KPhMWUM6mHWZzR4Ws1gl74.jpg" alt="Suburbanos 3" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
-                            <div class="quality-badge hd-1080p">1080p</div>
-                        </div>
-                        <div class="card-info">
-                            <div class="card-title" title="Suburbanos 3">Suburbanos 3 🎬</div>
-                            <div class="card-year-type">
-                                <span>📅 2026</span>
-                                <span class="media-badge">🎬 Película</span>
-                            </div>
-                            <button class="download-link" data-id="1774540028069">⬇️ Descargar archivo (1 crédito)</button>
-                        </div>
-                    </div><div class="movie-card" data-id="1774541244430">
-                        <div class="poster-container">
-                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/tISaeNWkqPYqSdANTTteewEMS5H.jpg" alt="Pose" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
-                            <div class="quality-badge hd-1080p">1080p</div>
-                        </div>
-                        <div class="card-info">
-                            <div class="card-title" title="Pose">Pose 🎬</div>
-                            <div class="card-year-type">
-                                <span>📅 2026</span>
-                                <span class="media-badge">🎬 Película</span>
-                            </div>
-                            <button class="download-link" data-id="1774541244430">⬇️ Descargar archivo (1 crédito)</button>
-                        </div>
-                    </div><div class="movie-card" data-id="1774542078902">
-                        <div class="poster-container">
-                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/5Y2TeCVEnwPbd4FDShGbkKYw6GE.jpg" alt="Return to Silent Hill" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
-                            <div class="quality-badge hd-1080p">1080p</div>
-                        </div>
-                        <div class="card-info">
-                            <div class="card-title" title="Return to Silent Hill">Return to Silent Hill 🎬</div>
-                            <div class="card-year-type">
-                                <span>📅 2026</span>
-                                <span class="media-badge">🎬 Película</span>
-                            </div>
-                            <button class="download-link" data-id="1774542078902">⬇️ Descargar archivo (1 crédito)</button>
-                        </div>
-                    </div><div class="movie-card" data-id="1774541188064">
-                        <div class="poster-container">
-                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/2DTPapravB7kVBWjm6RsqEWyNqn.jpg" alt="28 años después: El templo de los huesos" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
-                            <div class="quality-badge hd-1080p">1080p</div>
-                        </div>
-                        <div class="card-info">
-                            <div class="card-title" title="28 años después: El templo de los huesos">28 años después: El te... 🎬</div>
-                            <div class="card-year-type">
-                                <span>📅 2026</span>
-                                <span class="media-badge">🎬 Película</span>
-                            </div>
-                            <button class="download-link" data-id="1774541188064">⬇️ Descargar archivo (1 crédito)</button>
-                        </div>
-                    </div><div class="movie-card" data-id="1774559766492">
-                        <div class="poster-container">
-                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/szcew6yyjcDvaL0isaPBk2e3nkF.jpg" alt="Dune" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
+                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/4tp9W3QAbQcpanBtBceZtHD10UT.jpg" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No'">
                             
                         </div>
                         <div class="card-info">
-                            <div class="card-title" title="Dune">Dune 🎬</div>
+                            <div class="card-title">cars 3</div>
                             <div class="card-year-type">
-                                <span>📅 2021</span>
-                                <span class="media-badge">🎬 Película</span>
+                                <span>📅 200</span>
+                                <span class="media-badge">🎬</span>
                             </div>
-                            <button class="download-link" data-id="1774559766492">⬇️ Descargar archivo (1 crédito)</button>
+                            <button class="download-link" data-id="1774590683635">⬇️ Descargar (1 crédito)</button>
+                        </div>
+                    </div><div class="movie-card">
+                        <div class="poster-container">
+                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/lgBe9KD6DoLyQP28JZ6fSUGK8j0.jpg" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No'">
+                            
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">cars</div>
+                            <div class="card-year-type">
+                                <span>📅 2006</span>
+                                <span class="media-badge">🎬</span>
+                            </div>
+                            <button class="download-link" data-id="1774590647947">⬇️ Descargar (1 crédito)</button>
+                        </div>
+                    </div><div class="movie-card">
+                        <div class="poster-container">
+                            <img class="poster-img not-available" src="https://image.tmdb.org/t/p/w500/4Js0gYWxuvTN6b8iAaSF1cSQzBs.jpg" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No'">
+                            <div class="quality-badge cam">CAM</div>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">Super Mario Galaxy l...</div>
+                            <div class="card-year-type">
+                                <span>📅 2026</span>
+                                <span class="coming-soon-badge">⏳ Próx</span>
+                            </div>
+                            <button class="download-link disabled" data-id="1774483041039" disabled="">⏳ Próximamente</button>
+                        </div>
+                    </div><div class="movie-card">
+                        <div class="poster-container">
+                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/4Z0E1W7YvQ0aVtgj7KKtktb9ukd.jpg" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No'">
+                            <div class="quality-badge cam">CAM</div>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">Hoppers</div>
+                            <div class="card-year-type">
+                                <span>📅 2026</span>
+                                <span class="media-badge">🎬</span>
+                            </div>
+                            <button class="download-link" data-id="1774482931390">⬇️ Descargar (1 crédito)</button>
+                        </div>
+                    </div><div class="movie-card">
+                        <div class="poster-container">
+                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/2pULHV2e3W7KNTyyfZl6dX071Np.jpg" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No'">
+                            <div class="quality-badge cam">CAM</div>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">Scream 7</div>
+                            <div class="card-year-type">
+                                <span>📅 2026</span>
+                                <span class="media-badge">🎬</span>
+                            </div>
+                            <button class="download-link" data-id="1774482950825">⬇️ Descargar (1 crédito)</button>
+                        </div>
+                    </div><div class="movie-card">
+                        <div class="poster-container">
+                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/7lwOTxajURKEWO6gI370NTrVdBO.jpg" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No'">
+                            <div class="quality-badge cam">CAM</div>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">Proyecto Salvación</div>
+                            <div class="card-year-type">
+                                <span>📅 2026</span>
+                                <span class="media-badge">🎬</span>
+                            </div>
+                            <button class="download-link" data-id="1774482992698">⬇️ Descargar (1 crédito)</button>
+                        </div>
+                    </div><div class="movie-card">
+                        <div class="poster-container">
+                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/l9S8MLUyi2diTc2Gf3KDAOQTuVx.jpg" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No'">
+                            <div class="quality-badge hd-1080p">1080p</div>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">Peaky Blinders: El h...</div>
+                            <div class="card-year-type">
+                                <span>📅 2026</span>
+                                <span class="media-badge">🎬</span>
+                            </div>
+                            <button class="download-link" data-id="1774480733383">⬇️ Descargar (1 crédito)</button>
+                        </div>
+                    </div><div class="movie-card">
+                        <div class="poster-container">
+                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/d5YmQx9kPLQBHEboGwrAavypztB.jpg" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No'">
+                            <div class="quality-badge hd-1080p">1080p</div>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">Máquina de guerra</div>
+                            <div class="card-year-type">
+                                <span>📅 2026</span>
+                                <span class="media-badge">🎬</span>
+                            </div>
+                            <button class="download-link" data-id="1774482914074">⬇️ Descargar (1 crédito)</button>
+                        </div>
+                    </div><div class="movie-card">
+                        <div class="poster-container">
+                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/q7aijAKE98Fcp6dgR6oWiUkFO2g.jpg" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No'">
+                            <div class="quality-badge hd-1080p">1080p</div>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">Greenland 2</div>
+                            <div class="card-year-type">
+                                <span>📅 2026</span>
+                                <span class="media-badge">🎬</span>
+                            </div>
+                            <button class="download-link" data-id="1774507784749">⬇️ Descargar (1 crédito)</button>
+                        </div>
+                    </div><div class="movie-card">
+                        <div class="poster-container">
+                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/9zBNg8koM3fjUTPT7QeJHuGG2r9.jpg" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No'">
+                            <div class="quality-badge hd-1080p">1080p</div>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">Sin piedad</div>
+                            <div class="card-year-type">
+                                <span>📅 2026</span>
+                                <span class="media-badge">🎬</span>
+                            </div>
+                            <button class="download-link" data-id="1774506932525">⬇️ Descargar (1 crédito)</button>
+                        </div>
+                    </div><div class="movie-card">
+                        <div class="poster-container">
+                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/efSsZJaddeq0LOABZqpCXdMxv9P.jpg" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No'">
+                            <div class="quality-badge hd-1080p">1080p</div>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">Solo Mio</div>
+                            <div class="card-year-type">
+                                <span>📅 2026</span>
+                                <span class="media-badge">🎬</span>
+                            </div>
+                            <button class="download-link" data-id="1774539010961">⬇️ Descargar (1 crédito)</button>
+                        </div>
+                    </div><div class="movie-card">
+                        <div class="poster-container">
+                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/dTCQ9KPhMWUM6mHWZzR4Ws1gl74.jpg" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No'">
+                            <div class="quality-badge hd-1080p">1080p</div>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">Suburbanos 3</div>
+                            <div class="card-year-type">
+                                <span>📅 2026</span>
+                                <span class="media-badge">🎬</span>
+                            </div>
+                            <button class="download-link" data-id="1774540028069">⬇️ Descargar (1 crédito)</button>
+                        </div>
+                    </div><div class="movie-card">
+                        <div class="poster-container">
+                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/tISaeNWkqPYqSdANTTteewEMS5H.jpg" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No'">
+                            <div class="quality-badge hd-1080p">1080p</div>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">Pose</div>
+                            <div class="card-year-type">
+                                <span>📅 2026</span>
+                                <span class="media-badge">🎬</span>
+                            </div>
+                            <button class="download-link" data-id="1774541244430">⬇️ Descargar (1 crédito)</button>
+                        </div>
+                    </div><div class="movie-card">
+                        <div class="poster-container">
+                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/5Y2TeCVEnwPbd4FDShGbkKYw6GE.jpg" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No'">
+                            <div class="quality-badge hd-1080p">1080p</div>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">Return to Silent Hill</div>
+                            <div class="card-year-type">
+                                <span>📅 2026</span>
+                                <span class="media-badge">🎬</span>
+                            </div>
+                            <button class="download-link" data-id="1774542078902">⬇️ Descargar (1 crédito)</button>
+                        </div>
+                    </div><div class="movie-card">
+                        <div class="poster-container">
+                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/2DTPapravB7kVBWjm6RsqEWyNqn.jpg" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No'">
+                            <div class="quality-badge hd-1080p">1080p</div>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">28 años después: El ...</div>
+                            <div class="card-year-type">
+                                <span>📅 2026</span>
+                                <span class="media-badge">🎬</span>
+                            </div>
+                            <button class="download-link" data-id="1774541188064">⬇️ Descargar (1 crédito)</button>
+                        </div>
+                    </div><div class="movie-card">
+                        <div class="poster-container">
+                            <img class="poster-img " src="https://image.tmdb.org/t/p/w500/fvUJb08yatV2b3NUSwuYdQKYoFd.jpg" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No'">
+                            <div class="quality-badge hd-1080p">1080p</div>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">superman</div>
+                            <div class="card-year-type">
+                                <span>📅 2025</span>
+                                <span class="media-badge">🎬</span>
+                            </div>
+                            <button class="download-link" data-id="1774588605851">⬇️ Descargar (1 crédito)</button>
                         </div>
                     </div></div>
 
-<footer></footer>
+<footer>CineStack · Todos los derechos reservados</footer>
 
+<!-- Modales -->
 <div id="toastNotification" class="toast-notification" style="display: none; border-left-color: rgb(76, 175, 80);">
-    <div class="toast-icon" id="toastIcon">🔄</div>
+    <div class="toast-icon" id="toastIcon">✅</div>
     <div class="toast-content">
-        <div class="toast-title" id="toastTitle">Orden actualizado</div>
-        <div class="toast-message" id="toastMessage">La galería ha sido reordenada.</div>
+        <div class="toast-title" id="toastTitle">Agregado</div>
+        <div class="toast-message" id="toastMessage">cars 3</div>
     </div>
     <button class="toast-close" id="toastClose">✕</button>
 </div>
@@ -1229,11 +1213,11 @@
         <h3>💰 MIS CRÉDITOS</h3>
         <div class="credits-balance">
             <span>CRÉDITOS DISPONIBLES</span><br>
-            <span id="creditsBalance">1</span>
+            <span id="creditsBalance">3</span>
         </div>
         <div class="code-input-group">
-            <input type="text" id="codeInput" class="code-input" placeholder="Ingresa tu código" maxlength="20" autocomplete="off">
-            <button id="redeemCodeBtn" class="btn btn-primary" style="padding: 0.8rem 1.2rem;">CANJEAR</button>
+            <input type="text" id="codeInput" class="code-input" placeholder="Ingresa tu código" maxlength="20">
+            <button id="redeemCodeBtn" class="btn btn-primary" style="padding: 0.7rem 1rem;">CANJEAR</button>
         </div>
         <div id="codeMessage" class="code-message"></div>
         <button class="btn btn-secondary" id="closeCreditsBtn" style="margin-top: 1rem; width: 100%;">CERRAR</button>
@@ -1243,25 +1227,24 @@
 <div id="pinModal" class="pin-modal" style="display: none;">
     <div class="pin-card">
         <h3>🔐 Acceso restringido</h3>
-        <p>Ingresa el PIN para acceder al panel de control</p>
-        <input type="password" id="pinInput" class="pin-input" placeholder="••••••" maxlength="6" autocomplete="off">
-        <div id="pinError" class="pin-error" style="display: none;">❌ PIN incorrecto. Intenta de nuevo.</div>
-        <button id="verifyPinBtn" class="btn btn-primary" style="width: 100%;">Verificar acceso</button>
+        <p>Ingresa el PIN para acceder al panel</p>
+        <input type="password" id="pinInput" class="pin-input" placeholder="••••••" maxlength="6">
+        <div id="pinError" class="pin-error" style="display: none;">❌ PIN incorrecto</div>
+        <button id="verifyPinBtn" class="btn btn-primary" style="width: 100%;">Verificar</button>
     </div>
 </div>
 
-<div id="controlPanelModal" class="modal">
+<div id="controlPanelModal" class="modal active">
     <div class="modal-card">
         <div class="modal-header">
             <h2>🎛️ PANEL DE CONTROL</h2>
         </div>
-        
         <div class="modal-tabs">
             <div class="modal-tab" data-tab="add">➕ AGREGAR</div>
-            <div class="modal-tab active" data-tab="edit">✏️ EDITAR / ELIMINAR · 🎯 ARRASTRA PARA ORDENAR</div>
-            <div class="modal-tab" data-tab="codes">🎫 CÓDIGOS DE CRÉDITO</div>
+            <div class="modal-tab active" data-tab="edit">✏️ EDITAR / ORDENAR</div>
+            <div class="modal-tab" data-tab="codes">🎫 CÓDIGOS</div>
+            <div class="modal-tab" data-tab="importexport">📦 IMPORTAR/EXPORTAR</div>
         </div>
-        
         <div class="modal-body">
             <div id="tabAdd" class="tab-content" style="display: none;">
                 <form id="addForm">
@@ -1269,16 +1252,16 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>🎞️ Título *</label>
-                            <input type="text" id="titleInput" placeholder="Ej: Dune, The Last of Us" required="">
+                            <input type="text" id="titleInput" placeholder="Ej: Dune">
                         </div>
                         <div class="form-group">
                             <label>📅 Año *</label>
-                            <input type="number" id="yearInput" placeholder="2024" required="">
+                            <input type="number" id="yearInput" placeholder="2024">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>🔗 Enlace del archivo (URL) *</label>
-                        <textarea id="urlInput" placeholder="https://ejemplo.com/video.mp4 - Dejar vacío si es PRÓXIMAMENTE" required=""></textarea>
+                        <label>🔗 Enlace del archivo</label>
+                        <textarea id="urlInput" placeholder="https://ejemplo.com/video.mp4"></textarea>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
@@ -1291,8 +1274,8 @@
                         <div class="form-group">
                             <label>📌 Estado</label>
                             <select id="statusType">
-                                <option value="available">✅ Disponible ahora</option>
-                                <option value="coming">⏳ Próximamente (póster gris)</option>
+                                <option value="available">✅ Disponible</option>
+                                <option value="coming">⏳ Próximamente</option>
                             </select>
                         </div>
                     </div>
@@ -1300,375 +1283,235 @@
                         <label>🎬 Calidad</label>
                         <select id="qualityType">
                             <option value="none">Sin etiqueta</option>
-                            <option value="1080p">1080p (Dorado)</option>
-                            <option value="cam">CAM (Efecto vidrio)</option>
+                            <option value="1080p">1080p</option>
+                            <option value="cam">CAM</option>
                         </select>
                     </div>
-                    
                     <div class="poster-preview">
-                        <div style="font-size:0.7rem; color:#9aa9da;">⭐ Poster desde TMDb</div>
-                        <img id="posterPreview" style="display: none; margin-top: 5px;" alt="preview" src="https://image.tmdb.org/t/p/w500/szcew6yyjcDvaL0isaPBk2e3nkF.jpg">
-                        <div class="tmdb-status" id="tmdbStatus">✨ Usa el botón para obtener poster automático</div>
-                        <button type="button" id="fetchTmdbBtn" class="tmdb-btn">🌐 Obtener datos de TMDb</button>
+                        <div style="font-size:0.65rem;">⭐ Poster desde TMDb</div>
+                        <img id="posterPreview" style="display: none;" alt="preview" src="https://image.tmdb.org/t/p/w500/4tp9W3QAbQcpanBtBceZtHD10UT.jpg">
+                        <div class="tmdb-status" id="tmdbStatus">✅ Poster obtenido</div>
+                        <button type="button" id="fetchTmdbBtn" class="tmdb-btn">🌐 Obtener de TMDb</button>
                     </div>
-                    
                     <div class="modal-actions">
                         <button type="button" class="btn btn-secondary" id="closeModalBtn">Cerrar</button>
                         <button type="submit" class="btn btn-primary" id="submitBtn">➕ AGREGAR</button>
                     </div>
                 </form>
             </div>
-            
             <div id="tabEdit" class="tab-content" style="display: block;">
-                <div class="sort-info">
-                    <span>🖱️ Arrastra los elementos (agarra el ícono ⋮⋮ o la tarjeta) para cambiar el orden de la galería</span>
-                </div>
-                <div class="items-list" id="itemsList"><div class="admin-item" data-index="0" data-id="1774483041039" draggable="true">
+                <div class="sort-info">🖱️ Arrastra los elementos (⋮⋮) para ordenar la galería</div>
+                <div class="items-list" id="itemsList"><div class="admin-item" data-index="0" data-id="1774590683635" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
-                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/4Js0gYWxuvTN6b8iAaSF1cSQzBs.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/4tp9W3QAbQcpanBtBceZtHD10UT.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'">
                         <div class="admin-item-info">
-                            <div class="admin-item-title">Super Mario Galaxy la película 🎬</div>
-                            <div class="admin-item-meta">
-                                <span>📅 2026</span>
-                                <span>Película</span>
-                                <span>⏳ Próximamente</span>
-                                <span>🏷️ CAM</span>
-                                <span>🔗 a</span>
-                            </div>
+                            <div class="admin-item-title">cars 3</div>
+                            <div class="admin-item-meta">📅 200 · ✅ Disp</div>
                         </div>
                         <div class="admin-item-actions">
-                            <button class="action-btn edit" data-id="1774483041039">✏️ Editar</button>
-                            <button class="action-btn delete" data-id="1774483041039">🗑️ Eliminar</button>
+                            <button class="action-btn edit" data-id="1774590683635">✏️</button>
+                            <button class="action-btn delete" data-id="1774590683635">🗑️</button>
                         </div>
-                    </div><div class="admin-item" data-index="1" data-id="1774482931390" draggable="true">
+                    </div><div class="admin-item" data-index="1" data-id="1774590647947" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
-                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/4Z0E1W7YvQ0aVtgj7KKtktb9ukd.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/lgBe9KD6DoLyQP28JZ6fSUGK8j0.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'">
                         <div class="admin-item-info">
-                            <div class="admin-item-title">Hoppers 🎬</div>
-                            <div class="admin-item-meta">
-                                <span>📅 2026</span>
-                                <span>Película</span>
-                                <span>✅ Disponible</span>
-                                <span>🏷️ CAM</span>
-                                <span>🔗 https://www.dropbox.com/s…</span>
-                            </div>
+                            <div class="admin-item-title">cars</div>
+                            <div class="admin-item-meta">📅 2006 · ✅ Disp</div>
                         </div>
                         <div class="admin-item-actions">
-                            <button class="action-btn edit" data-id="1774482931390">✏️ Editar</button>
-                            <button class="action-btn delete" data-id="1774482931390">🗑️ Eliminar</button>
+                            <button class="action-btn edit" data-id="1774590647947">✏️</button>
+                            <button class="action-btn delete" data-id="1774590647947">🗑️</button>
                         </div>
-                    </div><div class="admin-item" data-index="2" data-id="1774482950825" draggable="true">
+                    </div><div class="admin-item" data-index="2" data-id="1774483041039" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
-                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/2pULHV2e3W7KNTyyfZl6dX071Np.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/4Js0gYWxuvTN6b8iAaSF1cSQzBs.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'">
                         <div class="admin-item-info">
-                            <div class="admin-item-title">Scream 7 🎬</div>
-                            <div class="admin-item-meta">
-                                <span>📅 2026</span>
-                                <span>Película</span>
-                                <span>✅ Disponible</span>
-                                <span>🏷️ CAM</span>
-                                <span>🔗 https://www.dropbox.com/s…</span>
-                            </div>
+                            <div class="admin-item-title">Super Mario Galaxy la película</div>
+                            <div class="admin-item-meta">📅 2026 · ⏳ Próx</div>
                         </div>
                         <div class="admin-item-actions">
-                            <button class="action-btn edit" data-id="1774482950825">✏️ Editar</button>
-                            <button class="action-btn delete" data-id="1774482950825">🗑️ Eliminar</button>
+                            <button class="action-btn edit" data-id="1774483041039">✏️</button>
+                            <button class="action-btn delete" data-id="1774483041039">🗑️</button>
                         </div>
-                    </div><div class="admin-item" data-index="3" data-id="1774482992698" draggable="true">
+                    </div><div class="admin-item" data-index="3" data-id="1774482931390" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
-                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/7lwOTxajURKEWO6gI370NTrVdBO.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/4Z0E1W7YvQ0aVtgj7KKtktb9ukd.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'">
                         <div class="admin-item-info">
-                            <div class="admin-item-title">Proyecto Salvación 🎬</div>
-                            <div class="admin-item-meta">
-                                <span>📅 2026</span>
-                                <span>Película</span>
-                                <span>✅ Disponible</span>
-                                <span>🏷️ CAM</span>
-                                <span>🔗 https://www.dropbox.com/s…</span>
-                            </div>
+                            <div class="admin-item-title">Hoppers</div>
+                            <div class="admin-item-meta">📅 2026 · ✅ Disp</div>
                         </div>
                         <div class="admin-item-actions">
-                            <button class="action-btn edit" data-id="1774482992698">✏️ Editar</button>
-                            <button class="action-btn delete" data-id="1774482992698">🗑️ Eliminar</button>
+                            <button class="action-btn edit" data-id="1774482931390">✏️</button>
+                            <button class="action-btn delete" data-id="1774482931390">🗑️</button>
                         </div>
-                    </div><div class="admin-item" data-index="4" data-id="1774480733383" draggable="true">
+                    </div><div class="admin-item" data-index="4" data-id="1774482950825" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
-                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/l9S8MLUyi2diTc2Gf3KDAOQTuVx.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/2pULHV2e3W7KNTyyfZl6dX071Np.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'">
                         <div class="admin-item-info">
-                            <div class="admin-item-title">Peaky Blinders: El hombre inmortal 🎬</div>
-                            <div class="admin-item-meta">
-                                <span>📅 2026</span>
-                                <span>Película</span>
-                                <span>✅ Disponible</span>
-                                <span>🏷️ 1080p</span>
-                                <span>🔗 https://www.dropbox.com/s…</span>
-                            </div>
+                            <div class="admin-item-title">Scream 7</div>
+                            <div class="admin-item-meta">📅 2026 · ✅ Disp</div>
                         </div>
                         <div class="admin-item-actions">
-                            <button class="action-btn edit" data-id="1774480733383">✏️ Editar</button>
-                            <button class="action-btn delete" data-id="1774480733383">🗑️ Eliminar</button>
+                            <button class="action-btn edit" data-id="1774482950825">✏️</button>
+                            <button class="action-btn delete" data-id="1774482950825">🗑️</button>
                         </div>
-                    </div><div class="admin-item" data-index="5" data-id="1774482914074" draggable="true">
+                    </div><div class="admin-item" data-index="5" data-id="1774482992698" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
-                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/d5YmQx9kPLQBHEboGwrAavypztB.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/7lwOTxajURKEWO6gI370NTrVdBO.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'">
                         <div class="admin-item-info">
-                            <div class="admin-item-title">Máquina de guerra 🎬</div>
-                            <div class="admin-item-meta">
-                                <span>📅 2026</span>
-                                <span>Película</span>
-                                <span>✅ Disponible</span>
-                                <span>🏷️ 1080p</span>
-                                <span>🔗 https://www.dropbox.com/s…</span>
-                            </div>
+                            <div class="admin-item-title">Proyecto Salvación</div>
+                            <div class="admin-item-meta">📅 2026 · ✅ Disp</div>
                         </div>
                         <div class="admin-item-actions">
-                            <button class="action-btn edit" data-id="1774482914074">✏️ Editar</button>
-                            <button class="action-btn delete" data-id="1774482914074">🗑️ Eliminar</button>
+                            <button class="action-btn edit" data-id="1774482992698">✏️</button>
+                            <button class="action-btn delete" data-id="1774482992698">🗑️</button>
                         </div>
-                    </div><div class="admin-item" data-index="6" data-id="1774507784749" draggable="true">
+                    </div><div class="admin-item" data-index="6" data-id="1774480733383" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
-                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/q7aijAKE98Fcp6dgR6oWiUkFO2g.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/l9S8MLUyi2diTc2Gf3KDAOQTuVx.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'">
                         <div class="admin-item-info">
-                            <div class="admin-item-title">Greenland 2 🎬</div>
-                            <div class="admin-item-meta">
-                                <span>📅 2026</span>
-                                <span>Película</span>
-                                <span>✅ Disponible</span>
-                                <span>🏷️ 1080p</span>
-                                <span>🔗 https://www.dropbox.com/s…</span>
-                            </div>
+                            <div class="admin-item-title">Peaky Blinders: El hombre inmortal</div>
+                            <div class="admin-item-meta">📅 2026 · ✅ Disp</div>
                         </div>
                         <div class="admin-item-actions">
-                            <button class="action-btn edit" data-id="1774507784749">✏️ Editar</button>
-                            <button class="action-btn delete" data-id="1774507784749">🗑️ Eliminar</button>
+                            <button class="action-btn edit" data-id="1774480733383">✏️</button>
+                            <button class="action-btn delete" data-id="1774480733383">🗑️</button>
                         </div>
-                    </div><div class="admin-item" data-index="7" data-id="1774506932525" draggable="true">
+                    </div><div class="admin-item" data-index="7" data-id="1774482914074" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
-                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/9zBNg8koM3fjUTPT7QeJHuGG2r9.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/d5YmQx9kPLQBHEboGwrAavypztB.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'">
                         <div class="admin-item-info">
-                            <div class="admin-item-title">Sin piedad 🎬</div>
-                            <div class="admin-item-meta">
-                                <span>📅 2026</span>
-                                <span>Película</span>
-                                <span>✅ Disponible</span>
-                                <span>🏷️ 1080p</span>
-                                <span>🔗 https://www.dropbox.com/s…</span>
-                            </div>
+                            <div class="admin-item-title">Máquina de guerra</div>
+                            <div class="admin-item-meta">📅 2026 · ✅ Disp</div>
                         </div>
                         <div class="admin-item-actions">
-                            <button class="action-btn edit" data-id="1774506932525">✏️ Editar</button>
-                            <button class="action-btn delete" data-id="1774506932525">🗑️ Eliminar</button>
+                            <button class="action-btn edit" data-id="1774482914074">✏️</button>
+                            <button class="action-btn delete" data-id="1774482914074">🗑️</button>
                         </div>
-                    </div><div class="admin-item" data-index="8" data-id="1774539010961" draggable="true">
+                    </div><div class="admin-item" data-index="8" data-id="1774507784749" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
-                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/efSsZJaddeq0LOABZqpCXdMxv9P.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/q7aijAKE98Fcp6dgR6oWiUkFO2g.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'">
                         <div class="admin-item-info">
-                            <div class="admin-item-title">Solo Mio 🎬</div>
-                            <div class="admin-item-meta">
-                                <span>📅 2026</span>
-                                <span>Película</span>
-                                <span>✅ Disponible</span>
-                                <span>🏷️ 1080p</span>
-                                <span>🔗 https://www.dropbox.com/s…</span>
-                            </div>
+                            <div class="admin-item-title">Greenland 2</div>
+                            <div class="admin-item-meta">📅 2026 · ✅ Disp</div>
                         </div>
                         <div class="admin-item-actions">
-                            <button class="action-btn edit" data-id="1774539010961">✏️ Editar</button>
-                            <button class="action-btn delete" data-id="1774539010961">🗑️ Eliminar</button>
+                            <button class="action-btn edit" data-id="1774507784749">✏️</button>
+                            <button class="action-btn delete" data-id="1774507784749">🗑️</button>
                         </div>
-                    </div><div class="admin-item" data-index="9" data-id="1774540028069" draggable="true">
+                    </div><div class="admin-item" data-index="9" data-id="1774506932525" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
-                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/dTCQ9KPhMWUM6mHWZzR4Ws1gl74.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/9zBNg8koM3fjUTPT7QeJHuGG2r9.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'">
                         <div class="admin-item-info">
-                            <div class="admin-item-title">Suburbanos 3 🎬</div>
-                            <div class="admin-item-meta">
-                                <span>📅 2026</span>
-                                <span>Película</span>
-                                <span>✅ Disponible</span>
-                                <span>🏷️ 1080p</span>
-                                <span>🔗 https://www.dropbox.com/s…</span>
-                            </div>
+                            <div class="admin-item-title">Sin piedad</div>
+                            <div class="admin-item-meta">📅 2026 · ✅ Disp</div>
                         </div>
                         <div class="admin-item-actions">
-                            <button class="action-btn edit" data-id="1774540028069">✏️ Editar</button>
-                            <button class="action-btn delete" data-id="1774540028069">🗑️ Eliminar</button>
+                            <button class="action-btn edit" data-id="1774506932525">✏️</button>
+                            <button class="action-btn delete" data-id="1774506932525">🗑️</button>
                         </div>
-                    </div><div class="admin-item" data-index="10" data-id="1774541244430" draggable="true">
+                    </div><div class="admin-item" data-index="10" data-id="1774539010961" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
-                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/tISaeNWkqPYqSdANTTteewEMS5H.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/efSsZJaddeq0LOABZqpCXdMxv9P.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'">
                         <div class="admin-item-info">
-                            <div class="admin-item-title">Pose 🎬</div>
-                            <div class="admin-item-meta">
-                                <span>📅 2026</span>
-                                <span>Película</span>
-                                <span>✅ Disponible</span>
-                                <span>🏷️ 1080p</span>
-                                <span>🔗 https://www.dropbox.com/s…</span>
-                            </div>
+                            <div class="admin-item-title">Solo Mio</div>
+                            <div class="admin-item-meta">📅 2026 · ✅ Disp</div>
                         </div>
                         <div class="admin-item-actions">
-                            <button class="action-btn edit" data-id="1774541244430">✏️ Editar</button>
-                            <button class="action-btn delete" data-id="1774541244430">🗑️ Eliminar</button>
+                            <button class="action-btn edit" data-id="1774539010961">✏️</button>
+                            <button class="action-btn delete" data-id="1774539010961">🗑️</button>
                         </div>
-                    </div><div class="admin-item" data-index="11" data-id="1774542078902" draggable="true">
+                    </div><div class="admin-item" data-index="11" data-id="1774540028069" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
-                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/5Y2TeCVEnwPbd4FDShGbkKYw6GE.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/dTCQ9KPhMWUM6mHWZzR4Ws1gl74.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'">
                         <div class="admin-item-info">
-                            <div class="admin-item-title">Return to Silent Hill 🎬</div>
-                            <div class="admin-item-meta">
-                                <span>📅 2026</span>
-                                <span>Película</span>
-                                <span>✅ Disponible</span>
-                                <span>🏷️ 1080p</span>
-                                <span>🔗 https://www.dropbox.com/s…</span>
-                            </div>
+                            <div class="admin-item-title">Suburbanos 3</div>
+                            <div class="admin-item-meta">📅 2026 · ✅ Disp</div>
                         </div>
                         <div class="admin-item-actions">
-                            <button class="action-btn edit" data-id="1774542078902">✏️ Editar</button>
-                            <button class="action-btn delete" data-id="1774542078902">🗑️ Eliminar</button>
+                            <button class="action-btn edit" data-id="1774540028069">✏️</button>
+                            <button class="action-btn delete" data-id="1774540028069">🗑️</button>
                         </div>
-                    </div><div class="admin-item" data-index="12" data-id="1774541188064" draggable="true">
+                    </div><div class="admin-item" data-index="12" data-id="1774541244430" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
-                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/2DTPapravB7kVBWjm6RsqEWyNqn.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/tISaeNWkqPYqSdANTTteewEMS5H.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'">
                         <div class="admin-item-info">
-                            <div class="admin-item-title">28 años después: El templo de los huesos 🎬</div>
-                            <div class="admin-item-meta">
-                                <span>📅 2026</span>
-                                <span>Película</span>
-                                <span>✅ Disponible</span>
-                                <span>🏷️ 1080p</span>
-                                <span>🔗 https://www.dropbox.com/s…</span>
-                            </div>
+                            <div class="admin-item-title">Pose</div>
+                            <div class="admin-item-meta">📅 2026 · ✅ Disp</div>
                         </div>
                         <div class="admin-item-actions">
-                            <button class="action-btn edit" data-id="1774541188064">✏️ Editar</button>
-                            <button class="action-btn delete" data-id="1774541188064">🗑️ Eliminar</button>
+                            <button class="action-btn edit" data-id="1774541244430">✏️</button>
+                            <button class="action-btn delete" data-id="1774541244430">🗑️</button>
                         </div>
-                    </div><div class="admin-item" data-index="13" data-id="1774559766492" draggable="true">
+                    </div><div class="admin-item" data-index="13" data-id="1774542078902" draggable="true">
                         <div class="drag-handle">⋮⋮</div>
-                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/szcew6yyjcDvaL0isaPBk2e3nkF.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
+                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/5Y2TeCVEnwPbd4FDShGbkKYw6GE.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'">
                         <div class="admin-item-info">
-                            <div class="admin-item-title">Dune 🎬</div>
-                            <div class="admin-item-meta">
-                                <span>📅 2021</span>
-                                <span>Película</span>
-                                <span>✅ Disponible</span>
-                                <span>🏷️ Sin etiqueta</span>
-                                <span>🔗 v</span>
-                            </div>
+                            <div class="admin-item-title">Return to Silent Hill</div>
+                            <div class="admin-item-meta">📅 2026 · ✅ Disp</div>
                         </div>
                         <div class="admin-item-actions">
-                            <button class="action-btn edit" data-id="1774559766492">✏️ Editar</button>
-                            <button class="action-btn delete" data-id="1774559766492">🗑️ Eliminar</button>
+                            <button class="action-btn edit" data-id="1774542078902">✏️</button>
+                            <button class="action-btn delete" data-id="1774542078902">🗑️</button>
                         </div>
-                    </div></div>
-                <div class="modal-actions" style="margin-top: 1rem;">
-                    <button type="button" class="btn btn-export" id="exportHtmlBtn">📤 Exportar HTML completo</button>
-                </div>
-            </div>
-            
-            <div id="tabCodes" class="tab-content" style="display: none;">
-                <div class="add-code-section">
-                    <h4>➕ Agregar nuevo código de crédito (se incrustará permanentemente)</h4>
-                    <div class="code-form-row">
-                        <input type="text" id="newCodeInput" placeholder="Código (ej: NUEVO10)" maxlength="20">
-                        <input type="number" id="newCodeValue" placeholder="Valor en créditos" min="1" style="width: 120px;">
-                        <button id="addCodeBtn" class="btn btn-primary">AGREGAR CÓDIGO</button>
-                    </div>
-                </div>
-                <div class="code-list" id="codeList"><div class="code-item">
-                        <div class="code-item-info">
-                            <span class="code-value">gsf1</span>
-                            <span class="code-amount">💰 1 crédito</span>
+                    </div><div class="admin-item" data-index="14" data-id="1774541188064" draggable="true">
+                        <div class="drag-handle">⋮⋮</div>
+                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/2DTPapravB7kVBWjm6RsqEWyNqn.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'">
+                        <div class="admin-item-info">
+                            <div class="admin-item-title">28 años después: El templo de los huesos</div>
+                            <div class="admin-item-meta">📅 2026 · ✅ Disp</div>
                         </div>
-                        <button class="action-btn delete" data-code="gsf1">🗑️ Eliminar</button>
-                    </div><div class="code-item">
-                        <div class="code-item-info">
-                            <span class="code-value">sgd1</span>
-                            <span class="code-amount">💰 1 crédito</span>
+                        <div class="admin-item-actions">
+                            <button class="action-btn edit" data-id="1774541188064">✏️</button>
+                            <button class="action-btn delete" data-id="1774541188064">🗑️</button>
                         </div>
-                        <button class="action-btn delete" data-code="sgd1">🗑️ Eliminar</button>
-                    </div><div class="code-item">
-                        <div class="code-item-info">
-                            <span class="code-value">asd1</span>
-                            <span class="code-amount">💰 1 crédito</span>
+                    </div><div class="admin-item" data-index="15" data-id="1774588605851" draggable="true">
+                        <div class="drag-handle">⋮⋮</div>
+                        <img class="admin-item-poster" src="https://image.tmdb.org/t/p/w500/fvUJb08yatV2b3NUSwuYdQKYoFd.jpg" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'">
+                        <div class="admin-item-info">
+                            <div class="admin-item-title">superman</div>
+                            <div class="admin-item-meta">📅 2025 · ✅ Disp</div>
                         </div>
-                        <button class="action-btn delete" data-code="asd1">🗑️ Eliminar</button>
-                    </div><div class="code-item">
-                        <div class="code-item-info">
-                            <span class="code-value">vdf2</span>
-                            <span class="code-amount">💰 2 créditos</span>
+                        <div class="admin-item-actions">
+                            <button class="action-btn edit" data-id="1774588605851">✏️</button>
+                            <button class="action-btn delete" data-id="1774588605851">🗑️</button>
                         </div>
-                        <button class="action-btn delete" data-code="vdf2">🗑️ Eliminar</button>
-                    </div><div class="code-item">
-                        <div class="code-item-info">
-                            <span class="code-value">fsd2</span>
-                            <span class="code-amount">💰 2 créditos</span>
-                        </div>
-                        <button class="action-btn delete" data-code="fsd2">🗑️ Eliminar</button>
-                    </div><div class="code-item">
-                        <div class="code-item-info">
-                            <span class="code-value">sgd2</span>
-                            <span class="code-amount">💰 2 créditos</span>
-                        </div>
-                        <button class="action-btn delete" data-code="sgd2">🗑️ Eliminar</button>
-                    </div><div class="code-item">
-                        <div class="code-item-info">
-                            <span class="code-value">sfd3</span>
-                            <span class="code-amount">💰 3 créditos</span>
-                        </div>
-                        <button class="action-btn delete" data-code="sfd3">🗑️ Eliminar</button>
-                    </div><div class="code-item">
-                        <div class="code-item-info">
-                            <span class="code-value">ssd3</span>
-                            <span class="code-amount">💰 3 créditos</span>
-                        </div>
-                        <button class="action-btn delete" data-code="ssd3">🗑️ Eliminar</button>
-                    </div><div class="code-item">
-                        <div class="code-item-info">
-                            <span class="code-value">fsdsy5</span>
-                            <span class="code-amount">💰 5 créditos</span>
-                        </div>
-                        <button class="action-btn delete" data-code="fsdsy5">🗑️ Eliminar</button>
-                    </div><div class="code-item">
-                        <div class="code-item-info">
-                            <span class="code-value">sfdbd5</span>
-                            <span class="code-amount">💰 5 créditos</span>
-                        </div>
-                        <button class="action-btn delete" data-code="sfdbd5">🗑️ Eliminar</button>
-                    </div><div class="code-item">
-                        <div class="code-item-info">
-                            <span class="code-value">gsfdy5</span>
-                            <span class="code-amount">💰 5 créditos</span>
-                        </div>
-                        <button class="action-btn delete" data-code="gsfdy5">🗑️ Eliminar</button>
-                    </div><div class="code-item">
-                        <div class="code-item-info">
-                            <span class="code-value">sgdtd10</span>
-                            <span class="code-amount">💰 10 créditos</span>
-                        </div>
-                        <button class="action-btn delete" data-code="sgdtd10">🗑️ Eliminar</button>
-                    </div><div class="code-item">
-                        <div class="code-item-info">
-                            <span class="code-value">shdgd10</span>
-                            <span class="code-amount">💰 10 créditos</span>
-                        </div>
-                        <button class="action-btn delete" data-code="shdgd10">🗑️ Eliminar</button>
-                    </div><div class="code-item">
-                        <div class="code-item-info">
-                            <span class="code-value">mnhd20</span>
-                            <span class="code-amount">💰 20 créditos</span>
-                        </div>
-                        <button class="action-btn delete" data-code="mnhd20">🗑️ Eliminar</button>
-                    </div><div class="code-item">
-                        <div class="code-item-info">
-                            <span class="code-value">mx50</span>
-                            <span class="code-amount">💰 50 créditos</span>
-                        </div>
-                        <button class="action-btn delete" data-code="mx50">🗑️ Eliminar</button>
                     </div></div>
                 <div class="modal-actions">
+                    <button type="button" class="btn btn-export" id="exportHtmlBtn">📤 Exportar HTML</button>
+                </div>
+            </div>
+            <div id="tabCodes" class="tab-content" style="display: none;">
+                <div class="add-code-section">
+                    <h4>➕ Agregar código de crédito</h4>
+                    <div class="code-form-row">
+                        <input type="text" id="newCodeInput" placeholder="Código" maxlength="20">
+                        <input type="number" id="newCodeValue" placeholder="Valor" min="1" style="width: 100px;">
+                        <button id="addCodeBtn" class="btn btn-primary">AGREGAR</button>
+                    </div>
+                </div>
+                <div class="code-list" id="codeList"><div class="code-item"><div class="code-item-info"><span class="code-value">saul5</span><span class="code-amount">💰 5</span></div><button class="action-btn delete" data-code="saul5">🗑️</button></div><div class="code-item"><div class="code-item-info"><span class="code-value">skin</span><span class="code-amount">💰 5</span></div><button class="action-btn delete" data-code="skin">🗑️</button></div><div class="code-item"><div class="code-item-info"><span class="code-value">mx</span><span class="code-amount">💰 5</span></div><button class="action-btn delete" data-code="mx">🗑️</button></div></div>
+                <div class="modal-actions">
                     <button type="button" class="btn btn-secondary" id="closeCodesModalBtn">Cerrar</button>
+                </div>
+            </div>
+            <div id="tabImportexport" class="tab-content" style="display: none;">
+                <div class="import-export-section">
+                    <h4>📤 Exportar datos (JSON)</h4>
+                    <div class="import-export-buttons">
+                        <button type="button" class="btn btn-json-export" id="exportAllDataJsonBtn">💾 Exportar todos los datos</button>
+                    </div>
+                </div>
+                <div class="import-export-section">
+                    <h4>📥 Importar datos (JSON)</h4>
+                    <div class="import-export-buttons">
+                        <label class="file-input-label">
+                            💾 Importar todos los datos
+                            <input type="file" id="importAllFile" accept=".json">
+                        </label>
+                    </div>
+                    <div id="importStatus" class="tmdb-status" style="margin-top: 10px;"></div>
                 </div>
             </div>
         </div>
@@ -1679,41 +1522,32 @@
     const TMDB_API_KEY = '04c35731a5ee918f014970082a0088b1';
     const ADMIN_PIN = '199494';
     
-    let catalogItems = [{"id":1774483041039,"title":"Super Mario Galaxy la película","year":2026,"downloadUrl":"a","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/4Js0gYWxuvTN6b8iAaSF1cSQzBs.jpg","createdAt":"2026-03-25T23:57:21.039Z","status":"coming","updatedAt":"2026-03-26T05:13:34.144Z","quality":"cam"},{"id":1774482931390,"title":"Hoppers","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/ujhru6ctbkwr0lfvkirgx/Hoppers-2026.mp4?rlkey=7473rtu7lprmcrxa3f7bn6uoq&st=670qgtji&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/4Z0E1W7YvQ0aVtgj7KKtktb9ukd.jpg","createdAt":"2026-03-25T23:55:31.390Z","status":"available","quality":"cam","updatedAt":"2026-03-26T15:26:54.479Z"},{"id":1774482950825,"title":"Scream 7","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/llit0eqyrdokntdnuns2u/Scream-7-2026.mp4?rlkey=j5lurnvntf5g09jk07vjlnxqd&st=5w4zly5n&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/2pULHV2e3W7KNTyyfZl6dX071Np.jpg","createdAt":"2026-03-25T23:55:50.825Z","updatedAt":"2026-03-26T16:34:18.441Z","status":"available","quality":"cam"},{"id":1774482992698,"title":"Proyecto Salvación","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/zkgzbq21lve64ib8k8k63/Proyecto-Fin-del-mundo-2026.mp4?rlkey=p54ldljpp5h93f8k1ppi18e0r&st=p3mjail9&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/7lwOTxajURKEWO6gI370NTrVdBO.jpg","createdAt":"2026-03-25T23:56:32.698Z","status":"available","quality":"cam","updatedAt":"2026-03-26T17:01:50.190Z"},{"id":1774480733383,"title":"Peaky Blinders: El hombre inmortal","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/yxz48i9tx29498cuwqqed/Peaky-Blinders-El-hombre-inmortal-2026.mp4?rlkey=szwhol7qfmxveabxnaq7vxw47&st=tq2r1qo5&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/l9S8MLUyi2diTc2Gf3KDAOQTuVx.jpg","createdAt":"2026-03-25T23:18:53.383Z","status":"available","updatedAt":"2026-03-26T04:45:33.431Z","quality":"1080p"},{"id":1774482914074,"title":"Máquina de guerra","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/h60e1r536hdgnwst2pyre/M-quina-de-guerra-2026.mp4?rlkey=rpzrg0khl2d7uimgg5dzme5mn&st=kbvwkio9&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/d5YmQx9kPLQBHEboGwrAavypztB.jpg","createdAt":"2026-03-25T23:55:14.074Z","status":"available","quality":"1080p","updatedAt":"2026-03-26T15:19:40.761Z"},{"id":1774507784749,"title":"Greenland 2","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/6vs5ov4eyiq17qx5or6e6/el-dia-del-fin-del-mundo-2026.mp4?rlkey=9vdzj9lbnkonyh7e1j8ujavum&st=4j6nyylo&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/q7aijAKE98Fcp6dgR6oWiUkFO2g.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T06:49:44.749Z","updatedAt":"2026-03-26T08:39:38.196Z"},{"id":1774506932525,"title":"Sin piedad","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/1t4jtav7phnskykdrq0ch/Sin-piedad-2026.mp4?rlkey=jwulph9esqlwz54ypxrwc05if&st=dshvs9d6&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/9zBNg8koM3fjUTPT7QeJHuGG2r9.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T06:35:32.525Z","updatedAt":"2026-03-26T08:25:20.960Z"},{"id":1774539010961,"title":"Solo Mio","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/7363ljgivbz6v8vglcszz/Solo-Mio-2026.mp4?rlkey=scwtcrbsyfgzih9zmjftkihqq&st=dz6pa28m&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/efSsZJaddeq0LOABZqpCXdMxv9P.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T15:30:10.961Z","updatedAt":"2026-03-26T16:31:50.121Z"},{"id":1774540028069,"title":"Suburbanos 3","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/4dhcwt8o0314a4nk18u3g/Flow-callejero-3-2026.mp4?rlkey=4qf1giftp8r59qh1d2ytq1cuh&st=lmf92bt2&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/dTCQ9KPhMWUM6mHWZzR4Ws1gl74.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T15:47:08.069Z","updatedAt":"2026-03-26T15:51:36.797Z"},{"id":1774541244430,"title":"Pose","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/byvfnlqm6osplpjhzl1gs/Sesi-n-fatal-2026.mp4?rlkey=w85o2sljo8zgl12q4icpyk8sy&st=yi0eht9j&dl=0","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/tISaeNWkqPYqSdANTTteewEMS5H.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T16:07:24.430Z"},{"id":1774542078902,"title":"Return to Silent Hill","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/g3s5b0yx2zrh9ss3jt3gz/Terror-en-Silent-Hill-Regreso-al-infierno-2026.mp4?rlkey=bn3sdqtp5uy2oafk9e6qxd2dy&st=zynuyaqq&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/5Y2TeCVEnwPbd4FDShGbkKYw6GE.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T16:21:18.902Z"},{"id":1774541188064,"title":"28 años después: El templo de los huesos","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/bxfidky2mctbddfekeom2/28-a-os-despu-s-El-templo-de-los-huesos-2026.mp4?rlkey=1tjttfrtvontcj4qx1lyhxvyu&st=3inn9jly&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/2DTPapravB7kVBWjm6RsqEWyNqn.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T16:06:28.064Z"},{"id":1774559766492,"title":"Dune","year":2021,"downloadUrl":"v","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/szcew6yyjcDvaL0isaPBk2e3nkF.jpg","status":"available","quality":"none","createdAt":"2026-03-26T21:16:06.492Z"}];
+    let catalogItems = [{"id":1774590683635,"title":"cars 3","year":200,"downloadUrl":"http://192.168.1.66:8096/Items/1361419/Download?api_key=d4f8955e60014f1d910f302a822544ec","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/4tp9W3QAbQcpanBtBceZtHD10UT.jpg","status":"available","quality":"none","createdAt":"2026-03-27T05:51:23.635Z"},{"id":1774590647947,"title":"cars","year":2006,"downloadUrl":"http://mxcuentas.ddns.net:8096/Items/1363139/Download?api_key=d4f8955e60014f1d910f302a822544ec","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/lgBe9KD6DoLyQP28JZ6fSUGK8j0.jpg","status":"available","quality":"none","createdAt":"2026-03-27T05:50:47.947Z"},{"id":1774483041039,"title":"Super Mario Galaxy la película","year":2026,"downloadUrl":"a","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/4Js0gYWxuvTN6b8iAaSF1cSQzBs.jpg","createdAt":"2026-03-25T23:57:21.039Z","status":"coming","updatedAt":"2026-03-26T05:13:34.144Z","quality":"cam"},{"id":1774482931390,"title":"Hoppers","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/ujhru6ctbkwr0lfvkirgx/Hoppers-2026.mp4?rlkey=7473rtu7lprmcrxa3f7bn6uoq&st=670qgtji&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/4Z0E1W7YvQ0aVtgj7KKtktb9ukd.jpg","createdAt":"2026-03-25T23:55:31.390Z","status":"available","quality":"cam","updatedAt":"2026-03-26T15:26:54.479Z"},{"id":1774482950825,"title":"Scream 7","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/llit0eqyrdokntdnuns2u/Scream-7-2026.mp4?rlkey=j5lurnvntf5g09jk07vjlnxqd&st=5w4zly5n&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/2pULHV2e3W7KNTyyfZl6dX071Np.jpg","createdAt":"2026-03-25T23:55:50.825Z","updatedAt":"2026-03-26T16:34:18.441Z","status":"available","quality":"cam"},{"id":1774482992698,"title":"Proyecto Salvación","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/zkgzbq21lve64ib8k8k63/Proyecto-Fin-del-mundo-2026.mp4?rlkey=p54ldljpp5h93f8k1ppi18e0r&st=p3mjail9&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/7lwOTxajURKEWO6gI370NTrVdBO.jpg","createdAt":"2026-03-25T23:56:32.698Z","status":"available","quality":"cam","updatedAt":"2026-03-26T17:01:50.190Z"},{"id":1774480733383,"title":"Peaky Blinders: El hombre inmortal","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/yxz48i9tx29498cuwqqed/Peaky-Blinders-El-hombre-inmortal-2026.mp4?rlkey=szwhol7qfmxveabxnaq7vxw47&st=tq2r1qo5&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/l9S8MLUyi2diTc2Gf3KDAOQTuVx.jpg","createdAt":"2026-03-25T23:18:53.383Z","status":"available","updatedAt":"2026-03-26T04:45:33.431Z","quality":"1080p"},{"id":1774482914074,"title":"Máquina de guerra","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/h60e1r536hdgnwst2pyre/M-quina-de-guerra-2026.mp4?rlkey=rpzrg0khl2d7uimgg5dzme5mn&st=kbvwkio9&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/d5YmQx9kPLQBHEboGwrAavypztB.jpg","createdAt":"2026-03-25T23:55:14.074Z","status":"available","quality":"1080p","updatedAt":"2026-03-26T15:19:40.761Z"},{"id":1774507784749,"title":"Greenland 2","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/6vs5ov4eyiq17qx5or6e6/el-dia-del-fin-del-mundo-2026.mp4?rlkey=9vdzj9lbnkonyh7e1j8ujavum&st=4j6nyylo&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/q7aijAKE98Fcp6dgR6oWiUkFO2g.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T06:49:44.749Z","updatedAt":"2026-03-26T08:39:38.196Z"},{"id":1774506932525,"title":"Sin piedad","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/1t4jtav7phnskykdrq0ch/Sin-piedad-2026.mp4?rlkey=jwulph9esqlwz54ypxrwc05if&st=dshvs9d6&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/9zBNg8koM3fjUTPT7QeJHuGG2r9.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T06:35:32.525Z","updatedAt":"2026-03-26T08:25:20.960Z"},{"id":1774539010961,"title":"Solo Mio","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/7363ljgivbz6v8vglcszz/Solo-Mio-2026.mp4?rlkey=scwtcrbsyfgzih9zmjftkihqq&st=dz6pa28m&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/efSsZJaddeq0LOABZqpCXdMxv9P.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T15:30:10.961Z","updatedAt":"2026-03-26T16:31:50.121Z"},{"id":1774540028069,"title":"Suburbanos 3","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/4dhcwt8o0314a4nk18u3g/Flow-callejero-3-2026.mp4?rlkey=4qf1giftp8r59qh1d2ytq1cuh&st=lmf92bt2&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/dTCQ9KPhMWUM6mHWZzR4Ws1gl74.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T15:47:08.069Z","updatedAt":"2026-03-26T15:51:36.797Z"},{"id":1774541244430,"title":"Pose","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/byvfnlqm6osplpjhzl1gs/Sesi-n-fatal-2026.mp4?rlkey=w85o2sljo8zgl12q4icpyk8sy&st=yi0eht9j&dl=0","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/tISaeNWkqPYqSdANTTteewEMS5H.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T16:07:24.430Z"},{"id":1774542078902,"title":"Return to Silent Hill","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/g3s5b0yx2zrh9ss3jt3gz/Terror-en-Silent-Hill-Regreso-al-infierno-2026.mp4?rlkey=bn3sdqtp5uy2oafk9e6qxd2dy&st=zynuyaqq&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/5Y2TeCVEnwPbd4FDShGbkKYw6GE.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T16:21:18.902Z"},{"id":1774541188064,"title":"28 años después: El templo de los huesos","year":2026,"downloadUrl":"https://www.dropbox.com/scl/fi/bxfidky2mctbddfekeom2/28-a-os-despu-s-El-templo-de-los-huesos-2026.mp4?rlkey=1tjttfrtvontcj4qx1lyhxvyu&st=3inn9jly&dl=1","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/2DTPapravB7kVBWjm6RsqEWyNqn.jpg","status":"available","quality":"1080p","createdAt":"2026-03-26T16:06:28.064Z"},{"id":1774588605851,"title":"superman","year":2025,"downloadUrl":"w","mediaType":"movie","poster":"https://image.tmdb.org/t/p/w500/fvUJb08yatV2b3NUSwuYdQKYoFd.jpg","status":"available","quality":"1080p","createdAt":"2026-03-27T05:16:45.851Z"}];
     
-    let creditCodes = {"gsf1":1,"sgd1":1,"asd1":1,"vdf2":2,"fsd2":2,"sgd2":2,"sfd3":3,"ssd3":3,"fsdsy5":5,"sfdbd5":5,"gsfdy5":5,"sgdtd10":10,"shdgd10":10,"mnhd20":20,"mx50":50};
-    
-    let userCredits = 0;  // ✅ INICIA EN 0
+    let creditCodes = {"saul5":5,"skin":5,"mx":5};
+    let userCredits = 0;
     let currentSearchTerm = '';
     let usedCodes = new Set();
     
     function loadUsedCodes() {
-        const savedUsedCodes = localStorage.getItem('cine_used_codes');
-        if (savedUsedCodes) {
-            try { usedCodes = new Set(JSON.parse(savedUsedCodes)); } catch(e) { usedCodes = new Set(); }
-        }
+        const saved = localStorage.getItem('cine_used_codes');
+        if (saved) { try { usedCodes = new Set(JSON.parse(saved)); } catch(e) {} }
     }
-    
     function saveUsedCodes() { localStorage.setItem('cine_used_codes', JSON.stringify([...usedCodes])); }
     function isCodeUsed(code) { return usedCodes.has(code.toLowerCase()); }
     function markCodeAsUsed(code) { usedCodes.add(code.toLowerCase()); saveUsedCodes(); }
     
     function loadCredits() {
         const saved = localStorage.getItem('cine_credits_session');
-        userCredits = saved !== null ? (parseInt(saved) || 0) : 0;  // ✅ INICIA EN 0
+        userCredits = saved !== null ? (parseInt(saved) || 0) : 0;
         updateCreditsDisplay();
     }
-    
-    function saveCredits() { 
-        localStorage.setItem('cine_credits_session', userCredits); 
-        updateCreditsDisplay(); 
-    }
-    
+    function saveCredits() { localStorage.setItem('cine_credits_session', userCredits); updateCreditsDisplay(); }
     function updateCreditsDisplay() {
         const balanceSpan = document.getElementById('creditsBalance');
         if (balanceSpan) balanceSpan.textContent = userCredits;
-        const creditsBadge = document.getElementById('creditsBadge');
-        if (creditsBadge) creditsBadge.textContent = userCredits;
+        const badge = document.getElementById('creditsBadge');
+        if (badge) badge.textContent = userCredits;
     }
     
     function showToast(icon, title, message, isSuccess = true) {
@@ -1735,182 +1569,112 @@
         }, 3500);
     }
     
-    function animateBadge() {
-        const badge = document.getElementById('creditsBadge');
-        if (badge) { badge.classList.add('pulse'); setTimeout(() => badge.classList.remove('pulse'), 500); }
-    }
-    
     function redeemCode(code) {
         const normalizedCode = code.toLowerCase().trim();
-        if (isCodeUsed(normalizedCode)) return { success: false, message: `❌ El código "${code}" ya ha sido canjeado anteriormente.` };
+        if (isCodeUsed(normalizedCode)) return { success: false, message: `❌ El código ya fue canjeado` };
         if (creditCodes[normalizedCode]) {
             const value = creditCodes[normalizedCode];
             userCredits += value;
             saveCredits();
             markCodeAsUsed(normalizedCode);
-            showToast('🎉', '¡Créditos canjeados!', `Has recibido ${value} crédito(s). Total: ${userCredits} créditos.`, true);
-            animateBadge();
-            return { success: true, message: `✅ ¡Código válido! +${value} créditos. Total: ${userCredits}` };
-        } else {
-            showToast('❌', 'Código inválido', `El código "${code}" no es válido.`, false);
-            return { success: false, message: `❌ Código inválido.` };
+            showToast('🎉', '¡Créditos canjeados!', `+${value} créditos. Total: ${userCredits}`, true);
+            return { success: true, message: `✅ +${value} créditos. Total: ${userCredits}` };
         }
+        return { success: false, message: `❌ Código inválido` };
     }
     
-    function spendCredit() { 
-        if (userCredits >= 1) { 
-            userCredits--; 
-            saveCredits(); 
-            return true; 
-        } 
-        return false; 
-    }
-    
-    function showCreditsModal() { 
-        const messageDiv = document.getElementById('codeMessage');
-        if (messageDiv) {
-            messageDiv.innerHTML = '';
-            messageDiv.className = 'code-message';
-        }
-        const codeInput = document.getElementById('codeInput');
-        if (codeInput) codeInput.value = '';
-        document.getElementById('creditsModal').style.display = 'flex'; 
-    }
-    function hideCreditsModal() { document.getElementById('creditsModal').style.display = 'none'; }
+    function spendCredit() { if (userCredits >= 1) { userCredits--; saveCredits(); return true; } return false; }
     
     function persistCatalog() { localStorage.setItem('cine_catalog', JSON.stringify(catalogItems)); renderCatalog(); renderEditList(); }
     
-    function addCreditCode(code, value) {
-        const normalizedCode = code.toLowerCase().trim();
-        if (!normalizedCode) return { success: false, message: 'El código no puede estar vacío' };
-        if (creditCodes[normalizedCode]) return { success: false, message: '❌ Este código ya existe' };
-        if (value < 1) return { success: false, message: 'El valor debe ser al menos 1 crédito' };
-        creditCodes[normalizedCode] = parseInt(value);
-        renderCodeList();
-        return { success: true, message: `✅ Código "${code}" agregado con ${value} créditos` };
-    }
-    
-    function deleteCreditCode(code) {
-        const normalizedCode = code.toLowerCase().trim();
-        if (creditCodes[normalizedCode]) {
-            delete creditCodes[normalizedCode];
-            renderCodeList();
-            showToast('🗑️', 'Código eliminado', `El código "${code}" ha sido eliminado.`, true);
-            return true;
-        }
-        return false;
-    }
-    
-    function renderCodeList() {
-        const container = document.getElementById('codeList');
-        if (!container) return;
-        
-        const codesArray = Object.entries(creditCodes);
-        if (codesArray.length === 0) {
-            container.innerHTML = '<div class="empty-message-panel">📭 No hay códigos de crédito configurados.<br>Agrega códigos desde el formulario.</div>';
-            return;
-        }
-        
+    function renderCatalog() {
+        const grid = document.getElementById('moviesGrid');
+        if(!grid) return;
+        let filtered = catalogItems;
+        if (currentSearchTerm) filtered = catalogItems.filter(i => i.title.toLowerCase().includes(currentSearchTerm));
+        if(filtered.length === 0) { grid.innerHTML = '<div class="empty-message">🎬 No hay resultados.</div>'; return; }
         let html = '';
-        codesArray.forEach(([code, value]) => {
-            html += `<div class="code-item">
-                        <div class="code-item-info">
-                            <span class="code-value">${escapeHtml(code)}</span>
-                            <span class="code-amount">💰 ${value} crédito${value !== 1 ? 's' : ''}</span>
+        for(let item of filtered) {
+            const displayTitle = item.title.length > 22 ? item.title.slice(0,20)+'...' : item.title;
+            const typeIcon = item.mediaType === 'movie' ? '🎬' : '📺';
+            const isAvailable = item.status !== 'coming';
+            const posterClass = !isAvailable ? 'not-available' : '';
+            const buttonClass = !isAvailable ? 'download-link disabled' : 'download-link';
+            const buttonText = !isAvailable ? '⏳ Próximamente' : '⬇️ Descargar (1 crédito)';
+            const badgeHtml = !isAvailable ? '<span class="coming-soon-badge">⏳ Próx</span>' : `<span class="media-badge">${typeIcon}</span>`;
+            let qualityHtml = '';
+            if (item.quality === '1080p') qualityHtml = '<div class="quality-badge hd-1080p">1080p</div>';
+            if (item.quality === 'cam') qualityHtml = '<div class="quality-badge cam">CAM</div>';
+            html += `<div class="movie-card">
+                        <div class="poster-container">
+                            <img class="poster-img ${posterClass}" src="${item.poster}" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No'">
+                            ${qualityHtml}
                         </div>
-                        <button class="action-btn delete" data-code="${escapeHtml(code)}">🗑️ Eliminar</button>
+                        <div class="card-info">
+                            <div class="card-title">${escapeHtml(displayTitle)}</div>
+                            <div class="card-year-type">
+                                <span>📅 ${item.year}</span>
+                                ${badgeHtml}
+                            </div>
+                            <button class="${buttonClass}" data-id="${item.id}" ${!isAvailable ? 'disabled' : ''}>${buttonText}</button>
+                        </div>
                     </div>`;
-        });
-        container.innerHTML = html;
-        
-        document.querySelectorAll('#codeList .delete').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const code = btn.getAttribute('data-code');
-                deleteCreditCode(code);
+        }
+        grid.innerHTML = html;
+        document.querySelectorAll('.download-link:not(.disabled)').forEach(btn => {
+            const id = parseInt(btn.dataset.id);
+            const item = catalogItems.find(i => i.id === id);
+            if(item) btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (userCredits >= 1 && confirm(`Usar 1 crédito para descargar "${item.title}"?`)) {
+                    if (spendCredit()) {
+                        showToast('📥', 'Descarga', `Descargando "${item.title}"`, true);
+                        if (item.downloadUrl && item.downloadUrl.startsWith('http')) window.open(item.downloadUrl, '_blank');
+                    }
+                } else if (userCredits < 1) {
+                    showToast('⚠️', 'Sin créditos', 'Canjea códigos para descargar', false);
+                    showCreditsModal();
+                }
             });
         });
     }
     
-    async function fetchTMDBData(title, year, mediaType) {
-        try {
-            let searchUrl = mediaType === 'movie' 
-                ? `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(title)}&language=es-ES&year=${year}`
-                : `https://api.themoviedb.org/3/search/tv?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(title)}&language=es-ES&first_air_date_year=${year}`;
-            const response = await fetch(searchUrl);
-            if(!response.ok) throw new Error(`Error ${response.status}`);
-            const data = await response.json();
-            if(data.results && data.results.length > 0) {
-                const firstResult = data.results[0];
-                const detailUrl = `https://api.themoviedb.org/3/${mediaType}/${firstResult.id}?api_key=${TMDB_API_KEY}&language=es-ES`;
-                const detailResp = await fetch(detailUrl);
-                const details = await detailResp.json();
-                let posterPath = details.poster_path ? `https://image.tmdb.org/t/p/w500${details.poster_path}` : null;
-                let displayTitle = mediaType === 'movie' ? details.title : details.name;
-                let displayYear = mediaType === 'movie' ? (details.release_date ? details.release_date.split('-')[0] : year) : (details.first_air_date ? details.first_air_date.split('-')[0] : year);
-                return { success: true, poster: posterPath, title: displayTitle, year: displayYear };
-            }
-            return { success: false, error: 'No encontrado en TMDB' };
-        } catch (error) { return { success: false, error: error.message }; }
-    }
-    
-    let currentPreviewPoster = null;
-    
-    async function updatePreview() {
-        let title = document.getElementById('titleInput').value.trim();
-        let year = document.getElementById('yearInput').value.trim();
-        let mediaType = document.getElementById('mediaType').value;
-        if(!title || !year) { alert("Completa título y año"); return; }
-        const statusDiv = document.getElementById('tmdbStatus');
-        statusDiv.innerHTML = '<span class="loading-spinner-sm"></span> Buscando en TMDb...';
-        const previewImg = document.getElementById('posterPreview');
-        previewImg.style.display = 'none';
-        const result = await fetchTMDBData(title, year, mediaType);
-        if(result.success) {
-            if(result.title) document.getElementById('titleInput').value = result.title;
-            if(result.year) document.getElementById('yearInput').value = result.year;
-            currentPreviewPoster = result.poster;
-            if(result.poster) { previewImg.src = result.poster; previewImg.style.display = 'block'; }
-            statusDiv.innerHTML = `✅ ${result.title} (${result.year}) · Poster listo`;
-        } else { statusDiv.innerHTML = `❌ ${result.error}. Verifica título/año.`; currentPreviewPoster = null; }
-    }
-    
-    async function saveItem(editId, title, year, url, mediaType, posterUrl, status, quality) {
-        if(!title || !year) { alert("Completa título y año"); return false; }
-        if(status === 'available' && !url) { alert("Las películas disponibles necesitan un enlace de descarga"); return false; }
-        
-        let finalPoster = posterUrl;
-        if(!finalPoster) {
-            const search = await fetchTMDBData(title, year, mediaType);
-            if(search.success && search.poster) finalPoster = search.poster;
-            else finalPoster = `https://via.placeholder.com/300x450/1a1f2e/6c7fc7?text=${encodeURIComponent(title.substring(0,12))}`;
-        }
-        
-        if(editId) {
-            const index = catalogItems.findIndex(i => i.id == editId);
-            if(index !== -1) {
-                catalogItems[index] = { ...catalogItems[index], title: title.trim(), year: parseInt(year), downloadUrl: url.trim(), mediaType, poster: finalPoster, status, quality: quality || 'none', updatedAt: new Date().toISOString() };
-                persistCatalog();
-                return true;
-            }
-            return false;
-        } else {
-            catalogItems.unshift({ id: Date.now(), title: title.trim(), year: parseInt(year), downloadUrl: url.trim(), mediaType, poster: finalPoster, status, quality: quality || 'none', createdAt: new Date().toISOString() });
-            persistCatalog();
-            return true;
-        }
+    function renderEditList() {
+        const container = document.getElementById('itemsList');
+        if(!container) return;
+        if(catalogItems.length === 0) { container.innerHTML = '<div class="empty-message-panel">📭 No hay elementos</div>'; return; }
+        let html = '';
+        catalogItems.forEach((item, idx) => {
+            html += `<div class="admin-item" data-index="${idx}" data-id="${item.id}" draggable="true">
+                        <div class="drag-handle">⋮⋮</div>
+                        <img class="admin-item-poster" src="${item.poster}" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'">
+                        <div class="admin-item-info">
+                            <div class="admin-item-title">${escapeHtml(item.title)}</div>
+                            <div class="admin-item-meta">📅 ${item.year} · ${item.status === 'coming' ? '⏳ Próx' : '✅ Disp'}</div>
+                        </div>
+                        <div class="admin-item-actions">
+                            <button class="action-btn edit" data-id="${item.id}">✏️</button>
+                            <button class="action-btn delete" data-id="${item.id}">🗑️</button>
+                        </div>
+                    </div>`;
+        });
+        container.innerHTML = html;
+        document.querySelectorAll('#itemsList .edit').forEach(btn => btn.addEventListener('click', () => editItem(parseInt(btn.dataset.id))));
+        document.querySelectorAll('#itemsList .delete').forEach(btn => btn.addEventListener('click', () => deleteItem(parseInt(btn.dataset.id))));
+        initDragAndDrop();
     }
     
     function deleteItem(id) {
-        const item = catalogItems.find(i => i.id == id);
-        if(item && confirm(`¿Eliminar "${item.title}" permanentemente?`)) {
-            catalogItems = catalogItems.filter(i => i.id != id);
+        const item = catalogItems.find(i => i.id === id);
+        if(item && confirm(`Eliminar "${item.title}"?`)) {
+            catalogItems = catalogItems.filter(i => i.id !== id);
             persistCatalog();
-            showToast('🗑️', 'Elemento eliminado', `"${item.title}" ha sido eliminado.`, true);
+            showToast('🗑️', 'Eliminado', `"${item.title}" eliminado`, true);
         }
     }
     
     function editItem(id) {
-        const item = catalogItems.find(i => i.id == id);
+        const item = catalogItems.find(i => i.id === id);
         if(!item) return;
         document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
@@ -1923,156 +1687,8 @@
         document.getElementById('mediaType').value = item.mediaType;
         document.getElementById('statusType').value = item.status || 'available';
         document.getElementById('qualityType').value = item.quality || 'none';
-        const previewImg = document.getElementById('posterPreview');
-        if(item.poster && !item.poster.includes('placeholder')) { previewImg.src = item.poster; previewImg.style.display = 'block'; currentPreviewPoster = item.poster; }
-        else { previewImg.style.display = 'none'; currentPreviewPoster = null; }
-        document.getElementById('tmdbStatus').innerHTML = '✏️ Modo edición · puedes buscar nuevo poster con TMDB';
-        document.getElementById('submitBtn').textContent = '💾 GUARDAR CAMBIOS';
-    }
-    
-    function resetForm() {
-        document.getElementById('editId').value = '';
-        document.getElementById('titleInput').value = '';
-        document.getElementById('yearInput').value = '';
-        document.getElementById('urlInput').value = '';
-        document.getElementById('mediaType').value = 'movie';
-        document.getElementById('statusType').value = 'available';
-        document.getElementById('qualityType').value = 'none';
-        document.getElementById('posterPreview').style.display = 'none';
-        currentPreviewPoster = null;
-        document.getElementById('tmdbStatus').innerHTML = '✨ Usa el botón para obtener poster automático';
-        document.getElementById('submitBtn').textContent = '➕ AGREGAR';
-    }
-    
-    function closeControlPanel() { document.getElementById('controlPanelModal').classList.remove('active'); resetForm(); }
-    
-    function getQualityBadgeHTML(quality) {
-        if (!quality || quality === 'none') return '';
-        if (quality === '1080p') {
-            return '<div class="quality-badge hd-1080p">1080p</div>';
-        }
-        if (quality === 'cam') {
-            return '<div class="quality-badge cam">CAM</div>';
-        }
-        return '';
-    }
-    
-    function handleDownload(item) {
-        return function(e) {
-            e.preventDefault();
-            if (item.status === 'coming') {
-                showToast('⏳', 'Próximamente', `"${item.title}" aún no está disponible para descargar.`, false);
-                return;
-            }
-            if (userCredits >= 1) {
-                if (confirm(`💰 Usar 1 crédito para descargar "${item.title}"? Te quedan ${userCredits - 1} créditos.`)) {
-                    if (spendCredit()) {
-                        showToast('📥', 'Descarga iniciada', `"${item.title}" se está descargando. Créditos restantes: ${userCredits}`, true);
-                        if (item.downloadUrl && item.downloadUrl !== '#' && item.downloadUrl.startsWith('http')) window.open(item.downloadUrl, '_blank');
-                        else showToast('🔗', 'Enlace simulado', `"${item.title}" - El enlace no es válido para descarga directa.`, false);
-                    }
-                }
-            } else {
-                showToast('⚠️', 'Créditos insuficientes', 'No tienes suficientes créditos. Canjea códigos.', false);
-                setTimeout(() => showCreditsModal(), 1500);
-            }
-        };
-    }
-    
-    function filterCatalog() {
-        const searchInput = document.getElementById('searchInput');
-        const searchTerm = searchInput.value.trim().toLowerCase();
-        currentSearchTerm = searchTerm;
-        
-        const clearBtn = document.getElementById('searchClear');
-        const resultsInfo = document.getElementById('searchResultsInfo');
-        
-        if (searchTerm === '') {
-            clearBtn.style.display = 'none';
-            resultsInfo.style.display = 'none';
-            renderCatalogWithFilter('');
-            return;
-        }
-        
-        clearBtn.style.display = 'block';
-        
-        const filteredItems = catalogItems.filter(item => 
-            item.title.toLowerCase().includes(searchTerm)
-        );
-        
-        if (filteredItems.length === 0) {
-            resultsInfo.style.display = 'block';
-            resultsInfo.innerHTML = `🔍 No se encontraron resultados para "<span>${escapeHtml(searchTerm)}</span>"`;
-        } else {
-            resultsInfo.style.display = 'block';
-            resultsInfo.innerHTML = `🔍 Se encontraron <span>${filteredItems.length}</span> resultado${filteredItems.length !== 1 ? 's' : ''} para "<span>${escapeHtml(searchTerm)}</span>"`;
-        }
-        
-        renderCatalogWithFilter(searchTerm);
-    }
-    
-    function renderCatalogWithFilter(searchTerm) {
-        const grid = document.getElementById('moviesGrid');
-        if(!grid) return;
-        
-        let filteredItems = catalogItems;
-        if (searchTerm && searchTerm !== '') {
-            filteredItems = catalogItems.filter(item => 
-                item.title.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-        }
-        
-        if(filteredItems.length === 0) { 
-            grid.innerHTML = '<div class="empty-message">🎬 No hay películas o series que coincidan con tu búsqueda.</div>'; 
-            return; 
-        }
-        
-        let html = '';
-        for(let item of filteredItems) {
-            const displayTitle = item.title.length > 25 ? item.title.slice(0,22)+'...' : item.title;
-            const typeLabel = item.mediaType === 'movie' ? '🎬 Película' : '📺 Serie';
-            const typeIcon = item.mediaType === 'movie' ? '🎬' : '📺';
-            const isAvailable = item.status !== 'coming';
-            const posterClass = !isAvailable ? 'not-available' : '';
-            const buttonClass = !isAvailable ? 'download-link disabled' : 'download-link';
-            const buttonText = !isAvailable ? '⏳ Próximamente' : '⬇️ Descargar archivo (1 crédito)';
-            const badgeHtml = !isAvailable ? '<span class="coming-soon-badge">⏳ Próximamente</span>' : `<span class="media-badge">${typeLabel}</span>`;
-            const qualityBadge = getQualityBadgeHTML(item.quality);
-            
-            html += `<div class="movie-card" data-id="${item.id}">
-                        <div class="poster-container">
-                            <img class="poster-img ${posterClass}" src="${item.poster}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No+poster'">
-                            ${qualityBadge}
-                        </div>
-                        <div class="card-info">
-                            <div class="card-title" title="${escapeHtml(item.title)}">${escapeHtml(displayTitle)} ${typeIcon}</div>
-                            <div class="card-year-type">
-                                <span>📅 ${item.year}</span>
-                                ${badgeHtml}
-                            </div>
-                            <button class="${buttonClass}" data-id="${item.id}" ${!isAvailable ? 'disabled' : ''}>${buttonText}</button>
-                        </div>
-                    </div>`;
-        }
-        grid.innerHTML = html;
-        document.querySelectorAll('.download-link').forEach(btn => {
-            const id = parseInt(btn.getAttribute('data-id'));
-            const item = catalogItems.find(i => i.id === id);
-            if(item && item.status !== 'coming') {
-                btn.addEventListener('click', handleDownload(item));
-            }
-        });
-    }
-    
-    function renderCatalog() {
-        renderCatalogWithFilter(currentSearchTerm);
-    }
-    
-    function clearSearch() {
-        const searchInput = document.getElementById('searchInput');
-        searchInput.value = '';
-        filterCatalog();
-        searchInput.focus();
+        document.getElementById('submitBtn').textContent = '💾 GUARDAR';
+        document.getElementById('tmdbStatus').innerHTML = '✏️ Modo edición';
     }
     
     function reorderItems(oldIndex, newIndex) {
@@ -2081,207 +1697,270 @@
         catalogItems.splice(oldIndex, 1);
         catalogItems.splice(newIndex, 0, item);
         persistCatalog();
-        showToast('🔄', 'Orden actualizado', 'La galería ha sido reordenada.', true);
+        showToast('🔄', 'Orden actualizado', 'Galería reordenada', true);
     }
     
     let draggedItem = null;
-    
-    function renderEditList() {
-        const container = document.getElementById('itemsList');
-        if(!container) return;
-        if(catalogItems.length === 0) { container.innerHTML = '<div class="empty-message-panel">📭 No hay elementos para administrar.<br>Agrega desde la pestaña "AGREGAR".</div>'; return; }
-        let html = '';
-        catalogItems.forEach((item, idx) => {
-            const typeIcon = item.mediaType === 'movie' ? '🎬' : '📺';
-            const statusIcon = item.status === 'coming' ? '⏳' : '✅';
-            const statusText = item.status === 'coming' ? 'Próximamente' : 'Disponible';
-            const qualityText = item.quality === '1080p' ? '1080p' : (item.quality === 'cam' ? 'CAM' : 'Sin etiqueta');
-            html += `<div class="admin-item" data-index="${idx}" data-id="${item.id}" draggable="true">
-                        <div class="drag-handle">⋮⋮</div>
-                        <img class="admin-item-poster" src="${item.poster}" onerror="this.src='https://via.placeholder.com/50x75/1e243c/8f9ce6?text=No'" alt="poster">
-                        <div class="admin-item-info">
-                            <div class="admin-item-title">${escapeHtml(item.title)} ${typeIcon}</div>
-                            <div class="admin-item-meta">
-                                <span>📅 ${item.year}</span>
-                                <span>${item.mediaType === 'movie' ? 'Película' : 'Serie'}</span>
-                                <span>${statusIcon} ${statusText}</span>
-                                <span>🏷️ ${qualityText}</span>
-                                <span>🔗 ${item.downloadUrl ? (item.downloadUrl.substring(0, 25) + (item.downloadUrl.length > 25 ? '…' : '')) : '(sin enlace)'}</span>
-                            </div>
-                        </div>
-                        <div class="admin-item-actions">
-                            <button class="action-btn edit" data-id="${item.id}">✏️ Editar</button>
-                            <button class="action-btn delete" data-id="${item.id}">🗑️ Eliminar</button>
-                        </div>
-                    </div>`;
+    function initDragAndDrop() {
+        document.querySelectorAll('.admin-item').forEach(item => {
+            item.draggable = true;
+            item.ondragstart = (e) => { draggedItem = item; e.dataTransfer.setData('text/plain', item.dataset.index); };
+            item.ondragend = () => draggedItem = null;
+            item.ondragover = (e) => e.preventDefault();
+            item.ondrop = (e) => {
+                e.preventDefault();
+                if (!draggedItem || draggedItem === item) return;
+                const fromIdx = parseInt(draggedItem.dataset.index);
+                const toIdx = parseInt(item.dataset.index);
+                if (!isNaN(fromIdx) && !isNaN(toIdx)) reorderItems(fromIdx, toIdx);
+            };
         });
-        container.innerHTML = html;
-        document.querySelectorAll('#itemsList .edit').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); editItem(parseInt(btn.getAttribute('data-id'))); }));
-        document.querySelectorAll('#itemsList .delete').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); deleteItem(parseInt(btn.getAttribute('data-id'))); }));
-        initDragAndDrop();
     }
     
-    function initDragAndDrop() {
-        const items = document.querySelectorAll('.admin-item');
-        items.forEach(item => {
-            item.setAttribute('draggable', 'true');
-            item.addEventListener('dragstart', (e) => { draggedItem = item; item.classList.add('dragging'); e.dataTransfer.setData('text/plain', item.getAttribute('data-index')); });
-            item.addEventListener('dragend', (e) => { item.classList.remove('dragging'); document.querySelectorAll('.admin-item').forEach(i => i.classList.remove('drag-over')); draggedItem = null; });
-            item.addEventListener('dragover', (e) => { e.preventDefault(); if (item !== draggedItem && !item.classList.contains('drag-over')) item.classList.add('drag-over'); });
-            item.addEventListener('dragleave', () => item.classList.remove('drag-over'));
-            item.addEventListener('drop', (e) => {
-                e.preventDefault();
-                item.classList.remove('drag-over');
-                if (!draggedItem || draggedItem === item) return;
-                const fromIndex = parseInt(draggedItem.getAttribute('data-index'));
-                const toIndex = parseInt(item.getAttribute('data-index'));
-                if (!isNaN(fromIndex) && !isNaN(toIndex) && fromIndex !== toIndex) reorderItems(fromIndex, toIndex);
-                draggedItem = null;
-            });
+    function renderCodeList() {
+        const container = document.getElementById('codeList');
+        if(!container) return;
+        let html = '';
+        Object.entries(creditCodes).forEach(([code, val]) => {
+            html += `<div class="code-item"><div class="code-item-info"><span class="code-value">${code}</span><span class="code-amount">💰 ${val}</span></div><button class="action-btn delete" data-code="${code}">🗑️</button></div>`;
         });
+        container.innerHTML = html || '<div class="empty-message-panel">No hay códigos</div>';
+        document.querySelectorAll('#codeList .delete').forEach(btn => btn.addEventListener('click', () => deleteCreditCode(btn.dataset.code)));
+    }
+    
+    function deleteCreditCode(code) {
+        if(creditCodes[code]) { delete creditCodes[code]; renderCodeList(); showToast('🗑️', 'Código eliminado', code, true); }
+    }
+    
+    function addCreditCode(code, val) {
+        if(creditCodes[code.toLowerCase()]) return false;
+        creditCodes[code.toLowerCase()] = val;
+        renderCodeList();
+        return true;
     }
     
     function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]); }
     
-    function exportFullHTML() {
-        closeControlPanel();
-        const exportData = JSON.stringify(catalogItems);
-        const exportCreditCodes = JSON.stringify(creditCodes);
-        let currentHTML = document.documentElement.outerHTML;
-        const catalogInitRegex = /let catalogItems = \[.*?\];/s;
-        const creditCodesRegex = /let creditCodes = \{.*?\};/s;
-        currentHTML = currentHTML.replace(catalogInitRegex, `let catalogItems = ${exportData};`);
-        currentHTML = currentHTML.replace(creditCodesRegex, `let creditCodes = ${exportCreditCodes};`);
-        const blob = new Blob([currentHTML], { type: 'text/html' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `CineStack_export_${new Date().toISOString().slice(0,19).replace(/:/g, '-')}.html`;
-        document.body.appendChild(a); a.click(); document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        showToast('📤', 'Exportación completada', `${catalogItems.length} elementos y ${Object.keys(creditCodes).length} códigos exportados correctamente.`, true);
+    function filterCatalog() {
+        const term = document.getElementById('searchInput').value.trim().toLowerCase();
+        currentSearchTerm = term;
+        document.getElementById('searchClear').style.display = term ? 'block' : 'none';
+        renderCatalog();
     }
+    
+    function clearSearch() { document.getElementById('searchInput').value = ''; filterCatalog(); }
+    
+    function showCreditsModal() { document.getElementById('creditsModal').style.display = 'flex'; }
+    function hideCreditsModal() { document.getElementById('creditsModal').style.display = 'none'; }
     
     let isPanelUnlocked = false;
-    
-    function showPinModal() { 
-        const pinInput = document.getElementById('pinInput');
-        if (pinInput) pinInput.value = '';
-        const pinError = document.getElementById('pinError');
-        if (pinError) pinError.style.display = 'none';
-        document.getElementById('pinModal').style.display = 'flex'; 
-    }
+    function showPinModal() { document.getElementById('pinModal').style.display = 'flex'; }
     function hidePinModal() { document.getElementById('pinModal').style.display = 'none'; }
     function verifyPin() {
-        const enteredPin = document.getElementById('pinInput').value.trim();
-        if(enteredPin === ADMIN_PIN) { isPanelUnlocked = true; hidePinModal(); openControlPanel(); }
-        else { 
-            document.getElementById('pinError').style.display = 'block'; 
-            showToast('🔐', 'PIN incorrecto', 'El PIN ingresado no es válido.', false); 
+        if(document.getElementById('pinInput').value === ADMIN_PIN) {
+            isPanelUnlocked = true;
+            hidePinModal();
+            document.getElementById('controlPanelModal').classList.add('active');
+            renderEditList();
+            renderCodeList();
+            // Resetear el input del PIN
+            document.getElementById('pinInput').value = '';
+            document.getElementById('pinError').style.display = 'none';
+        } else {
+            document.getElementById('pinError').style.display = 'block';
         }
     }
-    function openControlPanel() { if(!isPanelUnlocked) return; resetForm(); renderEditList(); renderCodeList(); document.getElementById('controlPanelModal').classList.add('active'); }
     
-    // Event Listeners
+    function exportFullHTML() {
+        const data = JSON.stringify(catalogItems);
+        const codes = JSON.stringify(creditCodes);
+        let html = document.documentElement.outerHTML;
+        html = html.replace(/let catalogItems = \[.*?\];/s, `let catalogItems = ${data};`);
+        html = html.replace(/let creditCodes = \{.*?\};/s, `let creditCodes = ${codes};`);
+        const blob = new Blob([html], {type: 'text/html'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `cine_export_${Date.now()}.html`;
+        a.click();
+        URL.revokeObjectURL(a.href);
+        showToast('📤', 'Exportado', `${catalogItems.length} elementos`, true);
+    }
+    
+    // Función de exportación de todos los datos
+    function exportAllDataJSON() {
+        const allData = {
+            catalog: catalogItems,
+            codes: creditCodes,
+            exportDate: new Date().toISOString(),
+            version: "1.0"
+        };
+        const data = JSON.stringify(allData, null, 2);
+        const blob = new Blob([data], {type: 'application/json'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `cine_all_data_${Date.now()}.json`;
+        a.click();
+        URL.revokeObjectURL(a.href);
+        showToast('💾', 'Todos los datos exportados', `Catálogo: ${catalogItems.length} items, Códigos: ${Object.keys(creditCodes).length}`, true);
+    }
+    
+    function importAllDataJSON(file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const importedData = JSON.parse(e.target.result);
+                if (importedData.catalog && Array.isArray(importedData.catalog)) {
+                    catalogItems = importedData.catalog;
+                }
+                if (importedData.codes && typeof importedData.codes === 'object') {
+                    creditCodes = importedData.codes;
+                }
+                persistCatalog();
+                renderCodeList();
+                showToast('💾', 'Datos importados', `Catálogo: ${catalogItems.length} items, Códigos: ${Object.keys(creditCodes).length}`, true);
+                document.getElementById('importStatus').innerHTML = '✅ Todos los datos importados exitosamente';
+                setTimeout(() => { document.getElementById('importStatus').innerHTML = ''; }, 3000);
+            } catch (error) {
+                showToast('❌', 'Error de importación', 'Formato JSON inválido', false);
+                document.getElementById('importStatus').innerHTML = '❌ Error: Formato JSON inválido';
+            }
+        };
+        reader.readAsText(file);
+    }
+    
     document.getElementById('creditsBtn')?.addEventListener('click', showCreditsModal);
     document.getElementById('closeCreditsBtn')?.addEventListener('click', hideCreditsModal);
     document.getElementById('redeemCodeBtn')?.addEventListener('click', () => {
         const code = document.getElementById('codeInput').value;
-        if (!code.trim()) {
-            const messageDiv = document.getElementById('codeMessage');
-            messageDiv.innerHTML = '❌ Por favor ingresa un código.';
-            messageDiv.className = 'code-message error';
-            return;
-        }
         const result = redeemCode(code);
-        const messageDiv = document.getElementById('codeMessage');
-        messageDiv.innerHTML = result.message;
-        messageDiv.className = `code-message ${result.success ? 'success' : 'error'}`;
-        if (result.success) { 
-            document.getElementById('codeInput').value = ''; 
-            updateCreditsDisplay(); 
-        }
+        const msgDiv = document.getElementById('codeMessage');
+        msgDiv.innerHTML = result.message;
+        msgDiv.className = `code-message ${result.success ? 'success' : 'error'}`;
+        if(result.success) document.getElementById('codeInput').value = '';
     });
-    document.getElementById('codeInput')?.addEventListener('keypress', (e) => { if (e.key === 'Enter') document.getElementById('redeemCodeBtn').click(); });
-    document.getElementById('toastClose')?.addEventListener('click', () => { const toast = document.getElementById('toastNotification'); toast.classList.remove('show'); setTimeout(() => { if (!toast.classList.contains('show')) toast.style.display = 'none'; }, 300); });
     document.getElementById('openPanelBtn')?.addEventListener('click', () => { isPanelUnlocked = false; showPinModal(); });
-    document.getElementById('closeModalBtn')?.addEventListener('click', closeControlPanel);
-    document.getElementById('closeCodesModalBtn')?.addEventListener('click', closeControlPanel);
+    document.getElementById('verifyPinBtn')?.addEventListener('click', verifyPin);
+    document.getElementById('closeModalBtn')?.addEventListener('click', () => document.getElementById('controlPanelModal').classList.remove('active'));
+    document.getElementById('closeCodesModalBtn')?.addEventListener('click', () => document.getElementById('controlPanelModal').classList.remove('active'));
     document.getElementById('exportHtmlBtn')?.addEventListener('click', exportFullHTML);
-    
     document.getElementById('searchInput')?.addEventListener('input', filterCatalog);
     document.getElementById('searchClear')?.addEventListener('click', clearSearch);
-    
     document.getElementById('addCodeBtn')?.addEventListener('click', () => {
-        const newCode = document.getElementById('newCodeInput').value.trim();
-        const newValue = parseInt(document.getElementById('newCodeValue').value);
-        if (!newCode) {
-            showToast('⚠️', 'Campo vacío', 'Ingresa un código válido', false);
-            return;
-        }
-        if (isNaN(newValue) || newValue < 1) {
-            showToast('⚠️', 'Valor inválido', 'Ingresa un valor de créditos válido (mínimo 1)', false);
-            return;
-        }
-        const result = addCreditCode(newCode, newValue);
-        showToast(result.success ? '✅' : '❌', result.success ? 'Código agregado' : 'Error', result.message, result.success);
-        if (result.success) {
+        const code = document.getElementById('newCodeInput').value.trim();
+        const val = parseInt(document.getElementById('newCodeValue').value);
+        if(code && val > 0 && addCreditCode(code, val)) {
+            showToast('✅', 'Código agregado', code, true);
             document.getElementById('newCodeInput').value = '';
             document.getElementById('newCodeValue').value = '';
-        }
+        } else showToast('❌', 'Error', 'Código inválido o ya existe', false);
     });
     
-    window.addEventListener('click', (e) => {
-        if(e.target === document.getElementById('controlPanelModal')) closeControlPanel();
-        if(e.target === document.getElementById('pinModal')) document.getElementById('pinModal').style.display = 'none';
-        if(e.target === document.getElementById('creditsModal')) document.getElementById('creditsModal').style.display = 'none';
+    // Event listeners para importar/exportar
+    document.getElementById('exportAllDataJsonBtn')?.addEventListener('click', exportAllDataJSON);
+    document.getElementById('importAllFile')?.addEventListener('change', (e) => {
+        if (e.target.files[0]) importAllDataJSON(e.target.files[0]);
+        e.target.value = '';
     });
-    document.getElementById('verifyPinBtn')?.addEventListener('click', verifyPin);
-    document.getElementById('pinInput')?.addEventListener('keypress', (e) => { if(e.key === 'Enter') verifyPin(); });
-    document.querySelectorAll('.modal-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-            const tabId = tab.getAttribute('data-tab');
-            document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
-            tab.classList.add('active');
-            if(tabId === 'add') { document.getElementById('tabAdd').style.display = 'block'; resetForm(); }
-            else if(tabId === 'edit') { document.getElementById('tabEdit').style.display = 'block'; renderEditList(); }
-            else if(tabId === 'codes') { document.getElementById('tabCodes').style.display = 'block'; renderCodeList(); }
-        });
-    });
+    
     document.getElementById('addForm')?.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const editId = document.getElementById('editId').value;
+        const id = document.getElementById('editId').value;
         const title = document.getElementById('titleInput').value.trim();
-        const year = parseInt(document.getElementById('yearInput').value.trim());
+        const year = parseInt(document.getElementById('yearInput').value);
         const url = document.getElementById('urlInput').value.trim();
         const mediaType = document.getElementById('mediaType').value;
         const status = document.getElementById('statusType').value;
         const quality = document.getElementById('qualityType').value;
-        if(!title || !year) { alert("Completa título y año"); return; }
-        if(status === 'available' && !url) { alert("Las películas disponibles necesitan un enlace de descarga"); return; }
-        const submitBtn = document.getElementById('submitBtn');
-        submitBtn.disabled = true;
-        submitBtn.textContent = editId ? 'Guardando...' : 'Agregando...';
-        try {
-            const success = await saveItem(editId ? parseInt(editId) : null, title, year, url, mediaType, currentPreviewPoster, status, quality);
-            if(success) {
-                showToast('✅', 'Éxito', `"${title}" ha sido ${editId ? 'actualizado' : 'agregado'} correctamente.`, true);
-                resetForm();
-                if(document.getElementById('tabEdit').style.display === 'block') renderEditList();
-            }
-        } catch(err) { alert("Error: " + err.message); }
-        finally { submitBtn.disabled = false; submitBtn.textContent = editId ? '💾 GUARDAR CAMBIOS' : '➕ AGREGAR'; }
+        if(!title || !year) { alert('Completa título y año'); return; }
+        if(status === 'available' && !url) { alert('Agrega un enlace de descarga'); return; }
+        
+        let poster = null;
+        if(document.getElementById('posterPreview').src) poster = document.getElementById('posterPreview').src;
+        
+        if(id) {
+            const idx = catalogItems.findIndex(i => i.id == id);
+            if(idx !== -1) catalogItems[idx] = {...catalogItems[idx], title, year, downloadUrl: url, mediaType, status, quality, poster: poster || catalogItems[idx].poster};
+        } else {
+            catalogItems.unshift({id: Date.now(), title, year, downloadUrl: url, mediaType, poster: poster || 'https://via.placeholder.com/300x450/1e243c/8f9ce6?text=No', status, quality, createdAt: new Date().toISOString()});
+        }
+        persistCatalog();
+        showToast('✅', id ? 'Actualizado' : 'Agregado', title, true);
+        document.getElementById('addForm').reset();
+        document.getElementById('editId').value = '';
+        document.getElementById('posterPreview').style.display = 'none';
+        document.getElementById('submitBtn').textContent = '➕ AGREGAR';
     });
-    document.getElementById('fetchTmdbBtn')?.addEventListener('click', async (e) => { e.preventDefault(); await updatePreview(); });
     
-    function initialize() {
-        loadUsedCodes();
-        loadCredits();
-        renderCatalog();
-        renderEditList();
+    document.getElementById('fetchTmdbBtn')?.addEventListener('click', async () => {
+        const title = document.getElementById('titleInput').value.trim();
+        const year = document.getElementById('yearInput').value;
+        const type = document.getElementById('mediaType').value;
+        if(!title) { alert('Ingresa un título'); return; }
+        try {
+            const url = type === 'movie' 
+                ? `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(title)}&language=es&year=${year}`
+                : `https://api.themoviedb.org/3/search/tv?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(title)}&language=es&first_air_date_year=${year}`;
+            const res = await fetch(url);
+            const data = await res.json();
+            if(data.results && data.results[0]) {
+                const item = data.results[0];
+                const posterUrl = item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : null;
+                if(posterUrl) {
+                    document.getElementById('posterPreview').src = posterUrl;
+                    document.getElementById('posterPreview').style.display = 'block';
+                    document.getElementById('tmdbStatus').innerHTML = '✅ Poster obtenido';
+                } else document.getElementById('tmdbStatus').innerHTML = '❌ Sin poster disponible';
+            } else document.getElementById('tmdbStatus').innerHTML = '❌ No encontrado';
+        } catch(e) { document.getElementById('tmdbStatus').innerHTML = '❌ Error de conexión'; }
+    });
+    
+    document.querySelectorAll('.modal-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const id = tab.dataset.tab;
+            document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+            tab.classList.add('active');
+            document.getElementById(`tab${id.charAt(0).toUpperCase() + id.slice(1)}`).style.display = 'block';
+            if(id === 'edit') renderEditList();
+            if(id === 'codes') renderCodeList();
+        });
+    });
+    
+    window.onclick = (e) => {
+        if(e.target.classList.contains('credits-modal')) hideCreditsModal();
+        if(e.target.classList.contains('pin-modal')) hidePinModal();
+        if(e.target.classList.contains('modal')) document.getElementById('controlPanelModal').classList.remove('active');
+    };
+    
+    // Cerrar panel con tecla ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const panel = document.getElementById('controlPanelModal');
+            if (panel.classList.contains('active')) {
+                panel.classList.remove('active');
+            }
+            const pinModal = document.getElementById('pinModal');
+            if (pinModal.style.display === 'flex') {
+                hidePinModal();
+            }
+            const creditsModal = document.getElementById('creditsModal');
+            if (creditsModal.style.display === 'flex') {
+                hideCreditsModal();
+            }
+        }
+    });
+    
+    loadUsedCodes();
+    loadCredits();
+    renderCatalog();
+    renderEditList();
+    renderCodeList();
+    
+    // Asegurar que el panel NO se abra automáticamente al cargar
+    const panel = document.getElementById('controlPanelModal');
+    if (panel) {
+        panel.classList.remove('active');
     }
-    initialize();
 </script>
 
 </body></html>
